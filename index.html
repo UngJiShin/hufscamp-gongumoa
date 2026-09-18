@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>09함 (09ham) | 흩어진 인플루언서 공구 보관함</title>
-  <meta name="description" content="유튜브, 인스타그램에 흩어진 인플루언서 단독 화장품 공동구매(공구) 링크를 한곳에 담아두는 스마트 09함" />
+  <title>뷰티스타09 (beautystar09) | 뷰티 인플루언서 시크릿 공구 & 내 화장대 알림</title>
+  <meta name="description" content="유튜브, 인스타그램에 흩어진 인플루언서 단독 화장품 공동구매(공구) 링크와 내 화장대 맞춤 알림 스마트 플랫폼, 뷰티스타09" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -98,10 +98,10 @@
       <!-- ✏️ [창업 아이템명 변경 포인트]: 상단 스크립트 BRAND_CONFIG 또는 아래 태그에서 수정 가능 -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="resetAll()">
         <span class="text-2xl font-black tracking-tighter text-zinc-900">
-          <span id="brand-logo-text">09ham</span><span class="text-rose-500 font-serif text-3xl leading-none">.</span>
+          <span id="brand-logo-text">beautystar09</span><span class="text-rose-500 font-serif text-3xl leading-none">.</span>
         </span>
         <span id="brand-tagline" class="hidden sm:inline text-[11px] text-zinc-600 font-medium pl-2 border-l border-zinc-200">
-          흩어진 인플루언서 공구 보관함
+          뷰티 인플루언서 시크릿 공구 & 내 화장대 알림
         </span>
       </div>
 
@@ -258,6 +258,113 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- 4.5. 💄 내 화장대 등록 & 실시간 공구 오픈 대기실 (Demand Pooling Engine) -->
+  <section class="max-w-6xl mx-auto px-4 pt-1 pb-4">
+    <div class="bg-gradient-to-br from-rose-50/70 via-white to-sand-100 rounded-3xl p-5 sm:p-7 border border-rose-100 shadow-sm relative overflow-hidden">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+        <div>
+          <div class="flex items-center space-x-2 mb-1.5 flex-wrap gap-y-1">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-extrabold bg-rose-500 text-white tracking-wide uppercase flex items-center gap-1">
+              <i class="fa-solid fa-fire text-[9px]"></i> 수요 집결 엔진 (Demand Pooling)
+            </span>
+            <span class="text-xs font-bold text-rose-600">목표 인원 달성 시 인플루언서 단독 40~50% 공구 협상 확정!</span>
+          </div>
+          <h2 class="text-base sm:text-xl font-black text-zinc-900 tracking-tight flex items-center gap-2">
+            <span>💄 내 화장대 등록 & 실시간 공구 오픈 대기실</span>
+          </h2>
+          <p class="text-xs text-zinc-600 mt-1 leading-relaxed">
+            내가 매일 쓰는 인생 화장품을 등록해 두세요. 구매 대기 인원이 모이면, 뷰티스타09가 인플루언서 및 본사와 직접 협상해 시크릿 공구를 오픈합니다!
+          </p>
+        </div>
+        <button onclick="openNotifyModal('내 화장대 인생템')" class="self-start md:self-auto px-4 py-2.5 bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold rounded-2xl shadow-md hover:shadow-lg transition duration-200 flex items-center space-x-2 shrink-0 cursor-pointer">
+          <i class="fa-solid fa-plus-circle text-rose-400"></i>
+          <span>+ 내 화장대 등록하고 공구 요청</span>
+        </button>
+      </div>
+
+      <!-- 3대 실시간 공구 대기 게이지 카드 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- Card 1: 닥터지 수분크림 -->
+        <div class="bg-white rounded-2xl p-4 border border-zinc-200/80 shadow-xs hover:border-rose-300 transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md flex items-center gap-1">
+                <i class="fa-solid fa-fire text-[10px]"></i> 18명 남음 (96%)
+              </span>
+              <span class="text-[11px] text-zinc-400 font-medium">목표: 500명</span>
+            </div>
+            <h3 class="text-xs font-bold text-zinc-900 truncate">닥터지 레드 블레미쉬 클리어 수딩 크림</h3>
+            <p class="text-[11px] text-zinc-500 mt-0.5 mb-3">유튜버 @haley_kim 본사 단독 45% 협상 확정 임박</p>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-zinc-100 rounded-full h-2 mb-2 overflow-hidden">
+              <div class="bg-gradient-to-r from-rose-500 to-amber-500 h-2 rounded-full transition-all duration-1000" style="width: 96%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] pt-1 border-t border-zinc-50">
+            <span class="font-black text-zinc-900">482명 대기 중</span>
+            <button onclick="openNotifyModal('닥터지 수분크림')" class="text-rose-600 hover:text-rose-800 font-bold hover:underline cursor-pointer">
+              + 나도 알림받기
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: 아누아 어성초 토너 -->
+        <div class="bg-white rounded-2xl p-4 border border-zinc-200/80 shadow-xs hover:border-rose-300 transition group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md flex items-center gap-1">
+                <i class="fa-solid fa-droplet text-[10px]"></i> 81% 달성
+              </span>
+              <span class="text-[11px] text-zinc-400 font-medium">목표: 1,000명</span>
+            </div>
+            <h3 class="text-xs font-bold text-zinc-900 truncate">아누아 어성초 77% 진정 수분 토너 대용량</h3>
+            <p class="text-[11px] text-zinc-500 mt-0.5 mb-3">20대 수부지 1위 • 1+1 기획전 매칭 조율 중</p>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-zinc-100 rounded-full h-2 mb-2 overflow-hidden">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full transition-all duration-1000" style="width: 81%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] pt-1 border-t border-zinc-50">
+            <span class="font-black text-zinc-900">810명 대기 중</span>
+            <button onclick="openNotifyModal('아누아 어성초 토너')" class="text-emerald-600 hover:text-emerald-800 font-bold hover:underline cursor-pointer">
+              + 나도 알림받기
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: 달바 미스트 세럼 -->
+        <div class="bg-rose-50/40 rounded-2xl p-4 border border-rose-200 shadow-xs hover:border-rose-400 transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black text-purple-600 bg-purple-100/70 px-2 py-0.5 rounded-md flex items-center gap-1">
+                <i class="fa-solid fa-crown text-[10px]"></i> 목표 103% 초과 달성!
+              </span>
+              <span class="text-[11px] text-zinc-400 font-medium">1,240명 대기</span>
+            </div>
+            <h3 class="text-xs font-bold text-zinc-900 truncate">달바 화이트 트러플 퍼스트 스프레이 세럼</h3>
+            <p class="text-[11px] text-rose-600 font-bold mt-0.5 mb-3">🌟 유트루 단독 52% 공구 이번 주 오픈 확정!</p>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-zinc-200/70 rounded-full h-2 mb-2 overflow-hidden">
+              <div class="bg-gradient-to-r from-purple-500 to-rose-500 h-2 rounded-full" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] pt-1 border-t border-rose-100/60">
+            <span class="font-black text-purple-700">오픈 확정 (1,240명)</span>
+            <button onclick="openNotifyModal('달바 스프레이 세럼 오픈알림')" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold text-[10px] transition shadow-xs cursor-pointer">
+              오픈 30분 전 알림 예약
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -566,10 +673,10 @@
     // =========================================================================
     const BRAND_CONFIG = {
       teamName: "팀 제티 (Zetty)",                      // 팀명 (고정)
-      serviceName: "09함",                             // 창업 아이템 한글명 (09함)
-      serviceNameEn: "09ham",                          // 창업 아이템 영문명 / 로고 텍스트 (09ham)
-      serviceSubTitle: "흩어진 인플루언서 공구 보관함",     // 탭 타이틀 서브 카피
-      tagline: "흩어진 인플루언서 공구 보관함",              // 상단 헤더 태그라인
+      serviceName: "뷰티스타09",                          // 창업 아이템 한글명 (뷰티스타09)
+      serviceNameEn: "beautystar09",                   // 창업 아이템 영문명 / 로고 텍스트 (beautystar09)
+      serviceSubTitle: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림", // 탭 타이틀 서브 카피
+      tagline: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림",          // 상단 헤더 태그라인
       googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe-sample-zetty-beauty/viewform" // 구글 폼 신청 링크
     };
 
@@ -637,7 +744,7 @@
         notice_crawler: "한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)",
         notice_verify: "20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증",
         notice_deal: "최대 52% 단독 협상 파괴가",
-        tagline: "흩어진 인플루언서 공구 보관함",
+        tagline: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림",
         search_placeholder: "인플루언서, 브랜드, 제품명을 검색해보세요",
         btn_notify: "공구 오픈 알림",
         story_title: "Creators on Market",
@@ -732,7 +839,7 @@
         notice_crawler: "Real-time crawler active across US, KR, JP & CN (Updated 5m ago)",
         notice_verify: "100% verified exclusive secret links for top 20 creators",
         notice_deal: "Up to 52% Exclusive Negotiated Discount",
-        tagline: "Curated Box for Scattered Influencer Group Buys",
+        tagline: "Exclusive Influencer Deals & My Vanity Alerts",
         search_placeholder: "Search creators, brands, or products...",
         btn_notify: "Deal Alerts",
         story_title: "Creators on Market",
