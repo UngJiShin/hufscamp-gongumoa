@@ -751,11 +751,16 @@
 
             <!-- Meta & Title -->
             <div class="space-y-1.5 px-1">
-              <span class="text-xs font-bold text-zinc-600 uppercase tracking-wide">${deal.brand}</span>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-zinc-600 uppercase tracking-wide">${deal.brand}</span>
+                <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-sand-100 text-zinc-600 border border-zinc-200/60">
+                  <i class="fa-solid fa-link text-[9px] mr-1 text-rose-500"></i>${deal.linkType || '인플루언서 단독 링크'}
+                </span>
+              </div>
               <h4 class="font-bold text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
                 ${deal.productName}
               </h4>
-              <p class="text-xs text-zinc-600 line-clamp-1 italic font-normal pt-1">"${deal.influencerQuote}"</p>
+              <p class="text-xs text-zinc-600 line-clamp-1 italic font-normal pt-0.5">"${deal.influencerQuote}"</p>
             </div>
           </div>
 
@@ -767,10 +772,13 @@
                 ${deal.salePrice.toLocaleString()}<span class="text-xs text-zinc-900 font-semibold ml-0.5">원</span>
               </div>
             </div>
-            <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1">
-              <span>상세보기</span>
-              <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </button>
+            <div class="text-right">
+              <span class="text-[10px] text-zinc-600 block">${((deal.originalPrice - deal.salePrice)).toLocaleString()}원 절약</span>
+              <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1 ml-auto">
+                <span>할인 링크 확인</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
           </div>
         `;
         grid.appendChild(card);
