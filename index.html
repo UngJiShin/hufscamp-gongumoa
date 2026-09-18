@@ -80,12 +80,12 @@
     <div class="max-w-6xl mx-auto flex justify-between items-center text-[11px] sm:text-xs">
       <div class="flex items-center space-x-2">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="font-semibold text-emerald-300">한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)</span>
+        <span id="notice-crawler" class="font-semibold text-emerald-300">한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)</span>
         <span class="text-zinc-600 hidden sm:inline">•</span>
-        <span class="text-zinc-400 hidden sm:inline">20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증</span>
+        <span id="notice-verify" class="text-zinc-400 hidden sm:inline">20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증</span>
       </div>
       <div class="flex items-center space-x-3 text-zinc-400">
-        <span class="text-rose-400 font-bold"><i class="fa-solid fa-fire mr-1"></i>최대 52% 단독 협상 파괴가</span>
+        <span id="notice-deal" class="text-rose-400 font-bold"><i class="fa-solid fa-fire mr-1"></i>최대 52% 단독 협상 파괴가</span>
       </div>
     </div>
   </aside>
@@ -122,11 +122,37 @@
         </div>
       </div>
 
-      <!-- Right Actions -->
-      <div class="flex items-center space-x-2.5">
-        <button onclick="openGoogleFormOrModal()" class="px-4 py-2 rounded-full bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold shadow-sm transition flex items-center space-x-1.5">
+      <!-- Right Actions (Language Switcher & Notification) -->
+      <div class="flex items-center space-x-2 sm:space-x-2.5">
+        <!-- 🌐 Multi-language Switcher (7+ Countries) -->
+        <div class="relative flex items-center">
+          <label for="lang-switcher" class="sr-only">언어 선택 (Language)</label>
+          <div class="relative">
+            <select 
+              id="lang-switcher" 
+              onchange="changeLanguage(this.value)" 
+              class="appearance-none bg-white hover:bg-sand-100 text-zinc-800 text-xs font-bold pl-7 pr-6 py-1.5 sm:py-2 rounded-full border border-zinc-200 focus:outline-none focus:border-zinc-900 shadow-sm cursor-pointer transition"
+              title="Select Language"
+            >
+              <option value="ko" selected>🇰🇷 한국어</option>
+              <option value="en">🇺🇸 English</option>
+              <option value="zh">🇨🇳 简体中文</option>
+              <option value="zh-TW">🇹🇼 繁體中文</option>
+              <option value="ja">🇯🇵 日本語</option>
+              <option value="th">🇹🇭 ภาษาไทย</option>
+              <option value="ms">🇲🇾 B. Melayu</option>
+              <option value="vi">🇻🇳 Tiếng Việt</option>
+              <option value="id">🇮🇩 B. Indonesia</option>
+              <option value="tl">🇵🇭 Tagalog</option>
+            </select>
+            <i class="fa-solid fa-globe absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs pointer-events-none"></i>
+            <i class="fa-solid fa-chevron-down absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-zinc-400 pointer-events-none"></i>
+          </div>
+        </div>
+
+        <button onclick="openGoogleFormOrModal()" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold shadow-sm transition flex items-center space-x-1.5 whitespace-nowrap">
           <i class="fa-regular fa-bell text-xs"></i>
-          <span>공구 오픈 알림</span>
+          <span id="btn-notify-text">공구 오픈 알림</span>
         </button>
       </div>
     </div>
@@ -150,8 +176,8 @@
   <section class="bg-sand-50 py-4 px-4 editorial-border">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center justify-between mb-2">
-        <h2 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">Creators on Market</h2>
-        <span class="text-[11px] text-zinc-600">프로필을 누르면 크리에이터별 마켓으로 이동합니다</span>
+        <h2 id="story-title" class="text-xs font-bold text-zinc-400 uppercase tracking-wider">Creators on Market</h2>
+        <span id="story-subtitle" class="text-[11px] text-zinc-600">프로필을 누르면 크리에이터별 마켓으로 이동합니다</span>
       </div>
       <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar py-1" id="influencer-story-bar">
         <!-- Story circles rendered via JS -->
@@ -166,13 +192,13 @@
       <!-- Left Editorial Copy -->
       <div class="lg:col-span-7 space-y-4">
         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">
-          <span>✨ 이번 주 가장 화제인 인플루언서 단독 구성</span>
+          <span id="hero-badge">✨ 이번 주 가장 화제인 인플루언서 단독 구성</span>
         </div>
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-zinc-900 tracking-tight leading-[1.15]">
+        <h1 id="hero-title" class="text-3xl sm:text-5xl font-extrabold text-zinc-900 tracking-tight leading-[1.15]">
           인스타 스토리 속 그 링크,<br />
           <span class="text-rose-600 font-serif italic">단독 최저가</span>로 한눈에.
         </h1>
-        <p class="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-xl font-normal">
+        <p id="hero-desc" class="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-xl font-normal">
           좋아하는 크리에이터가 공들여 기획한 특별 공구 마켓.<br class="hidden sm:inline" />
           흩어진 링크를 찾아 헤매지 않도록, 오늘 마감되는 시크릿 최저가만 모아둡니다.
         </p>
@@ -180,18 +206,18 @@
         <!-- Social Proof Stats (Human Editorial Numbers) -->
         <div class="pt-4 flex items-center space-x-8 text-xs text-zinc-600">
           <div>
-            <span class="block text-2xl font-black text-zinc-900">20인</span>
-            <span class="text-zinc-600">글로벌 탑 크리에이터</span>
+            <span id="stat-1-num" class="block text-2xl font-black text-zinc-900">20인</span>
+            <span id="stat-1-label" class="text-zinc-600">글로벌 탑 크리에이터</span>
           </div>
           <div class="w-px h-8 bg-zinc-200"></div>
           <div>
-            <span class="block text-2xl font-black text-rose-600">최대 52%</span>
-            <span class="text-zinc-600">단독 협상 파괴가</span>
+            <span id="stat-2-num" class="block text-2xl font-black text-rose-600">최대 52%</span>
+            <span id="stat-2-label" class="text-zinc-600">단독 협상 파괴가</span>
           </div>
           <div class="w-px h-8 bg-zinc-200"></div>
           <div>
-            <span class="block text-2xl font-black text-emerald-600">100%</span>
-            <span class="text-zinc-600">실시간 유효 링크 검증</span>
+            <span id="stat-3-num" class="block text-2xl font-black text-emerald-600">100%</span>
+            <span id="stat-3-label" class="text-zinc-600">실시간 유효 링크 검증</span>
           </div>
         </div>
       </div>
@@ -201,30 +227,30 @@
         <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-200/80 hover:shadow-xl transition duration-300 relative group">
           <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-sand-100">
             <img src="https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=800&auto=format&fit=crop&q=80" alt="달바 세럼" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-900 text-white text-xs font-bold">
+            <div id="hero-card-badge" class="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-900 text-white text-xs font-bold">
               WEEKLY BEST #1
             </div>
             <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-zinc-100 shadow-sm flex items-center justify-between">
               <div class="flex items-center space-x-2.5 truncate">
                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-8 h-8 rounded-full object-cover border border-rose-300" />
                 <div>
-                  <span class="text-xs font-bold text-zinc-900 block truncate">유트루 X 달바 마켓</span>
-                  <span class="text-[10px] text-zinc-600 block">YouTube 58만 • 단독 3종 기획</span>
+                  <span id="hero-card-creator" class="text-xs font-bold text-zinc-900 block truncate">유트루 X 달바 마켓</span>
+                  <span id="hero-card-sub" class="text-[10px] text-zinc-600 block">YouTube 58만 • 단독 3종 기획</span>
                 </div>
               </div>
-              <span class="text-xs font-black text-rose-600 bg-rose-50 px-2 py-1 rounded-lg">52% OFF</span>
+              <span id="hero-card-rate" class="text-xs font-black text-rose-600 bg-rose-50 px-2 py-1 rounded-lg">52% OFF</span>
             </div>
           </div>
 
           <div class="mt-4 space-y-2">
-            <h3 class="font-extrabold text-base text-zinc-900">달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 3종 세트</h3>
-            <p class="text-xs text-zinc-600 italic">"3통째 비우고 6개월 동안 직접 본사에 요청해 준비한 역대급 구성입니다."</p>
+            <h3 id="hero-card-title" class="font-extrabold text-base text-zinc-900">달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 3종 세트</h3>
+            <p id="hero-card-quote" class="text-xs text-zinc-600 italic">"3통째 비우고 6개월 동안 직접 본사에 요청해 준비한 역대급 구성입니다."</p>
             <div class="pt-2 flex items-baseline justify-between border-t border-zinc-100">
               <div>
-                <span class="text-xs text-zinc-600 line-through">87,000원</span>
-                <span class="text-xl font-black text-rose-600 ml-1.5">41,700원</span>
+                <span id="hero-card-orig-price" class="text-xs text-zinc-600 line-through">87,000원</span>
+                <span id="hero-card-sale-price" class="text-xl font-black text-rose-600 ml-1.5">41,700원</span>
               </div>
-              <button onclick="openDetailModal('kr-1')" class="px-4 py-2 bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition">
+              <button id="hero-card-btn" onclick="openDetailModal('kr-1')" class="px-4 py-2 bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition">
                 마켓 바로가기 →
               </button>
             </div>
@@ -244,23 +270,23 @@
       <!-- Country Region Selector -->
       <div class="flex space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar pb-1">
         <button id="tab-ALL" onclick="setCountry('ALL')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span>✨ 전체 20인 마켓</span>
+          <span id="tab-ALL-text">✨ 전체 20인 마켓</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full font-bold">20</span>
         </button>
         <button id="tab-US" onclick="setCountry('US')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span>🇺🇸 미국/글로벌 1위</span>
+          <span id="tab-US-text">🇺🇸 미국/글로벌 1위</span>
           <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-full font-extrabold">BEST</span>
         </button>
         <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span>🇰🇷 국내 올리브영 랭킹</span>
+          <span id="tab-KR-text">🇰🇷 국내 올리브영 랭킹</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 9</span>
         </button>
         <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span>🇯🇵 일본 큐텐/직구 1위</span>
+          <span id="tab-JP-text">🇯🇵 일본 큐텐/직구 1위</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
         <button id="tab-CN" onclick="setCountry('CN')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span>🇨🇳 중화권 라이브 1위</span>
+          <span id="tab-CN-text">🇨🇳 중화권 라이브 1위</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
       </div>
@@ -269,32 +295,32 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 w-full sm:w-auto">
         <!-- Skin Concern Category Pills -->
         <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1" id="category-pills">
-          <button onclick="setCategory('전체')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white whitespace-nowrap">전체</button>
-          <button onclick="setCategory('속건조/진정')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💧 속건조/진정</button>
-          <button onclick="setCategory('선케어')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">☀️ 선케어</button>
-          <button onclick="setCategory('모공/트러블')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">🪡 모공/트러블</button>
-          <button onclick="setCategory('안티에이징/광채')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">✨ 광채/탄력</button>
-          <button onclick="setCategory('베이스/색조')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💄 베이스/색조</button>
+          <button id="cat-all" data-cat="전체" onclick="setCategory('전체')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white whitespace-nowrap">전체</button>
+          <button id="cat-soothing" data-cat="속건조/진정" onclick="setCategory('속건조/진정')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💧 속건조/진정</button>
+          <button id="cat-sun" data-cat="선케어" onclick="setCategory('선케어')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">☀️ 선케어</button>
+          <button id="cat-pore" data-cat="모공/트러블" onclick="setCategory('모공/트러블')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">🪡 모공/트러블</button>
+          <button id="cat-glow" data-cat="안티에이징/광채" onclick="setCategory('안티에이징/광채')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">✨ 광채/탄력</button>
+          <button id="cat-base" data-cat="베이스/색조" onclick="setCategory('베이스/색조')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💄 베이스/색조</button>
         </div>
 
         <!-- Sort Select -->
         <select id="sort-select" onchange="handleSort(this.value)" class="text-xs font-semibold bg-white border border-zinc-200 text-zinc-800 py-1.5 pl-3 pr-8 rounded-full focus:outline-none cursor-pointer shadow-sm">
-          <option value="rank">추천 랭킹순</option>
-          <option value="discount">🔥 할인율 높은순</option>
-          <option value="saved">💰 절약금액 큰순</option>
-          <option value="time">⏳ 마감 임박순</option>
-          <option value="price">낮은 가격순</option>
+          <option id="sort-opt-rank" value="rank">추천 랭킹순</option>
+          <option id="sort-opt-discount" value="discount">🔥 할인율 높은순</option>
+          <option id="sort-opt-saved" value="saved">💰 절약금액 큰순</option>
+          <option id="sort-opt-time" value="time">⏳ 마감 임박순</option>
+          <option id="sort-opt-price" value="price">낮은 가격순</option>
         </select>
       </div>
     </div>
 
     <!-- Secondary Quick Benefit Filter Bar -->
     <div class="flex items-center space-x-2 text-xs overflow-x-auto no-scrollbar pt-1" id="benefit-pills">
-      <span class="text-zinc-400 font-bold text-[11px] uppercase mr-1 whitespace-nowrap">Quick Filter:</span>
-      <button onclick="setBenefit('전체')" class="benefit-btn active px-3 py-1 rounded-lg font-bold bg-zinc-900 text-white whitespace-nowrap">전체 혜택</button>
-      <button onclick="setBenefit('50%이상')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🔥 50% 이상 반값</button>
-      <button onclick="setBenefit('1+1')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🎁 1+1 기획전</button>
-      <button onclick="setBenefit('마감임박')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">⏳ 14시간 내 마감</button>
+      <span id="quick-filter-label" class="text-zinc-400 font-bold text-[11px] uppercase mr-1 whitespace-nowrap">Quick Filter:</span>
+      <button id="benefit-all" data-benefit="전체" onclick="setBenefit('전체')" class="benefit-btn active px-3 py-1 rounded-lg font-bold bg-zinc-900 text-white whitespace-nowrap">전체 혜택</button>
+      <button id="benefit-half" data-benefit="50%이상" onclick="setBenefit('50%이상')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🔥 50% 이상 반값</button>
+      <button id="benefit-bogo" data-benefit="1+1" onclick="setBenefit('1+1')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🎁 1+1 기획전</button>
+      <button id="benefit-ending" data-benefit="마감임박" onclick="setBenefit('마감임박')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">⏳ 14시간 내 마감</button>
     </div>
 
     <!-- Active Search Filter Breadcrumb -->
@@ -313,9 +339,9 @@
       <div class="w-12 h-12 rounded-full bg-sand-100 text-zinc-600 mx-auto flex items-center justify-center text-lg">
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
-      <p class="text-sm font-bold text-zinc-900">찾으시는 마켓이나 제품이 없습니다.</p>
-      <p class="text-xs text-zinc-600">다른 크리에이터나 제품 키워드로 검색해보세요.</p>
-      <button onclick="resetAll()" class="mt-2 px-4 py-2 bg-zinc-900 text-white rounded-xl text-xs font-semibold">
+      <p id="empty-title" class="text-sm font-bold text-zinc-900">찾으시는 마켓이나 제품이 없습니다.</p>
+      <p id="empty-desc" class="text-xs text-zinc-600">다른 크리에이터나 제품 키워드로 검색해보세요.</p>
+      <button id="empty-btn" onclick="resetAll()" class="mt-2 px-4 py-2 bg-zinc-900 text-white rounded-xl text-xs font-semibold">
         전체 마켓 보기
       </button>
     </div>
@@ -323,18 +349,18 @@
     <!-- 6. Bottom Clean Newsletter / Pre-order Banner (No Tech Jargon) -->
     <section class="bg-zinc-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden">
       <div class="max-w-2xl space-y-3">
-        <span class="text-rose-400 font-bold text-xs uppercase tracking-wider">Secret Market Alert</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+        <span id="bottom-alert-tag" class="text-rose-400 font-bold text-xs uppercase tracking-wider">Secret Market Alert</span>
+        <h2 id="bottom-alert-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight">
           좋아하는 크리에이터의 다음 공구,<br />
           놓치지 않도록 시작 1시간 전에 알려드립니다.
         </h2>
-        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+        <p id="bottom-alert-desc" class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
           한정 수량이나 선착순 사은품이 포함된 공구는 오픈 10분 만에 품절되는 경우가 많습니다. 
           카카오톡 알림을 신청하고 시크릿 마켓 링크를 가장 먼저 받아보세요.
         </p>
 
         <div class="pt-4">
-          <button onclick="openNotifyModal('시크릿 알림')" class="px-6 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg transition">
+          <button id="bottom-alert-btn" onclick="openNotifyModal('시크릿 알림')" class="px-6 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg transition">
             무료 오픈 알림 신청하기 →
           </button>
         </div>
@@ -348,17 +374,17 @@
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
       <div class="space-y-1">
         <span class="text-base font-black text-zinc-900"><span id="footer-logo-text">gongumoa</span>.</span>
-        <p class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • <strong class="text-zinc-900" id="footer-team-name">팀 제티 (Zetty)</strong> (지웅, 성준, 민석, 신혜, 재현)</p>
-        <p class="text-[11px] text-zinc-600">본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.</p>
+        <p id="footer-team-sub" class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • <strong class="text-zinc-900" id="footer-team-name">팀 제티 (Zetty)</strong> (지웅, 성준, 민석, 신혜, 재현)</p>
+        <p id="footer-disclaimer" class="text-[11px] text-zinc-600">본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.</p>
       </div>
 
       <div class="flex items-center space-x-6 text-zinc-600 font-medium">
         <button onclick="openGoogleFormOrModal()" class="hover:text-zinc-900 flex items-center space-x-1.5">
           <i class="fa-regular fa-bell text-rose-500"></i>
-          <span>공구 오픈 알림 (구글 폼)</span>
+          <span id="footer-form-text">공구 오픈 알림 (구글 폼)</span>
         </button>
         <span>•</span>
-        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-zinc-900">
+        <button id="footer-top-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-zinc-900">
           맨 위로
         </button>
       </div>
@@ -369,15 +395,15 @@
   <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 px-8 py-2.5 flex justify-between items-center text-center">
     <button onclick="resetAll()" class="flex flex-col items-center text-zinc-900">
       <i class="fa-solid fa-house text-sm"></i>
-      <span class="text-[10px] font-bold mt-1">홈</span>
+      <span id="nav-home-text" class="text-[10px] font-bold mt-1">홈</span>
     </button>
     <button onclick="document.getElementById('mobile-search').focus()" class="flex flex-col items-center text-zinc-600">
       <i class="fa-solid fa-magnifying-glass text-sm"></i>
-      <span class="text-[10px] font-medium mt-1">검색</span>
+      <span id="nav-search-text" class="text-[10px] font-medium mt-1">검색</span>
     </button>
     <button onclick="openGoogleFormOrModal()" class="flex flex-col items-center text-rose-600 font-bold">
       <i class="fa-regular fa-bell text-sm"></i>
-      <span class="text-[10px] font-bold mt-1">공구 오픈 알림</span>
+      <span id="nav-notify-text" class="text-[10px] font-bold mt-1">공구 오픈 알림</span>
     </button>
   </nav>
 
@@ -404,22 +430,22 @@
 
         <!-- Creator Note -->
         <div class="p-3.5 bg-sand-50 rounded-2xl border border-zinc-200/80 text-xs text-zinc-700 leading-relaxed font-normal">
-          <span class="font-bold text-zinc-900 block mb-1">Creator's Note</span>
+          <span id="modal-note-title" class="font-bold text-zinc-900 block mb-1">Creator's Note</span>
           <p id="modal-quote" class="italic"></p>
         </div>
 
         <!-- Clean Pricing Box -->
         <div class="py-3 border-y border-zinc-100 space-y-1.5 text-xs">
           <div class="flex justify-between text-zinc-600">
-            <span>공식 정가</span>
+            <span id="modal-lbl-official">공식 정가</span>
             <span id="modal-original-price" class="line-through"></span>
           </div>
           <div class="flex justify-between text-zinc-600">
-            <span>일반 시중 할인가</span>
+            <span id="modal-lbl-regular">일반 시중 할인가</span>
             <span id="modal-olive-price"></span>
           </div>
           <div class="pt-2 flex justify-between items-baseline">
-            <span class="font-bold text-zinc-900">인플루언서 단독 할인가</span>
+            <span id="modal-lbl-exclusive" class="font-bold text-zinc-900">인플루언서 단독 할인가</span>
             <div class="text-right">
               <span id="modal-discount-rate" class="text-rose-600 font-extrabold text-sm mr-1"></span>
               <strong id="modal-sale-price" class="text-2xl font-black text-rose-600"></strong>
@@ -430,21 +456,21 @@
         <!-- Promo Code Box -->
         <div class="p-3 bg-sand-100 rounded-2xl flex items-center justify-between text-xs">
           <div>
-            <span class="text-[10px] text-zinc-500 block font-medium">크리에이터 단독 프로모션 코드</span>
+            <span id="modal-promo-desc" class="text-[10px] text-zinc-500 block font-medium">크리에이터 단독 프로모션 코드</span>
             <span id="modal-promo-code" class="font-mono font-bold text-zinc-900 text-sm tracking-wide"></span>
           </div>
-          <button type="button" onclick="copyCurrentPromoCode()" class="px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-zinc-800 hover:bg-zinc-50 transition shadow-sm">
+          <button id="modal-copy-btn" type="button" onclick="copyCurrentPromoCode()" class="px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-zinc-800 hover:bg-zinc-50 transition shadow-sm">
             코드 복사
           </button>
         </div>
 
         <!-- Direct Purchase Button -->
         <div class="pt-2">
-          <button onclick="goToDealLink()" class="w-full py-4 bg-zinc-900 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-sm flex items-center justify-center space-x-2">
-            <span>인플루언서 단독 링크로 구매하기</span>
+          <button id="modal-buy-btn" onclick="goToDealLink()" class="w-full py-4 bg-zinc-900 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-sm flex items-center justify-center space-x-2">
+            <span id="modal-buy-text">인플루언서 단독 링크로 구매하기</span>
             <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </button>
-          <p class="text-[11px] text-zinc-600 text-center mt-2">클릭 시 단독 코드가 자동 복사되며 공식 판매처로 이동합니다.</p>
+          <p id="modal-auto-copy-hint" class="text-[11px] text-zinc-600 text-center mt-2">클릭 시 단독 코드가 자동 복사되며 공식 판매처로 이동합니다.</p>
         </div>
       </div>
     </div>
@@ -485,45 +511,45 @@
         <i class="fa-solid fa-xmark text-base"></i>
       </button>
       <div class="text-center space-y-1">
-        <h3 class="text-lg font-black text-zinc-900">시크릿 공구 오픈 알림</h3>
-        <p class="text-xs text-zinc-600">관심 있는 크리에이터의 공구가 오픈되면 가장 먼저 카톡으로 알려드립니다.</p>
+        <h3 id="notify-title" class="text-lg font-black text-zinc-900">시크릿 공구 오픈 알림</h3>
+        <p id="notify-desc" class="text-xs text-zinc-600">관심 있는 크리에이터의 공구가 오픈되면 가장 먼저 카톡으로 알려드립니다.</p>
       </div>
 
       <!-- Google Form Direct CTA Banner -->
       <div class="mt-4 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-center space-y-2">
         <div class="flex items-center justify-center space-x-1.5">
-          <span class="inline-block px-2 py-0.5 bg-rose-600 text-white text-[10px] font-extrabold rounded-full">공식 설문 채널</span>
-          <span class="text-xs font-black text-zinc-900">구글 폼으로 1초 만에 알림 예약</span>
+          <span id="notify-google-badge" class="inline-block px-2 py-0.5 bg-rose-600 text-white text-[10px] font-extrabold rounded-full">공식 설문 채널</span>
+          <span id="notify-google-h" class="text-xs font-black text-zinc-900">구글 폼으로 1초 만에 알림 예약</span>
         </div>
-        <p class="text-[11px] text-zinc-600 leading-tight">
+        <p id="notify-google-p" class="text-[11px] text-zinc-600 leading-tight">
           선호 크리에이터 12인·피부 고민 맞춤 설문 완료 시 <strong class="text-rose-600">추가 5% 시크릿 쿠폰</strong>을 전원 지급합니다.
         </p>
         <a id="google-form-link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSe-sample-zetty-beauty/viewform" target="_blank" class="block w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs transition shadow-sm flex items-center justify-center space-x-1.5">
           <i class="fa-solid fa-square-poll-horizontal"></i>
-          <span>공식 구글 설문지(Google Forms) 바로 열기 →</span>
+          <span id="notify-google-btn-text">공식 구글 설문지(Google Forms) 바로 열기 →</span>
         </a>
       </div>
 
       <div class="relative flex py-2 items-center">
         <div class="flex-grow border-t border-zinc-200"></div>
-        <span class="flex-shrink mx-3 text-zinc-400 text-[11px]">또는 웹에서 간편 접수</span>
+        <span id="notify-or-text" class="flex-shrink mx-3 text-zinc-400 text-[11px]">또는 웹에서 간편 접수</span>
         <div class="flex-grow border-t border-zinc-200"></div>
       </div>
 
       <form id="notify-form" onsubmit="handleNotifySubmit(event)" class="mt-1 space-y-3">
         <div>
-          <label class="block text-xs font-bold text-zinc-700 mb-1">성함</label>
+          <label id="label-user-name" class="block text-xs font-bold text-zinc-700 mb-1">성함</label>
           <input type="text" id="user-name" required placeholder="예: 지웅" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-zinc-700 mb-1">연락처</label>
+          <label id="label-user-contact" class="block text-xs font-bold text-zinc-700 mb-1">연락처</label>
           <input type="text" id="user-contact" required placeholder="010-1234-5678 또는 이메일" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-zinc-700 mb-1">관심 브랜드 또는 크리에이터</label>
+          <label id="label-user-wish" class="block text-xs font-bold text-zinc-700 mb-1">관심 브랜드 또는 크리에이터</label>
           <input type="text" id="user-wish" placeholder="예: 유트루, 달바, 롬앤 등" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3 bg-zinc-900 hover:bg-rose-600 text-white font-bold rounded-xl text-xs transition">
+        <button id="btn-notify-submit" type="submit" class="w-full py-3 bg-zinc-900 hover:bg-rose-600 text-white font-bold rounded-xl text-xs transition">
           알림 신청 완료하기
         </button>
       </form>
@@ -568,6 +594,1144 @@
       if (googleFormBtn && BRAND_CONFIG.googleFormUrl) {
         googleFormBtn.href = BRAND_CONFIG.googleFormUrl;
       }
+    }
+
+    // =========================================================================
+    // 🌐 [다국어 & 환율 번역 엔진] (i18n & Dynamic Currency Engine)
+    // 지원 언어: 한국어(KO), English(EN), 중국어 간체(ZH), 대만 번체(ZH-TW), 
+    //            일본어(JA), 태국어(TH), 말레이시아어(MS), 베트남어(VI), 
+    //            인도네시아어(ID), 필리핀 타갈로그어(TL)
+    // =========================================================================
+    let currentLang = localStorage.getItem('zetty_lang') || 'ko';
+
+    const CURRENCY_MAP = {
+      ko: { code: 'KRW', symbol: '원', rate: 1, pos: 'after', decimals: 0 },
+      en: { code: 'USD', symbol: '$', rate: 1 / 1350, pos: 'before', decimals: 2 },
+      zh: { code: 'CNY', symbol: '¥', rate: 1 / 190, pos: 'before', decimals: 1 },
+      'zh-TW': { code: 'NT$', symbol: 'NT$', rate: 1 / 42, pos: 'before', decimals: 0 },
+      ja: { code: 'JPY', symbol: '¥', rate: 100 / 900, pos: 'before', decimals: 0 },
+      th: { code: 'THB', symbol: '฿', rate: 1 / 38, pos: 'before', decimals: 0 },
+      ms: { code: 'MYR', symbol: 'RM ', rate: 1 / 290, pos: 'before', decimals: 2 },
+      vi: { code: 'VND', symbol: '₫', rate: 18, pos: 'after', decimals: 0 },
+      id: { code: 'IDR', symbol: 'Rp ', rate: 11.5, pos: 'before', decimals: 0 },
+      tl: { code: 'PHP', symbol: '₱', rate: 1 / 24, pos: 'before', decimals: 0 }
+    };
+
+    function formatCurrency(amountKrw, lang = currentLang) {
+      const c = CURRENCY_MAP[lang] || CURRENCY_MAP.ko;
+      let val = amountKrw * c.rate;
+      let formatted = "";
+      if (c.decimals === 0) {
+        if (lang === 'vi') val = Math.round(val / 1000) * 1000;
+        else if (lang === 'id') val = Math.round(val / 100) * 100;
+        else val = Math.round(val);
+        formatted = val.toLocaleString();
+      } else {
+        formatted = (Math.round(val * 100) / 100).toLocaleString(undefined, { minimumFractionDigits: c.decimals, maximumFractionDigits: c.decimals });
+      }
+      return c.pos === 'before' ? `${c.symbol}${formatted}` : `${formatted}${c.symbol}`;
+    }
+
+    const I18N = {
+      ko: {
+        notice_crawler: "한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)",
+        notice_verify: "20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증",
+        notice_deal: "최대 52% 단독 협상 파괴가",
+        tagline: "인플루언서 뷰티 마켓 셀렉트숍",
+        search_placeholder: "인플루언서, 브랜드, 제품명을 검색해보세요",
+        btn_notify: "공구 오픈 알림",
+        story_title: "Creators on Market",
+        story_subtitle: "프로필을 누르면 크리에이터별 마켓으로 이동합니다",
+        story_all: "전체 마켓",
+        hero_badge: "✨ 이번 주 가장 화제인 인플루언서 단독 구성",
+        hero_title: '인스타 스토리 속 그 링크,<br />단독 최저가로 한눈에.',
+        hero_desc: "좋아하는 크리에이터가 공들여 기획한 특별 공구 마켓. 흩어진 링크를 찾아 헤매지 않도록, 오늘 마감되는 시크릿 최저가만 모아둡니다.",
+        stat_1_num: "20인",
+        stat_1_label: "글로벌 탑 크리에이터",
+        stat_2_num: "최대 52%",
+        stat_2_label: "단독 협상 파괴가",
+        stat_3_num: "100%",
+        stat_3_label: "실시간 유효 링크 검증",
+        hero_card_badge: "WEEKLY BEST #1",
+        hero_card_creator: "유트루 X 달바 마켓",
+        hero_card_sub: "YouTube 58만 • 단독 3종 기획",
+        hero_card_title: "달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 3종 세트",
+        hero_card_quote: '"3통째 비우고 6개월 동안 직접 본사에 요청해 준비한 역대급 구성입니다."',
+        hero_card_btn: "마켓 바로가기 →",
+        tab_all: "✨ 전체 20인 마켓",
+        tab_us: "🇺🇸 미국/글로벌 1위",
+        tab_kr: "🇰🇷 국내 올리브영 랭킹",
+        tab_jp: "🇯🇵 일본 큐텐/직구 1위",
+        tab_cn: "🇨🇳 중화권 라이브 1위",
+        cat_all: "전체",
+        cat_soothing: "💧 속건조/진정",
+        cat_sun: "☀️ 선케어",
+        cat_pore: "🪡 모공/트러블",
+        cat_glow: "✨ 광채/탄력",
+        cat_base: "💄 베이스/색조",
+        sort_rank: "추천 랭킹순",
+        sort_discount: "🔥 할인율 높은순",
+        sort_saved: "💰 절약금액 큰순",
+        sort_time: "⏳ 마감 임박순",
+        sort_price: "낮은 가격순",
+        quick_filter_label: "Quick Filter:",
+        benefit_all: "전체 혜택",
+        benefit_half: "🔥 50% 이상 반값",
+        benefit_bogo: "🎁 1+1 기획전",
+        benefit_ending: "⏳ 14시간 내 마감",
+        empty_title: "찾으시는 마켓이나 제품이 없습니다.",
+        empty_desc: "다른 크리에이터나 제품 키워드로 검색해보세요.",
+        empty_btn: "전체 마켓 보기",
+        card_ends_in: "마감 {hours}시간 전",
+        card_in_stock: "구매 가능",
+        card_exclusive: "단독 특가",
+        card_code: "코드: ",
+        card_auto_copy: "클릭 시 자동복사",
+        card_saved: "{amount} 절약",
+        card_secret_link: "시크릿 링크",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "좋아하는 크리에이터의 다음 공구,<br />놓치지 않도록 시작 1시간 전에 알려드립니다.",
+        bottom_alert_desc: "한정 수량이나 선착순 사은품이 포함된 공구는 오픈 10분 만에 품절되는 경우가 많습니다. 카카오톡 알림을 신청하고 시크릿 마켓 링크를 가장 먼저 받아보세요.",
+        bottom_alert_btn: "무료 오픈 알림 신청하기 →",
+        footer_team_sub: "1박 2일 창업 캠프 MVP 프로젝트 • 팀 제티 (Zetty) (지웅, 성준, 민석, 신혜, 재현)",
+        footer_disclaimer: "본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.",
+        footer_form: "공구 오픈 알림 (구글 폼)",
+        footer_top: "맨 위로",
+        nav_home: "홈",
+        nav_search: "검색",
+        nav_notify: "공구 오픈 알림",
+        modal_official: "공식 정가",
+        modal_regular: "일반 시중 할인가",
+        modal_exclusive: "인플루언서 단독 할인가",
+        modal_promo_desc: "크리에이터 단독 프로모션 코드",
+        modal_copy_btn: "코드 복사",
+        modal_buy_text: "인플루언서 단독 링크로 구매하기",
+        modal_auto_copy_hint: "클릭 시 단독 코드가 자동 복사되며 공식 판매처로 이동합니다.",
+        notify_title: "시크릿 공구 오픈 알림",
+        notify_desc: "관심 있는 크리에이터의 공구가 오픈되면 가장 먼저 카톡으로 알려드립니다.",
+        notify_google_badge: "공식 설문 채널",
+        notify_google_h: "구글 폼으로 1초 만에 알림 예약",
+        notify_google_p: "선호 크리에이터 12인·피부 고민 맞춤 설문 완료 시 추가 5% 시크릿 쿠폰을 전원 지급합니다.",
+        notify_google_btn_text: "공식 구글 설문지(Google Forms) 바로 열기 →",
+        notify_or_text: "또는 웹에서 간편 접수",
+        label_user_name: "성함",
+        ph_user_name: "예: 지웅",
+        label_user_contact: "연락처",
+        ph_user_contact: "010-1234-5678 또는 이메일",
+        label_user_wish: "관심 브랜드 또는 크리에이터",
+        ph_user_wish: "예: 유트루, 달바, 롬앤 등",
+        btn_notify_submit: "알림 신청 완료하기",
+        auto_applied: "자동 할인 적용",
+        toast_copied: "단독코드 [{code}] 가 복사되었습니다!",
+        toast_redirect: "단독코드 [{code}] 자동 복사 완료! 제휴 할인 결제창으로 이동합니다 ✈️",
+        toast_safe_redirect: "시크릿 할인 링크로 안전하게 이동합니다 ✈️",
+        toast_registered: "{name}님, 공구 오픈 알림이 등록되었습니다.",
+        toast_url_copied: "주소가 복사되었습니다."
+      },
+      en: {
+        notice_crawler: "Real-time crawler active across US, KR, JP & CN (Updated 5m ago)",
+        notice_verify: "100% verified exclusive secret links for top 20 creators",
+        notice_deal: "Up to 52% Exclusive Negotiated Discount",
+        tagline: "Influencer Beauty Market Select Shop",
+        search_placeholder: "Search creators, brands, or products...",
+        btn_notify: "Deal Alerts",
+        story_title: "Creators on Market",
+        story_subtitle: "Click a profile to visit each creator's market",
+        story_all: "All Markets",
+        hero_badge: "✨ This Week's Most Viral Exclusive Sets",
+        hero_title: 'Those links in IG stories,<br />Exclusive lowest prices at a glance.',
+        hero_desc: "Special group buy markets carefully curated by your favorite creators. We collect only verified secret deals ending today.",
+        stat_1_num: "20",
+        stat_1_label: "Global Top Creators",
+        stat_2_num: "Up to 52%",
+        stat_2_label: "Negotiated Discounts",
+        stat_3_num: "100%",
+        stat_3_label: "Live Link Verification",
+        hero_card_badge: "WEEKLY BEST #1",
+        hero_card_creator: "YouTrue X d'Alba Market",
+        hero_card_sub: "580K YouTube • Exclusive 3-Item Set",
+        hero_card_title: "d'Alba White Truffle Supreme First Spray Serum 3-Bottle Set",
+        hero_card_quote: '"Emptied 3 bottles and negotiated with headquarters for 6 months for this exclusive set."',
+        hero_card_btn: "View Market →",
+        tab_all: "✨ All 20 Markets",
+        tab_us: "🇺🇸 US / Global #1",
+        tab_kr: "🇰🇷 Olive Young Ranking",
+        tab_jp: "🇯🇵 Japan Qoo10 #1",
+        tab_cn: "🇨🇳 Greater China Live #1",
+        cat_all: "All",
+        cat_soothing: "💧 Soothing / Hydration",
+        cat_sun: "☀️ Sun Care",
+        cat_pore: "🪡 Pore & Blemish",
+        cat_glow: "✨ Glow & Firming",
+        cat_base: "💄 Base & Makeup",
+        sort_rank: "Recommended Ranking",
+        sort_discount: "🔥 Highest Discount",
+        sort_saved: "💰 Biggest Savings",
+        sort_time: "⏳ Ending Soon",
+        sort_price: "Lowest Price",
+        quick_filter_label: "Quick Filter:",
+        benefit_all: "All Benefits",
+        benefit_half: "🔥 50%+ Half Price",
+        benefit_bogo: "🎁 Buy 1 Get 1 (1+1)",
+        benefit_ending: "⏳ Ending in 14h",
+        empty_title: "No markets or products found.",
+        empty_desc: "Try searching with other creator or product keywords.",
+        empty_btn: "View All Markets",
+        card_ends_in: "Ends in {hours}h",
+        card_in_stock: "In Stock",
+        card_exclusive: "Exclusive Deal",
+        card_code: "Code: ",
+        card_auto_copy: "Auto-copies on click",
+        card_saved: "Save {amount}",
+        card_secret_link: "Secret Link",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "Never miss your favorite creator's next deal.<br />Get alerted 1 hour before launch.",
+        bottom_alert_desc: "Limited quantity deals often sell out within 10 minutes. Sign up for alerts to receive secret links first.",
+        bottom_alert_btn: "Get Free Launch Alerts →",
+        footer_team_sub: "2-Day Startup Camp MVP Project • Team Zetty (Ji-woong, Sung-jun, Min-seok, Shin-hye, Jae-hyun)",
+        footer_disclaimer: "This service curates publicly released group buy links from creators and verified brands.",
+        footer_form: "Deal Alerts (Google Form)",
+        footer_top: "Back to Top",
+        nav_home: "Home",
+        nav_search: "Search",
+        nav_notify: "Alerts",
+        modal_official: "Official Retail Price",
+        modal_regular: "Standard Market Price",
+        modal_exclusive: "Creator Exclusive Price",
+        modal_promo_desc: "Creator Exclusive Promo Code",
+        modal_copy_btn: "Copy Code",
+        modal_buy_text: "Buy via Creator Secret Link",
+        modal_auto_copy_hint: "Clicking will auto-copy the promo code and redirect to official store.",
+        notify_title: "Secret Deal Launch Alert",
+        notify_desc: "Get notified immediately when exclusive deals from your favorite creators go live.",
+        notify_google_badge: "Official Survey Channel",
+        notify_google_h: "Reserve in 1 second via Google Forms",
+        notify_google_p: "Complete the survey on preferred creators & skin concerns to receive an extra 5% secret coupon.",
+        notify_google_btn_text: "Open Official Google Form →",
+        notify_or_text: "or Quick Sign-up on Web",
+        label_user_name: "Name / Nickname",
+        ph_user_name: "e.g. Alex",
+        label_user_contact: "Contact (Email or Phone)",
+        ph_user_contact: "your@email.com or phone",
+        label_user_wish: "Interested Brand or Creator",
+        ph_user_wish: "e.g. Haley Kim, d'Alba, Rom&nd",
+        btn_notify_submit: "Complete Alert Sign-up",
+        auto_applied: "Auto discount applied",
+        toast_copied: "Exclusive code [{code}] copied to clipboard!",
+        toast_redirect: "Code [{code}] copied! Redirecting to affiliate checkout ✈️",
+        toast_safe_redirect: "Redirecting safely to secret deal link ✈️",
+        toast_registered: "Thank you {name}, your deal alert has been registered.",
+        toast_url_copied: "URL copied to clipboard."
+      },
+      zh: {
+        notice_crawler: "中·韩·日·美 4大区域实时爬虫抓取中 (5分钟前更新)",
+        notice_verify: "20位头部美妆博主独家专属链接 100%正常验证",
+        notice_deal: "最高52%独家协议破盘价",
+        tagline: "K-Beauty 博主美妆团购精选集",
+        search_placeholder: "搜索创作者、品牌或商品名称...",
+        btn_notify: "开团提醒",
+        story_title: "Creators on Market",
+        story_subtitle: "点击头像进入创作者专属团购市集",
+        story_all: "全部市集",
+        hero_badge: "✨ 本周最火爆创作者独家组合",
+        hero_title: '社交媒体快拍里的神仙好物，<br />全网独家最低价一览无余。',
+        hero_desc: "精选你喜爱的博主亲自试用策划的特别团购。告别四处寻找失效链接，今日即将截团的独家好价尽收眼底。",
+        stat_1_num: "20位",
+        stat_1_label: "全球顶尖创作者",
+        stat_2_num: "最高52%",
+        stat_2_label: "独家破盘折扣",
+        stat_3_num: "100%",
+        stat_3_label: "实时有效链接验证",
+        hero_card_badge: "本周榜首 #1",
+        hero_card_creator: "YouTrue X 黛尔宝",
+        hero_card_sub: "YouTube 58万 • 独家3件套",
+        hero_card_title: "黛尔宝(d'Alba) 白松露精华喷雾 3支装特别企划",
+        hero_card_quote: '"空瓶3瓶后，亲自向品牌总部沟通6个月才拿下的超低独家组合。"',
+        hero_card_btn: "前往团购 →",
+        tab_all: "✨ 全部20位博主",
+        tab_us: "🇺🇸 欧美/全球TOP1",
+        tab_kr: "🇰🇷 韩国欧利芙洋榜单",
+        tab_jp: "🇯🇵 日本Qoo10/代购榜",
+        tab_cn: "🇨🇳 华语区直播顶流",
+        cat_all: "全部",
+        cat_soothing: "💧 保湿/舒缓",
+        cat_sun: "☀️ 防晒隔离",
+        cat_pore: "🪡 毛孔/祛痘",
+        cat_glow: "✨ 提亮/紧致",
+        cat_base: "💄 底妆/彩妆",
+        sort_rank: "推荐排序",
+        sort_discount: "🔥 折扣最高",
+        sort_saved: "💰 省钱最多",
+        sort_time: "⏳ 即将截止",
+        sort_price: "价格从低到高",
+        quick_filter_label: "快速筛选:",
+        benefit_all: "全部特惠",
+        benefit_half: "🔥 5折及以下半价",
+        benefit_bogo: "🎁 买一赠一 (1+1)",
+        benefit_ending: "⏳ 14小时内截团",
+        empty_title: "未找到相关团购或商品。",
+        empty_desc: "请尝试搜索其他博主或产品关键词。",
+        empty_btn: "查看全部团购",
+        card_ends_in: "距结束 {hours}小时",
+        card_in_stock: "可购买",
+        card_exclusive: "独家特价",
+        card_code: "优惠码: ",
+        card_auto_copy: "点击自动复制",
+        card_saved: "立省 {amount}",
+        card_secret_link: "独家密链",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "心仪博主的下次团购，<br />开抢前1小时准时提醒。",
+        bottom_alert_desc: "限量好货与前N名赠品常在开团10分钟内售罄。立即订阅提醒，抢先获取独家秘密通道。",
+        bottom_alert_btn: "免费订阅开团提醒 →",
+        footer_team_sub: "创业营MVP项目 • 团队 제티 (Zetty) (智雄、成俊、民锡、信惠、载炫)",
+        footer_disclaimer: "本平台整合并提供各创作者及官方品牌公开发布的团购链接与折扣优惠。",
+        footer_form: "开团提醒 (问卷星/Google)",
+        footer_top: "回到顶部",
+        nav_home: "首页",
+        nav_search: "搜索",
+        nav_notify: "开团提醒",
+        modal_official: "官方正价",
+        modal_regular: "普通市面折扣价",
+        modal_exclusive: "博主独家团购价",
+        modal_promo_desc: "创作者专属优惠码",
+        modal_copy_btn: "复制优惠码",
+        modal_buy_text: "通过博主独家链接购买",
+        modal_auto_copy_hint: "点击将自动复制独家优惠码并跳转至品牌官方渠道。",
+        notify_title: "独家开团专属提醒",
+        notify_desc: "当您关注的博主或品牌折扣开启时，第一时间推送通知。",
+        notify_google_badge: "官方问卷渠道",
+        notify_google_h: "通过问卷1秒完成提醒预约",
+        notify_google_p: "完成12位精选创作者及肤质问卷，全员即送额外5%专属优惠券。",
+        notify_google_btn_text: "打开官方Google问卷 →",
+        notify_or_text: "或在网页快速登记",
+        label_user_name: "姓名 / 昵称",
+        ph_user_name: "例如：小明",
+        label_user_contact: "微信 / 手机号 / 邮箱",
+        ph_user_contact: "微信号、手机或邮箱",
+        label_user_wish: "关注的品牌或博主",
+        ph_user_wish: "例如：李佳琦、黛尔宝、Rom&nd",
+        btn_notify_submit: "完成提醒登记",
+        auto_applied: "自动折扣结算",
+        toast_copied: "独家优惠码 [{code}] 已复制！",
+        toast_redirect: "优惠码 [{code}] 已自动复制！正在跳转至官方结账页 ✈️",
+        toast_safe_redirect: "正在安全跳转至独家折扣链接 ✈️",
+        toast_registered: "{name}，您的开团提醒已登记成功。",
+        toast_url_copied: "网址已复制到剪贴板。"
+      },
+      "zh-TW": {
+        notice_crawler: "中·韓·日·美 4大區域即時爬蟲運行中 (5分鐘前更新)",
+        notice_verify: "20位頂尖美妝創作者獨家專屬連結 100%正常驗證",
+        notice_deal: "最高52%獨家協議破盤價",
+        tagline: "K-Beauty 網紅美妝團購精選選品店",
+        search_placeholder: "搜尋創作者、品牌或商品名稱...",
+        btn_notify: "開團提醒",
+        story_title: "Creators on Market",
+        story_subtitle: "點擊頭像即可前往創作者專屬市集",
+        story_all: "全部市集",
+        hero_badge: "✨ 本週最火爆創作者獨家企劃組",
+        hero_title: 'IG限動裡的神秘好物，<br />獨家破盤最低價一覽無遺。',
+        hero_desc: "精選您喜愛的KOL精心策劃的特別團購。告別到處找失效連結，今日即將結團的專屬最低價全為您收錄。",
+        stat_1_num: "20位",
+        stat_1_label: "全球頂尖創作者",
+        stat_2_num: "最高52%",
+        stat_2_label: "獨家破盤折扣",
+        stat_3_num: "100%",
+        stat_3_label: "即時有效連結驗證",
+        hero_card_badge: "本週熱銷榜首 #1",
+        hero_card_creator: "YouTrue X 黛爾寶",
+        hero_card_sub: "YouTube 58萬 • 獨家3入組",
+        hero_card_title: "黛爾寶(d'Alba) 白松露精華噴霧 3瓶組特別企劃",
+        hero_card_quote: '"空瓶3罐後，親自向韓國總公司洽談6個月才爭取到的歷代級超殺組合。"',
+        hero_card_btn: "前往團購 →",
+        tab_all: "✨ 全部20位創作者",
+        tab_us: "🇺🇸 歐美 / 全球第一",
+        tab_kr: "🇰🇷 韓國Olive Young榜單",
+        tab_jp: "🇯🇵 日本Qoo10 / 代購第一",
+        tab_cn: "🇨🇳 華語圈頂流直播",
+        cat_all: "全部",
+        cat_soothing: "💧 保濕 / 鎮定舒緩",
+        cat_sun: "☀️ 防曬隔離",
+        cat_pore: "🪡 毛孔 / 淨痘修護",
+        cat_glow: "✨ 透亮光澤 / 彈力",
+        cat_base: "💄 底妝 / 彩妝",
+        sort_rank: "推薦排名",
+        sort_discount: "🔥 折扣最高",
+        sort_saved: "💰 省錢最多",
+        sort_time: "⏳ 即將截團",
+        sort_price: "價格由低至高",
+        quick_filter_label: "快速篩選:",
+        benefit_all: "全部優惠",
+        benefit_half: "🔥 5折起半價",
+        benefit_bogo: "🎁 買一送一 (1+1)",
+        benefit_ending: "⏳ 14小時內截團",
+        empty_title: "找不到相符的市集或商品。",
+        empty_desc: "請嘗試搜尋其他創作者或商品關鍵字。",
+        empty_btn: "查看全部市集",
+        card_ends_in: "倒數 {hours}小時",
+        card_in_stock: "可購買",
+        card_exclusive: "獨家特惠",
+        card_code: "優惠碼: ",
+        card_auto_copy: "點擊自動複製",
+        card_saved: "現省 {amount}",
+        card_secret_link: "獨家神秘連結",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "喜愛創作者的下次開團，<br />開搶前1小時準時通知您。",
+        bottom_alert_desc: "限量好物與前N名贈品常在開團10分鐘內秒殺。立即登記通知，搶先獲取秘密通道連結。",
+        bottom_alert_btn: "免費登記開團通知 →",
+        footer_team_sub: "創業營MVP專案 • 團隊 Zetty (智雄、成俊、民錫、信惠、載炫)",
+        footer_disclaimer: "本平台彙整並提供各創作者與官方品牌公開發布之團購連結與優惠。",
+        footer_form: "開團提醒 (Google表單)",
+        footer_top: "回到頂端",
+        nav_home: "首頁",
+        nav_search: "搜尋",
+        nav_notify: "通知",
+        modal_official: "官方原價",
+        modal_regular: "一般市面折扣價",
+        modal_exclusive: "創作者獨家團購價",
+        modal_promo_desc: "創作者專屬折扣代碼",
+        modal_copy_btn: "複製折扣碼",
+        modal_buy_text: "透過創作者專屬連結購買",
+        modal_auto_copy_hint: "點擊後將自動複製折扣碼並跳轉至官方正品商店。",
+        notify_title: "獨家開團專屬提醒登記",
+        notify_desc: "當您關注的創作者或品牌折扣啟動時，第一時間向您發送通知。",
+        notify_google_badge: "官方問卷管道",
+        notify_google_h: "透過Google表單1秒完成預約",
+        notify_google_p: "填寫12位精選KOL與膚質問卷，全員再送額外5%秘密優惠券。",
+        notify_google_btn_text: "前往Google官方表單 →",
+        notify_or_text: "或在網頁快速登記",
+        label_user_name: "姓名 / 暱稱",
+        ph_user_name: "例如：阿志",
+        label_user_contact: "聯絡電話或Email",
+        ph_user_contact: "09XX-XXX-XXX 或 Email",
+        label_user_wish: "感興趣的品牌或KOL",
+        ph_user_wish: "例如：d'Alba、Rom&nd、Haley Kim",
+        btn_notify_submit: "完成提醒登記",
+        auto_applied: "自動折扣結算",
+        toast_copied: "專屬折扣碼 [{code}] 已複製！",
+        toast_redirect: "折扣碼 [{code}] 已自動複製！正在前往結帳頁面 ✈️",
+        toast_safe_redirect: "正在安全前往獨家折扣頁面 ✈️",
+        toast_registered: "{name}，您的開團提醒已登記成功。",
+        toast_url_copied: "網址已複製至剪貼簿。"
+      },
+      ja: {
+        notice_crawler: "日·韓·中·米 4大エリアのリアルタイムクローラー稼働中（5分前更新）",
+        notice_verify: "トップクリエイター20名の独占シークレットリンク 100%正常検証済み",
+        notice_deal: "最大52%OFF 独占交渉価格",
+        tagline: "インフルエンサー ビューティーマーケット セレクトショップ",
+        search_placeholder: "クリエイター、ブランド、製品名を検索...",
+        btn_notify: "共同購入通知",
+        story_title: "Creators on Market",
+        story_subtitle: "アイコンをタップするとクリエイター別マーケットに移動します",
+        story_all: "全マーケット",
+        hero_badge: "✨ 今週もっとも話題のインフルエンサー限定セット",
+        hero_title: 'インスタストーリーのあのリンク、<br />独占最安値でひと目で。',
+        hero_desc: "お気に入りのクリエイターが厳選した特別な共同購入マーケット。消えてしまうリンクを探す手間なく、本日終了のシークレット最安値だけをお届けします。",
+        stat_1_num: "20名",
+        stat_1_label: "世界のトップクリエイター",
+        stat_2_num: "最大52%",
+        stat_2_label: "独占交渉ディスカウント",
+        stat_3_num: "100%",
+        stat_3_label: "有効リンク検証完了",
+        hero_card_badge: "今週のベスト #1",
+        hero_card_creator: "YouTrue X ダルバ",
+        hero_card_sub: "YouTube 58万人 • 単独3種特別セット",
+        hero_card_title: "ダルバ(d'Alba) ホワイトトリュフ スプレーセラム 3本セット",
+        hero_card_quote: '"3本使い切って、6ヶ月間本社に直接交渉して実現した過去最高の構成です。"',
+        hero_card_btn: "マーケットを見る →",
+        tab_all: "✨ 全20名マーケット",
+        tab_us: "🇺🇸 米国・グローバル1位",
+        tab_kr: "🇰🇷 韓国オリーブヤング上位",
+        tab_jp: "🇯🇵 日本Qoo10・直輸入1位",
+        tab_cn: "🇨🇳 中華圏ライブコマース1位",
+        cat_all: "すべて",
+        cat_soothing: "💧 インナードライ・鎮静",
+        cat_sun: "☀️ サンケア・UV",
+        cat_pore: "🪡 毛穴・トラブルケア",
+        cat_glow: "✨ ツヤ・ハリ・弾力",
+        cat_base: "💄 ベース・メイク",
+        sort_rank: "おすすめ順",
+        sort_discount: "🔥 割引率順",
+        sort_saved: "💰 お得金額順",
+        sort_time: "⏳ まもなく終了順",
+        sort_price: "価格の安い順",
+        quick_filter_label: "クイックフィルター:",
+        benefit_all: "全特典",
+        benefit_half: "🔥 50%以上半額",
+        benefit_bogo: "🎁 1+1 (2本まとめ買い)",
+        benefit_ending: "⏳ 14時間以内終了",
+        empty_title: "該当するマーケットや製品が見つかりませんでした。",
+        empty_desc: "他のクリエイターやブランド名で検索してみてください。",
+        empty_btn: "すべてのマーケットを見る",
+        card_ends_in: "終了まで{hours}時間",
+        card_in_stock: "購入可能",
+        card_exclusive: "限定特価",
+        card_code: "コード: ",
+        card_auto_copy: "クリックで自動コピー",
+        card_saved: "{amount}お得",
+        card_secret_link: "シークレットリンク",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "お気に入りクリエイターの次回セール、<br />買い逃さないよう開始1時間前にお知らせ。",
+        bottom_alert_desc: "数量限定や先着特典付きの共同購入は開始10分で完売することがあります。通知登録でシークレットリンクを最速でゲットしましょう。",
+        bottom_alert_btn: "無料オープン通知を申し込む →",
+        footer_team_sub: "創業キャンプMVPプロジェクト • チーム Zetty（ジウン、ソンジュン、ミンソク、シネ、ジェヒョン）",
+        footer_disclaimer: "本サービスは各クリエイターおよび公式ブランドが公開した共同購入リンクをキュレーションして提供しています。",
+        footer_form: "共同購入通知（Googleフォーム）",
+        footer_top: "トップへ戻る",
+        nav_home: "ホーム",
+        nav_search: "検索",
+        nav_notify: "通知",
+        modal_official: "公式定価",
+        modal_regular: "一般市販価格",
+        modal_exclusive: "クリエイター限定価格",
+        modal_promo_desc: "クリエイター限定プロモーションコード",
+        modal_copy_btn: "コードをコピー",
+        modal_buy_text: "クリエイター限定リンクで購入する",
+        modal_auto_copy_hint: "クリックすると限定コードが自動コピーされ、公式ショップに移動します。",
+        notify_title: "シークレット共同購入オープン通知",
+        notify_desc: "ご希望のクリエイターやブランドの割引リンクが公開された際、最速でお知らせします。",
+        notify_google_badge: "公式アンケート受付",
+        notify_google_h: "Googleフォームで1秒予約",
+        notify_google_p: "クリエイター12名・肌悩みアンケート回答で追加5%シークレットクーポン全員プレゼント。",
+        notify_google_btn_text: "公式Googleフォームを開く →",
+        notify_or_text: "またはWebで簡単受付",
+        label_user_name: "お名前 / ニックネーム",
+        ph_user_name: "例：山田",
+        label_user_contact: "連絡先（メールまたはLINE ID）",
+        ph_user_contact: "sample@email.com",
+        label_user_wish: "気になるブランドまたはクリエイター",
+        ph_user_wish: "例：ダルバ、ロムアンド、ミズキ",
+        btn_notify_submit: "通知登録を完了する",
+        auto_applied: "自動割引適用",
+        toast_copied: "限定コード [{code}] をコピーしました！",
+        toast_redirect: "限定コード [{code}] を自動コピーしました！購入ページへ移動します ✈️",
+        toast_safe_redirect: "シークレット割引ページへ安全に移動します ✈️",
+        toast_registered: "{name}様、共同購入通知が登録されました。",
+        toast_url_copied: "URLがコピーされました。"
+      },
+      th: {
+        notice_crawler: "ระบบติดตามเรียลไทม์ 4 ประเทศ เกาหลี·จีน·ญี่ปุ่น·สหรัฐฯ ทำงานอยู่ (อัปเดตเมื่อ 5 นาทีที่แล้ว)",
+        notice_verify: "ลิงก์ลับพิเศษจาก 20 บิวตี้ครีเอเตอร์ชั้นนำ ตรวจสอบแล้วใช้งานได้ 100%",
+        notice_deal: "ส่วนลดพิเศษต่อรองสูงสุดถึง 52%",
+        tagline: "ร้านคัดสรรดีลบิวตี้ร่วมกับอินฟลูเอนเซอร์ K-Beauty",
+        search_placeholder: "ค้นหาครีเอเตอร์ แบรนด์ หรือชื่อสินค้า...",
+        btn_notify: "แจ้งเตือนเปิดดีล",
+        story_title: "Creators on Market",
+        story_subtitle: "แตะที่โปรไฟล์เพื่อไปยังมาร์เก็ตของครีเอเตอร์แต่ละท่าน",
+        story_all: "ทุกมาร์เก็ต",
+        hero_badge: "✨ เซ็ตพิเศษสุดฮอตประจำสัปดาห์จากอินฟลูเอนเซอร์",
+        hero_title: 'ลิงก์ลับในสตอรี่ไอจี<br />ราคาถูกที่สุด รวมไว้ที่นี่แล้ว',
+        hero_desc: "มาร์เก็ตซื้อกลุ่มพิเศษที่ครีเอเตอร์ที่คุณรักคัดสรรมาอย่างประณีต รวมเฉพาะดีลลับราคาพิเศษที่จะหมดเขตวันนี้ไว้ในที่เดียว",
+        stat_1_num: "20 ท่าน",
+        stat_1_label: "ท็อปครีเอเตอร์ระดับโลก",
+        stat_2_num: "สูงสุด 52%",
+        stat_2_label: "ลดแหลกเฉพาะที่นี่",
+        stat_3_num: "100%",
+        stat_3_label: "ตรวจสอบลิงก์ใช้ได้จริง",
+        hero_card_badge: "อันดับ 1 ประจำสัปดาห์",
+        hero_card_creator: "YouTrue X d'Alba",
+        hero_card_sub: "YouTube 5.8 แสน • เซ็ตพิเศษ 3 ชิ้น",
+        hero_card_title: "d'Alba White Truffle First Spray Serum เซ็ต 3 ขวดพิเศษ",
+        hero_card_quote: '"ใช้หมดไป 3 ขวด ติดต่อเจรจากับสำนักงานใหญ่กว่า 6 เดือนจนได้เซ็ตสุดคุ้มนี้"',
+        hero_card_btn: "ไปที่มาร์เก็ต →",
+        tab_all: "✨ รวม 20 ครีเอเตอร์",
+        tab_us: "🇺🇸 สหรัฐฯ / โกลบอล อันดับ 1",
+        tab_kr: "🇰🇷 ท็อปชาร์ต Olive Young เกาหลี",
+        tab_jp: "🇯🇵 อันดับ 1 ญี่ปุ่น Qoo10",
+        tab_cn: "🇨🇳 ไลฟ์สดอันดับ 1 ตลาดจีน",
+        cat_all: "ทั้งหมด",
+        cat_soothing: "💧 เติมน้ำ/ปลอบประโลม",
+        cat_sun: "☀️ กันแดด",
+        cat_pore: "🪡 รูขุมขน/ปัญหาสิว",
+        cat_glow: "✨ ผิวกระจ่างใส/ยกกระชับ",
+        cat_base: "💄 เบส/เมคอัพ",
+        sort_rank: "แนะนำยอดนิยม",
+        sort_discount: "🔥 ส่วนลดสูงสุด",
+        sort_saved: "💰 ประหยัดเงินมากสุด",
+        sort_time: "⏳ ใกล้หมดเวลา",
+        sort_price: "ราคาต่ำไปสูง",
+        quick_filter_label: "ตัวกรองด่วน:",
+        benefit_all: "ทุกสิทธิประโยชน์",
+        benefit_half: "🔥 ลดครึ่งราคา 50%+",
+        benefit_bogo: "🎁 โปร 1 แถม 1 (1+1)",
+        benefit_ending: "⏳ ปิดรับใน 14 ชม.",
+        empty_title: "ไม่พบมาร์เก็ตหรือสินค้าที่คุณค้นหา",
+        empty_desc: "ลองค้นหาด้วยชื่อครีเอเตอร์หรือคีย์เวิร์ดสินค้าอื่น",
+        empty_btn: "ดูมาร์เก็ตทั้งหมด",
+        card_ends_in: "เหลือเวลา {hours} ชม.",
+        card_in_stock: "พร้อมสั่งซื้อ",
+        card_exclusive: "ราคาพิเศษเฉพาะที่นี่",
+        card_code: "โค้ด: ",
+        card_auto_copy: "คัดลอกอัตโนมัติเมื่อคลิก",
+        card_saved: "ประหยัด {amount}",
+        card_secret_link: "ลิงก์ลับพิเศษ",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "ดีลถัดไปของครีเอเตอร์ที่คุณชอบ<br />แจ้งเตือนล่วงหน้า 1 ชั่วโมงก่อนเปิดขาย",
+        bottom_alert_desc: "ดีลที่มีจำนวนจำกัดมักขายหมดภายใน 10 นาทีแรก ลงทะเบียนแจ้งเตือนเพื่อรับลิงก์ลับก่อนใคร",
+        bottom_alert_btn: "ลงทะเบียนแจ้งเตือนฟรี →",
+        footer_team_sub: "โปรเจกต์ MVP แคมป์สตาร์ทอัพ • ทีม Zetty (จีอุง, ซองจุน, มินซอก, ชินฮเย, แจฮยอน)",
+        footer_disclaimer: "บริการนี้รวบรวมลิงก์การซื้อกลุ่มที่เผยแพร่อย่างเป็นทางการจากครีเอเตอร์และแบรนด์ของแท้",
+        footer_form: "แจ้งเตือนเปิดดีล (Google Form)",
+        footer_top: "กลับสู่ด้านบน",
+        nav_home: "หน้าแรก",
+        nav_search: "ค้นหา",
+        nav_notify: "แจ้งเตือน",
+        modal_official: "ราคาปกติอย่างเป็นทางการ",
+        modal_regular: "ราคาลดทั่วไปในตลาด",
+        modal_exclusive: "ราคาพิเศษเฉพาะครีเอเตอร์",
+        modal_promo_desc: "โค้ดส่วนลดพิเศษเฉพาะครีเอเตอร์",
+        modal_copy_btn: "คัดลอกโค้ด",
+        modal_buy_text: "สั่งซื้อผ่านลิงก์ลับเฉพาะครีเอเตอร์",
+        modal_auto_copy_hint: "คลิกเพื่อคัดลอกโค้ดอัตโนมัติและนำทางไปยังร้านค้าทางการ",
+        notify_title: "ลงทะเบียนแจ้งเตือนดีลลับพิเศษ",
+        notify_desc: "รับการแจ้งเตือนทันทีเมื่อลิงก์ส่วนลดจากครีเอเตอร์ที่คุณสนใจเปิดตัว",
+        notify_google_badge: "แบบสำรวจอย่างเป็นทางการ",
+        notify_google_h: "จองการแจ้งเตือนใน 1 วินาทีผ่าน Google Forms",
+        notify_google_p: "ตอบแบบสำรวจครีเอเตอร์ 12 ท่านและปัญหาผิวเพื่อรับคูปองลับลดเพิ่ม 5% ทุกคน",
+        notify_google_btn_text: "เปิด Google Forms ทางการ →",
+        notify_or_text: "หรือลงทะเบียนด่วนบนเว็บ",
+        label_user_name: "ชื่อ / ชื่อเล่น",
+        ph_user_name: "เช่น เมย์",
+        label_user_contact: "อีเมล หรือ เบอร์โทรศัพท์",
+        ph_user_contact: "your@email.com หรือ 08X-XXX-XXXX",
+        label_user_wish: "แบรนด์หรือครีเอเตอร์ที่สนใจ",
+        ph_user_wish: "เช่น d'Alba, Rom&nd, Haley Kim",
+        btn_notify_submit: "ยืนยันการลงทะเบียนแจ้งเตือน",
+        auto_applied: "ใช้ส่วนลดอัตโนมัติ",
+        toast_copied: "คัดลอกโค้ดพิเศษ [{code}] แล้ว!",
+        toast_redirect: "คัดลอกโค้ด [{code}] เรียบร้อย! กำลังนำไปยังหน้าร้านค้า ✈️",
+        toast_safe_redirect: "กำลังนำคุณไปยังลิงก์ส่วนลดลับอย่างปลอดภัย ✈️",
+        toast_registered: "คุณ {name} ลงทะเบียนแจ้งเตือนเปิดดีลเรียบร้อยแล้วค่ะ",
+        toast_url_copied: "คัดลอกลิงก์แล้ว"
+      },
+      ms: {
+        notice_crawler: "Penjejak langsung 4 rantau KR·CN·JP·US beroperasi (Dikemas kini 5 min lalu)",
+        notice_verify: "100% pautan rahsia disahkan aktif daripada 20 pencipta kandungan kecantikan",
+        notice_deal: "Diskaun Rundingan Eksklusif Sehingga 52%",
+        tagline: "Kedai Pilihan Pasaran Kecantikan Pempengaruh K-Beauty",
+        search_placeholder: "Cari pempengaruh, jenama, atau nama produk...",
+        btn_notify: "Pemberitahuan Tawaran",
+        story_title: "Creators on Market",
+        story_subtitle: "Ketik profil untuk melawat pasaran setiap pencipta kandungan",
+        story_all: "Semua Pasaran",
+        hero_badge: "✨ Set Eksklusif Paling Hangat Minggu Ini",
+        hero_title: 'Pautan dalam IG story,<br />Harga terendah eksklusif sekali imbas.',
+        hero_desc: "Pasaran belian berkumpulan istimewa yang dipilih rapi oleh pencipta kegemaran anda. Kami mengumpulkan harga rahsia sah yang tamat hari ini.",
+        stat_1_num: "20 Orang",
+        stat_1_label: "Pencipta Utama Global",
+        stat_2_num: "Hingga 52%",
+        stat_2_label: "Diskaun Rundingan Khas",
+        stat_3_num: "100%",
+        stat_3_label: "Pautan Sah Terverifikasi",
+        hero_card_badge: "TERBAIK MINGGUAN #1",
+        hero_card_creator: "YouTrue X d'Alba",
+        hero_card_sub: "YouTube 580K • Set Istimewa 3 Keping",
+        hero_card_title: "Set 3 Botol Serum Semburan Pertama d'Alba White Truffle",
+        hero_card_quote: '"Menghabiskan 3 botol dan berunding dengan ibu pejabat selama 6 bulan untuk tawaran ini."',
+        hero_card_btn: "Pergi ke Pasaran →",
+        tab_all: "✨ Semua 20 Pasaran",
+        tab_us: "🇺🇸 AS / Global No.1",
+        tab_kr: "🇰🇷 Kedudukan Olive Young Korea",
+        tab_jp: "🇯🇵 No.1 Qoo10 / Import Jepun",
+        tab_cn: "🇨🇳 No.1 Siaran Langsung Pasaran Cina",
+        cat_all: "Semua",
+        cat_soothing: "💧 Penenang / Penghidratan",
+        cat_sun: "☀️ Perlindungan Suria",
+        cat_pore: "🪡 Pori & Masalah Kulit",
+        cat_glow: "✨ Seri & Ketegangan",
+        cat_base: "💄 Asas & Solekan",
+        sort_rank: "Pilihan Disyorkan",
+        sort_discount: "🔥 Diskaun Tertinggi",
+        sort_saved: "💰 Penjimatan Terbanyak",
+        sort_time: "⏳ Tamat Tidak Lama Lagi",
+        sort_price: "Harga Terendah",
+        quick_filter_label: "Penapis Pantas:",
+        benefit_all: "Semua Manfaat",
+        benefit_half: "🔥 Separuh Harga 50%+",
+        benefit_bogo: "🎁 Tawaran Beli 1 Percuma 1 (1+1)",
+        benefit_ending: "⏳ Tamat dlm 14 Jam",
+        empty_title: "Tiada pasaran atau produk dijumpai.",
+        empty_desc: "Cuba cari dengan kata kunci pencipta atau produk lain.",
+        empty_btn: "Lihat Semua Pasaran",
+        card_ends_in: "Tamat dlm {hours}j",
+        card_in_stock: "Tersedia",
+        card_exclusive: "Tawaran Eksklusif",
+        card_code: "Kod: ",
+        card_auto_copy: "Salin automatik bila klik",
+        card_saved: "Jimat {amount}",
+        card_secret_link: "Pautan Rahsia",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "Tawaran seterusnya pencipta kegemaran anda,<br />Dapatkan makluman 1 jam sebelum bermula.",
+        bottom_alert_desc: "Tawaran kuantiti terhad biasanya habis dalam 10 minit pertama. Daftar makluman untuk menerima pautan rahsia terlebih dahulu.",
+        bottom_alert_btn: "Daftar Makluman Percuma →",
+        footer_team_sub: "Projek MVP Kem Permulaan • Pasukan Zetty (Ji-woong, Sung-jun, Min-seok, Shin-hye, Jae-hyun)",
+        footer_disclaimer: "Perkhidmatan ini mengumpul pautan belian berkumpulan rasmi daripada pencipta dan jenama tulen.",
+        footer_form: "Makluman Tawaran (Borang Google)",
+        footer_top: "Kembali ke Atas",
+        nav_home: "Laman Utama",
+        nav_search: "Cari",
+        nav_notify: "Makluman",
+        modal_official: "Harga Rasmi Asal",
+        modal_regular: "Harga Pasaran Biasa",
+        modal_exclusive: "Harga Eksklusif Pencipta",
+        modal_promo_desc: "Kod Promosi Eksklusif Pencipta",
+        modal_copy_btn: "Salin Kod",
+        modal_buy_text: "Beli melalui Pautan Rahsia Pencipta",
+        modal_auto_copy_hint: "Klik untuk menyalin kod secara automatik dan beralih ke kedai rasmi.",
+        notify_title: "Pemberitahuan Tawaran Rahsia",
+        notify_desc: "Dapatkan makluman segera apabila pautan diskaun daripada pencipta kegemaran anda dibuka.",
+        notify_google_badge: "Saluran Soal Selidik Rasmi",
+        notify_google_h: "Tempah makluman dalam 1 saat melalui Google Forms",
+        notify_google_p: "Lengkapkan soal selidik 12 pencipta & jenis kulit untuk menerima kupon rahsia tambahan 5% secara percuma.",
+        notify_google_btn_text: "Buka Borang Google Rasmi →",
+        notify_or_text: "atau Pendaftaran Pantas di Web",
+        label_user_name: "Nama / Nama Panggilan",
+        ph_user_name: "cth. Adam",
+        label_user_contact: "Nombor Telefon atau Emel",
+        ph_user_contact: "anda@email.com atau 01X-XXXXXXX",
+        label_user_wish: "Jenama atau Pencipta Pilihan",
+        ph_user_wish: "cth. d'Alba, Rom&nd, Haley Kim",
+        btn_notify_submit: "Selesaikan Pendaftaran Makluman",
+        auto_applied: "Diskaun auto digunakan",
+        toast_copied: "Kod eksklusif [{code}] berjaya disalin!",
+        toast_redirect: "Kod [{code}] disalin secara automatik! Menuju ke laman rasmi ✈️",
+        toast_safe_redirect: "Menuju ke pautan diskaun rahsia dengan selamat ✈️",
+        toast_registered: "{name}, pemberitahuan tawaran anda telah didaftarkan.",
+        toast_url_copied: "Pautan disalin ke papan keratan."
+      },
+      vi: {
+        notice_crawler: "Trình thu thập dữ liệu trực tiếp 4 khu vực Hàn·Trung·Nhật·Mỹ đang chạy (Cập nhật 5 phút trước)",
+        notice_verify: "100% liên kết bí mật độc quyền từ 20 beauty creator hàng đầu đã được xác thực",
+        notice_deal: "Mức giảm độc quyền thương lượng lên đến 52%",
+        tagline: "Cửa hàng tuyển chọn deal mua chung mỹ phẩm K-Beauty từ Influencer",
+        search_placeholder: "Tìm kiếm creator, thương hiệu hoặc tên sản phẩm...",
+        btn_notify: "Nhận thông báo deal",
+        story_title: "Creators on Market",
+        story_subtitle: "Nhấn vào ảnh đại diện để đến trang mua sắm của từng creator",
+        story_all: "Tất cả phiên chợ",
+        hero_badge: "✨ Set độc quyền từ Influencer hot nhất tuần này",
+        hero_title: 'Đường link trên Story Instagram,<br />Giá thấp nhất độc quyền gói gọn tại đây.',
+        hero_desc: "Các phiên chợ mua chung đặc biệt được tuyển chọn kỹ lưỡng bởi creator bạn yêu mến. Không còn phải vất vả tìm link hết hạn, chỉ giữ lại deal bí mật giá tốt nhất kết thúc hôm nay.",
+        stat_1_num: "20 Người",
+        stat_1_label: "Top Creator Toàn Cầu",
+        stat_2_num: "Lên đến 52%",
+        stat_2_label: "Giá Sốc Độc Quyền",
+        stat_3_num: "100%",
+        stat_3_label: "Đã Kiểm Duyệt Link Thật",
+        hero_card_badge: "BÁN CHẠY NHẤT TUẦN #1",
+        hero_card_creator: "YouTrue X d'Alba",
+        hero_card_sub: "YouTube 580K • Set 3 món độc quyền",
+        hero_card_title: "Set 3 chai Xịt khoáng Tinh chất Nấm Truffle Trắng d'Alba Supreme",
+        hero_card_quote: '"Dùng hết 3 chai và làm việc trực tiếp với trụ sở trong 6 tháng để có set ưu đãi kỷ lục này."',
+        hero_card_btn: "Xem chi tiết deal →",
+        tab_all: "✨ Tất cả 20 Creator",
+        tab_us: "🇺🇸 Mỹ / Toàn cầu TOP 1",
+        tab_kr: "🇰🇷 Xếp hạng Olive Young Hàn Quốc",
+        tab_jp: "🇯🇵 Top 1 Qoo10 / Xách tay Nhật Bản",
+        tab_cn: "🇨🇳 Top 1 Livestream Trung Quốc",
+        cat_all: "Tất cả",
+        cat_soothing: "💧 Cấp ẩm / Làm dịu",
+        cat_sun: "☀️ Chống nắng",
+        cat_pore: "🪡 Lỗ chân lông / Giảm mụn",
+        cat_glow: "✨ Căng bóng / Chống lão hóa",
+        cat_base: "💄 Lớp nền & Trang điểm",
+        sort_rank: "Đề xuất phổ biến",
+        sort_discount: "🔥 Giảm giá nhiều nhất",
+        sort_saved: "💰 Tiết kiệm nhiều nhất",
+        sort_time: "⏳ Sắp kết thúc",
+        sort_price: "Giá thấp đến cao",
+        quick_filter_label: "Lọc nhanh:",
+        benefit_all: "Tất cả ưu đãi",
+        benefit_half: "🔥 Nửa giá từ 50%+",
+        benefit_bogo: "🎁 Mua 1 tặng 1 (1+1)",
+        benefit_ending: "⏳ Đóng deal trong 14h",
+        empty_title: "Không tìm thấy phiên chợ hoặc sản phẩm phù hợp.",
+        empty_desc: "Hãy thử tìm kiếm với tên creator hoặc từ khóa sản phẩm khác.",
+        empty_btn: "Xem tất cả phiên chợ",
+        card_ends_in: "Còn {hours} giờ",
+        card_in_stock: "Có sẵn",
+        card_exclusive: "Ưu đãi độc quyền",
+        card_code: "Mã: ",
+        card_auto_copy: "Tự động sao chép khi nhấn",
+        card_saved: "Tiết kiệm {amount}",
+        card_secret_link: "Link bí mật",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "Deal tiếp theo từ creator yêu thích,<br />Nhận thông báo trước 1 giờ khi mở bán.",
+        bottom_alert_desc: "Các đợt deal số lượng có hạn và quà tặng đặc biệt thường cháy hàng trong 10 phút đầu. Đăng ký thông báo để nhận link bí mật sớm nhất.",
+        bottom_alert_btn: "Đăng ký nhận thông báo miễn phí →",
+        footer_team_sub: "Dự án MVP Trại Khởi nghiệp • Nhóm Zetty (Ji-woong, Sung-jun, Min-seok, Shin-hye, Jae-hyun)",
+        footer_disclaimer: "Dịch vụ tuyển chọn và tổng hợp các liên kết mua chung công khai từ creator và thương hiệu chính hãng.",
+        footer_form: "Nhận thông báo mở deal (Google Form)",
+        footer_top: "Lên đầu trang",
+        nav_home: "Trang chủ",
+        nav_search: "Tìm kiếm",
+        nav_notify: "Thông báo",
+        modal_official: "Giá niêm yết chính hãng",
+        modal_regular: "Giá giảm thị trường thông thường",
+        modal_exclusive: "Giá độc quyền từ Creator",
+        modal_promo_desc: "Mã giảm giá độc quyền của Creator",
+        modal_copy_btn: "Sao chép mã",
+        modal_buy_text: "Mua qua link bí mật của Creator",
+        modal_auto_copy_hint: "Nhấn để tự động sao chép mã ưu đãi và chuyển hướng tới gian hàng chính hãng.",
+        notify_title: "Đăng ký nhận thông báo mở deal bí mật",
+        notify_desc: "Nhận thông báo ngay khi đường link giảm giá từ creator bạn yêu thích chính thức mở bán.",
+        notify_google_badge: "Kênh khảo sát chính thức",
+        notify_google_h: "Đăng ký nhận thông báo trong 1 giây qua Google Forms",
+        notify_google_p: "Hoàn thành khảo sát 12 creator và tình trạng da để nhận thêm coupon bí mật 5% cho tất cả người tham gia.",
+        notify_google_btn_text: "Mở Google Form chính thức →",
+        notify_or_text: "hoặc Đăng ký nhanh trên Web",
+        label_user_name: "Họ và tên / Nickname",
+        ph_user_name: "Ví dụ: Linh",
+        label_user_contact: "Số điện thoại hoặc Email",
+        ph_user_contact: "email@example.com hoặc SĐT",
+        label_user_wish: "Thương hiệu hoặc Creator quan tâm",
+        ph_user_wish: "Ví dụ: d'Alba, Rom&nd, Haley Kim",
+        btn_notify_submit: "Hoàn tất đăng ký nhận thông báo",
+        auto_applied: "Đã tự động áp dụng ưu đãi",
+        toast_copied: "Đã sao chép mã độc quyền [{code}] vào bộ nhớ tạm!",
+        toast_redirect: "Đã sao chép mã [{code}]! Đang chuyển hướng đến trang thanh toán ✈️",
+        toast_safe_redirect: "Đang chuyển hướng an toàn đến link ưu đãi bí mật ✈️",
+        toast_registered: "{name} ơi, đăng ký nhận thông báo deal của bạn đã thành công.",
+        toast_url_copied: "Đã sao chép đường dẫn trang web."
+      },
+      id: {
+        notice_crawler: "Perayap langsung 4 wilayah KR·CN·JP·US sedang aktif (Diperbarui 5 menit lalu)",
+        notice_verify: "100% tautan rahasia terverifikasi aktif dari 20 beauty creator teratas",
+        notice_deal: "Diskon Negosiasi Eksklusif Hingga 52%",
+        tagline: "Toko Kurasi Belanja Bersama Produk Kecantikan K-Beauty dari Influencer",
+        search_placeholder: "Cari kreator, merek, atau nama produk...",
+        btn_notify: "Notifikasi Deal",
+        story_title: "Creators on Market",
+        story_subtitle: "Ketuk profil untuk mengunjungi pasar masing-masing kreator",
+        story_all: "Semua Pasar",
+        hero_badge: "✨ Set Eksklusif Paling Viral Minggu Ini",
+        hero_title: 'Tautan dalam story IG,<br />Harga terendah eksklusif dalam satu pandangan.',
+        hero_desc: "Pasar belanja bersama khusus yang dikurasi rapi oleh kreator favorit Anda. Kami merangkum hanya harga rahasia yang berakhir hari ini.",
+        stat_1_num: "20 Orang",
+        stat_1_label: "Kreator Top Global",
+        stat_2_num: "Hingga 52%",
+        stat_2_label: "Diskon Khusus Negosiasi",
+        stat_3_num: "100%",
+        stat_3_label: "Verifikasi Tautan Valid",
+        hero_card_badge: "TERBAIK MINGGU INI #1",
+        hero_card_creator: "YouTrue X d'Alba",
+        hero_card_sub: "YouTube 580K • Set Spesial 3 Produk",
+        hero_card_title: "Set 3 Botol Serum Semprot Pertama d'Alba White Truffle Supreme",
+        hero_card_quote: '"Menghabiskan 3 botol dan bernegosiasi dengan kantor pusat selama 6 bulan untuk set istimewa ini."',
+        hero_card_btn: "Kunjungi Pasar →",
+        tab_all: "✨ Semua 20 Pasar",
+        tab_us: "🇺🇸 AS / Global #1",
+        tab_kr: "🇰🇷 Peringkat Olive Young Korea",
+        tab_jp: "🇯🇵 Peringkat 1 Qoo10 / Impor Jepang",
+        tab_cn: "🇨🇳 Peringkat 1 Live Streaming Tiongkok",
+        cat_all: "Semua",
+        cat_soothing: "💧 Penenang / Hidrasi",
+        cat_sun: "☀️ Perlindungan Tabir Surya",
+        cat_pore: "🪡 Pori & Masalah Kulit",
+        cat_glow: "✨ Cerah & Kekenyalan",
+        cat_base: "💄 Base & Rias Wajah",
+        sort_rank: "Pilihan Rekomendasi",
+        sort_discount: "🔥 Diskon Tertinggi",
+        sort_saved: "💰 Hemat Terbanyak",
+        sort_time: "⏳ Segera Berakhir",
+        sort_price: "Harga Terendah",
+        quick_filter_label: "Filter Cepat:",
+        benefit_all: "Semua Manfaat",
+        benefit_half: "🔥 Diskon 50%+ Setengah Harga",
+        benefit_bogo: "🎁 Promo Beli 1 Gratis 1 (1+1)",
+        benefit_ending: "⏳ Berakhir dlm 14 Jam",
+        empty_title: "Tidak ada pasar atau produk yang ditemukan.",
+        empty_desc: "Coba cari dengan kata kunci kreator atau produk lain.",
+        empty_btn: "Lihat Semua Pasar",
+        card_ends_in: "Berakhir dlm {hours}j",
+        card_in_stock: "Tersedia",
+        card_exclusive: "Tawaran Khusus",
+        card_code: "Kode: ",
+        card_auto_copy: "Salin otomatis saat diklik",
+        card_saved: "Hemat {amount}",
+        card_secret_link: "Tautan Rahasia",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "Deal berikutnya dari kreator favorit Anda,<br />Dapatkan pemberitahuan 1 jam sebelum dimulai.",
+        bottom_alert_desc: "Penawaran jumlah terbatas biasanya habis dalam 10 menit pertama. Daftar notifikasi untuk mendapatkan tautan rahasia terlebih dahulu.",
+        bottom_alert_btn: "Daftar Notifikasi Gratis →",
+        footer_team_sub: "Proyek MVP Startup Camp • Tim Zetty (Ji-woong, Sung-jun, Min-seok, Shin-hye, Jae-hyun)",
+        footer_disclaimer: "Layanan ini mengurasi tautan belanja bersama resmi yang dipublikasikan oleh kreator dan merek orisinal.",
+        footer_form: "Notifikasi Deal (Google Forms)",
+        footer_top: "Kembali ke Atas",
+        nav_home: "Beranda",
+        nav_search: "Cari",
+        nav_notify: "Notifikasi",
+        modal_official: "Harga Resmi Retail",
+        modal_regular: "Harga Pasar Standar",
+        modal_exclusive: "Harga Eksklusif Kreator",
+        modal_promo_desc: "Kode Promo Eksklusif Kreator",
+        modal_copy_btn: "Salin Kode",
+        modal_buy_text: "Beli via Tautan Rahasia Kreator",
+        modal_auto_copy_hint: "Klik untuk menyalin kode secara otomatis dan dialihkan ke toko resmi.",
+        notify_title: "Daftar Notifikasi Deal Rahasia",
+        notify_desc: "Dapatkan pemberitahuan seketika saat tautan diskon dari kreator favorit Anda aktif.",
+        notify_google_badge: "Saluran Survei Resmi",
+        notify_google_h: "Reservasi dalam 1 detik lewat Google Forms",
+        notify_google_p: "Isi survei 12 kreator & jenis kulit untuk mendapatkan kupon rahasia tambahan 5% untuk semua pendaftar.",
+        notify_google_btn_text: "Buka Google Forms Resmi →",
+        notify_or_text: "atau Daftar Cepat di Web",
+        label_user_name: "Nama / Nama Panggilan",
+        ph_user_name: "cth. Budi",
+        label_user_contact: "Nomor WhatsApp atau Email",
+        ph_user_contact: "email@contoh.com atau 08XXXXXXXXXX",
+        label_user_wish: "Merek atau Kreator yang Diminati",
+        ph_user_wish: "cth. d'Alba, Rom&nd, Haley Kim",
+        btn_notify_submit: "Selesaikan Pendaftaran Notifikasi",
+        auto_applied: "Diskon otomatis diterapkan",
+        toast_copied: "Kode eksklusif [{code}] berhasil disalin!",
+        toast_redirect: "Kode [{code}] disalin otomatis! Mengalihkan ke pembayaran resmi ✈️",
+        toast_safe_redirect: "Mengalihkan dengan aman ke tautan diskon rahasia ✈️",
+        toast_registered: "{name}, notifikasi deal Anda telah berhasil didaftarkan.",
+        toast_url_copied: "Tautan disalin ke papan klip."
+      },
+      tl: {
+        notice_crawler: "Aktibo ang live crawler para sa KR·CN·JP·US (Na-update 5 minuto ang nakalipas)",
+        notice_verify: "100% beripikadong lihim na link mula sa 20 nangungunang beauty creator",
+        notice_deal: "Hanggang 52% Eksklusibong Negosyadong Diskwento",
+        tagline: "Piling Tindahan ng K-Beauty Group Buy mula sa mga Influencer",
+        search_placeholder: "Maghanap ng creator, brand, o produkto...",
+        btn_notify: "Abiso sa Deal",
+        story_title: "Creators on Market",
+        story_subtitle: "I-click ang profile upang bisitahin ang bawat market ng creator",
+        story_all: "Lahat ng Market",
+        hero_badge: "✨ Pinakasikat na Eksklusibong Set Ngayong Linggo",
+        hero_title: 'Ang mga link sa IG story,<br />Eksklusibong pinakamababang presyo sa isang tingin.',
+        hero_desc: "Espesyal na group-buy market na maingat na pinili ng iyong mga paboritong creator. Tanging mga beripikadong lihim na deal na magtatapos ngayong araw ang narito.",
+        stat_1_num: "20 Tao",
+        stat_1_label: "Pandaigdigang Top Creators",
+        stat_2_num: "Hanggang 52%",
+        stat_2_label: "Eksklusibong Diskwento",
+        stat_3_num: "100%",
+        stat_3_label: "Aktibong Link Verification",
+        hero_card_badge: "PINAKAMAHUSAY #1",
+        hero_card_creator: "YouTrue X d'Alba",
+        hero_card_sub: "YouTube 580K • Eksklusibong 3-Item Set",
+        hero_card_title: "d'Alba White Truffle First Spray Serum Set ng 3 Bote",
+        hero_card_quote: '"Naubos ang 3 bote at nakipag-usap sa punong tanggapan sa loob ng 6 na buwan para sa set na ito."',
+        hero_card_btn: "Pumunta sa Market →",
+        tab_all: "✨ Lahat ng 20 Market",
+        tab_us: "🇺🇸 US / Global #1",
+        tab_kr: "🇰🇷 Olive Young Ranking ng Korea",
+        tab_jp: "🇯🇵 No. 1 sa Qoo10 ng Japan",
+        tab_cn: "🇨🇳 No. 1 sa Live ng China",
+        cat_all: "Lahat",
+        cat_soothing: "💧 Pampa-hydrate / Soothing",
+        cat_sun: "☀️ Sun Care",
+        cat_pore: "🪡 Pore & Blemish",
+        cat_glow: "✨ Glow & Firming",
+        cat_base: "💄 Base & Makeup",
+        sort_rank: "Inirerekomenda",
+        sort_discount: "🔥 Pinakamataas na Diskwento",
+        sort_saved: "💰 Pinakamalaking Tipid",
+        sort_time: "⏳ Matatapos Na",
+        sort_price: "Mababang Presyo",
+        quick_filter_label: "Mabilisang Filter:",
+        benefit_all: "Lahat ng Benepisyo",
+        benefit_half: "🔥 50%+ Kalahating Presyo",
+        benefit_bogo: "🎁 Buy 1 Get 1 (1+1)",
+        benefit_ending: "⏳ Matatapos sa 14 Oras",
+        empty_title: "Walang nahanap na market o produkto.",
+        empty_desc: "Subukang maghanap gamit ang ibang pangalan ng creator o produkto.",
+        empty_btn: "Tingnan ang Lahat ng Market",
+        card_ends_in: "Matatapos sa {hours} oras",
+        card_in_stock: "Mabibili Na",
+        card_exclusive: "Eksklusibong Deal",
+        card_code: "Code: ",
+        card_auto_copy: "Kusa itong kokopyahin sa pag-click",
+        card_saved: "Makatipid ng {amount}",
+        card_secret_link: "Lihim na Link",
+        bottom_alert_tag: "Secret Market Alert",
+        bottom_alert_title: "Ang susunod na deal ng iyong paboritong creator,<br />Magpa-abiso 1 oras bago magsimula.",
+        bottom_alert_desc: "Mabilis maubos ang mga limitadong deal sa loob ng 10 minuto. Mag-sign up para maunang makatanggap ng lihim na link.",
+        bottom_alert_btn: "Mag-sign Up para sa Libreng Abiso →",
+        footer_team_sub: "Startup Camp MVP Project • Team Zetty (Ji-woong, Sung-jun, Min-seok, Shin-hye, Jae-hyun)",
+        footer_disclaimer: "Kinukolekta ng serbisyong ito ang mga opisyal na pampublikong link mula sa mga creator at brand.",
+        footer_form: "Abiso sa Deal (Google Form)",
+        footer_top: "Bumalik sa Taas",
+        nav_home: "Tahanan",
+        nav_search: "Maghanap",
+        nav_notify: "Abiso",
+        modal_official: "Opisyal na Presyo",
+        modal_regular: "Karaniwang Presyo sa Merkado",
+        modal_exclusive: "Eksklusibong Presyo ng Creator",
+        modal_promo_desc: "Eksklusibong Promo Code ng Creator",
+        modal_copy_btn: "Kopyahin ang Code",
+        modal_buy_text: "Bumili gamit ang Lihim na Link",
+        modal_auto_copy_hint: "Kukopyahin ang code nang kusa at lilipat sa opisyal na tindahan.",
+        notify_title: "Abiso sa Pagbubukas ng Lihim na Deal",
+        notify_desc: "Maabisuhan agad kapag aktibo na ang diskwento mula sa iyong paboritong creator.",
+        notify_google_badge: "Opisyal na Form",
+        notify_google_h: "Magpareserba sa loob ng 1 segundo gamit ang Google Forms",
+        notify_google_p: "Kumpletuhin ang survey upang makatanggap ng karagdagang 5% lihim na kupon ang lahat.",
+        notify_google_btn_text: "Buksan ang Opisyal na Google Form →",
+        notify_or_text: "o Mabilisang Rehistrasyon sa Web",
+        label_user_name: "Pangalan / Palayaw",
+        ph_user_name: "hal. Maria",
+        label_user_contact: "Numero ng Telepono o Email",
+        ph_user_contact: "email@example.com o 09XXXXXXXXX",
+        label_user_wish: "Interesadong Brand o Creator",
+        ph_user_wish: "hal. d'Alba, Rom&nd, Haley Kim",
+        btn_notify_submit: "Kumpletuhin ang Rehistrasyon",
+        auto_applied: "Kusang nailapat ang diskwento",
+        toast_copied: "Nakopya ang eksklusibong code [{code}]!",
+        toast_redirect: "Nakopya ang code [{code}]! Lilipat na sa opisyal na checkout ✈️",
+        toast_safe_redirect: "Ligtas na lumilipat sa lihim na link ng deal ✈️",
+        toast_registered: "Salamat {name}, naitala na ang iyong abiso sa deal.",
+        toast_url_copied: "Nakopya ang link sa clipboard."
+      }
+    };
+
+    function changeLanguage(lang) {
+      if (!I18N[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('zetty_lang', lang);
+
+      const switcher = document.getElementById("lang-switcher");
+      if (switcher && switcher.value !== lang) {
+        switcher.value = lang;
+      }
+
+      applyTranslations();
+      renderStoryBar();
+      renderAll();
+
+      if (activeModalDeal) {
+        openDetailModal(activeModalDeal.id);
+      }
+    }
+
+    function applyTranslations() {
+      const t = I18N[currentLang] || I18N.ko;
+
+      const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      };
+      const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = text;
+      };
+      const setAttr = (id, attr, val) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute(attr, val);
+      };
+
+      // 1. Notice Bar
+      setText("notice-crawler", t.notice_crawler);
+      setText("notice-verify", t.notice_verify);
+      setHtml("notice-deal", `<i class="fa-solid fa-fire mr-1"></i>${t.notice_deal}`);
+
+      // 2. Header
+      setText("brand-tagline", t.tagline);
+      setAttr("desktop-search", "placeholder", t.search_placeholder);
+      setAttr("mobile-search", "placeholder", t.search_placeholder);
+      setText("btn-notify-text", t.btn_notify);
+
+      // 3. Story Bar
+      setText("story-title", t.story_title);
+      setText("story-subtitle", t.story_subtitle);
+
+      // 4. Magazine Hero
+      setText("hero-badge", t.hero_badge);
+      setHtml("hero-title", t.hero_title);
+      setText("hero-desc", t.hero_desc);
+      setText("stat-1-num", t.stat_1_num);
+      setText("stat-1-label", t.stat_1_label);
+      setText("stat-2-num", t.stat_2_num);
+      setText("stat-2-label", t.stat_2_label);
+      setText("stat-3-num", t.stat_3_num);
+      setText("stat-3-label", t.stat_3_label);
+
+      // Featured Hero Card
+      setText("hero-card-badge", t.hero_card_badge);
+      setText("hero-card-creator", t.hero_card_creator);
+      setText("hero-card-sub", t.hero_card_sub);
+      setText("hero-card-title", t.hero_card_title);
+      setText("hero-card-quote", t.hero_card_quote);
+      setText("hero-card-orig-price", formatCurrency(87000, currentLang));
+      setText("hero-card-sale-price", formatCurrency(41700, currentLang));
+      setText("hero-card-btn", t.hero_card_btn);
+
+      // 5. Country Tabs
+      setText("tab-ALL-text", t.tab_all);
+      setText("tab-US-text", t.tab_us);
+      setText("tab-KR-text", t.tab_kr);
+      setText("tab-JP-text", t.tab_jp);
+      setText("tab-CN-text", t.tab_cn);
+
+      // Category Pills
+      setText("cat-all", t.cat_all);
+      setText("cat-soothing", t.cat_soothing);
+      setText("cat-sun", t.cat_sun);
+      setText("cat-pore", t.cat_pore);
+      setText("cat-glow", t.cat_glow);
+      setText("cat-base", t.cat_base);
+
+      // Sort Options
+      setText("sort-opt-rank", t.sort_rank);
+      setText("sort-opt-discount", t.sort_discount);
+      setText("sort-opt-saved", t.sort_saved);
+      setText("sort-opt-time", t.sort_time);
+      setText("sort-opt-price", t.sort_price);
+
+      // Benefit Filter Bar
+      setText("quick-filter-label", t.quick_filter_label);
+      setText("benefit-all", t.benefit_all);
+      setText("benefit-half", t.benefit_half);
+      setText("benefit-bogo", t.benefit_bogo);
+      setText("benefit-ending", t.benefit_ending);
+
+      // Empty State
+      setText("empty-title", t.empty_title);
+      setText("empty-desc", t.empty_desc);
+      setText("empty-btn", t.empty_btn);
+
+      // Bottom Alert Banner
+      setText("bottom-alert-tag", t.bottom_alert_tag);
+      setHtml("bottom-alert-title", t.bottom_alert_title);
+      setText("bottom-alert-desc", t.bottom_alert_desc);
+      setText("bottom-alert-btn", t.bottom_alert_btn);
+
+      // Footer
+      setText("footer-team-sub", t.footer_team_sub);
+      setText("footer-disclaimer", t.footer_disclaimer);
+      setText("footer-form-text", t.footer_form);
+      setText("footer-top-btn", t.footer_top);
+
+      // Mobile Bottom Nav
+      setText("nav-home-text", t.nav_home);
+      setText("nav-search-text", t.nav_search);
+      setText("nav-notify-text", t.nav_notify);
+
+      // Detail Modal Labels
+      setText("modal-note-title", "Creator's Note");
+      setText("modal-lbl-official", t.modal_official);
+      setText("modal-lbl-regular", t.modal_regular);
+      setText("modal-lbl-exclusive", t.modal_exclusive);
+      setText("modal-promo-desc", t.modal_promo_desc);
+      setText("modal-copy-btn", t.modal_copy_btn);
+      setText("modal-buy-text", t.modal_buy_text);
+      setText("modal-auto-copy-hint", t.modal_auto_copy_hint);
+
+      // Notify Modal
+      setText("notify-title", t.notify_title);
+      setText("notify-desc", t.notify_desc);
+      setText("notify-google-badge", t.notify_google_badge);
+      setText("notify-google-h", t.notify_google_h);
+      setText("notify-google-p", t.notify_google_p);
+      setText("notify-google-btn-text", t.notify_google_btn_text);
+      setText("notify-or-text", t.notify_or_text);
+      setText("label-user-name", t.label_user_name);
+      setAttr("user-name", "placeholder", t.ph_user_name);
+      setText("label-user-contact", t.label_user_contact);
+      setAttr("user-contact", "placeholder", t.ph_user_contact);
+      setText("label-user-wish", t.label_user_wish);
+      setAttr("user-wish", "placeholder", t.ph_user_wish);
+      setText("btn-notify-submit", t.btn_notify_submit);
     }
 
     let allData = [];
@@ -725,8 +1889,9 @@
       const bar = document.getElementById("influencer-story-bar");
       bar.innerHTML = "";
 
+      const allMarketsLabel = I18N[currentLang] ? I18N[currentLang].story_all : "전체 마켓";
       const creators = [
-        { name: "전체 마켓", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
+        { name: allMarketsLabel, img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
         { name: "Haley Kim (美)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "Haley" },
         { name: "Tina (글로벌)", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "Tina" },
         { name: "Soo Beauty", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "Soo" },
@@ -854,6 +2019,19 @@
       emptyState.classList.add("hidden");
 
       deals.forEach(deal => {
+        const t = I18N[currentLang] || I18N.ko;
+        const origFormatted = formatCurrency(deal.originalPrice, currentLang);
+        const saleFormatted = formatCurrency(deal.salePrice, currentLang);
+        const savedAmount = deal.originalPrice - deal.salePrice;
+        const savedFormatted = formatCurrency(savedAmount, currentLang);
+        const savedText = (t.card_saved || "{amount} 절약").replace("{amount}", savedFormatted);
+        const endsInText = (t.card_ends_in || "마감 {hours}시간 전").replace("{hours}", deal.endTimeHours);
+        const inStockText = t.card_in_stock || "구매 가능";
+        const autoCopyText = t.card_auto_copy || "클릭 시 자동복사";
+        const secretLinkText = t.card_secret_link || "시크릿 링크";
+        const codePrefix = t.card_code || "코드: ";
+        const benefitTagText = deal.benefitTag || t.card_exclusive || "단독 특가";
+
         const card = document.createElement("div");
         card.className = "flex flex-col justify-between group cursor-pointer bg-white/40 p-3 sm:p-4 rounded-3xl border border-zinc-200/70 hover:border-zinc-900 transition duration-300 hover:shadow-lg";
         card.onclick = () => openDetailModal(deal.id);
@@ -870,7 +2048,7 @@
 
               <!-- Time Left -->
               <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-zinc-900/80 backdrop-blur text-white text-[11px] font-medium">
-                마감 ${deal.endTimeHours}시간 전
+                ${endsInText}
               </div>
 
               <!-- Creator Overlaid Pill -->
@@ -882,7 +2060,7 @@
                     <span class="text-[10px] text-zinc-600 block">${deal.influencerChannel}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/50">${deal.benefitTag || '단독 특가'}</span>
+                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/50">${benefitTagText}</span>
               </div>
             </div>
 
@@ -891,7 +2069,7 @@
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-zinc-700 uppercase tracking-wide">${deal.brand} <span class="text-zinc-400 font-normal">• ${deal.category}</span></span>
                 <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>구매 가능
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>${inStockText}
                 </span>
               </div>
               <h4 class="font-bold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
@@ -902,8 +2080,8 @@
               <!-- Promo Code Badge if available -->
               ${deal.promoCode && deal.promoCode !== '자동 할인 적용' ? `
                 <div class="pt-1 flex items-center space-x-1.5 text-[11px] text-zinc-600">
-                  <span class="font-mono font-bold bg-sand-100 px-2 py-0.5 rounded border border-zinc-200 text-zinc-800">코드: ${deal.promoCode}</span>
-                  <span class="text-[10px] text-rose-500">클릭 시 자동복사</span>
+                  <span class="font-mono font-bold bg-sand-100 px-2 py-0.5 rounded border border-zinc-200 text-zinc-800">${codePrefix}${deal.promoCode}</span>
+                  <span class="text-[10px] text-rose-500">${autoCopyText}</span>
                 </div>
               ` : ''}
             </div>
@@ -912,15 +2090,15 @@
           <!-- Pricing & CTA -->
           <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-baseline justify-between px-0.5">
             <div>
-              <span class="text-xs text-zinc-600 line-through">${deal.originalPrice.toLocaleString()}원</span>
+              <span class="text-xs text-zinc-600 line-through">${origFormatted}</span>
               <div class="text-xl font-black text-rose-600">
-                ${deal.salePrice.toLocaleString()}<span class="text-xs text-zinc-900 font-semibold ml-0.5">원</span>
+                ${saleFormatted}
               </div>
             </div>
             <div class="text-right">
-              <span class="text-[10px] text-emerald-600 font-bold block">${((deal.originalPrice - deal.salePrice)).toLocaleString()}원 절약</span>
+              <span class="text-[10px] text-emerald-600 font-bold block">${savedText}</span>
               <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1 ml-auto">
-                <span>시크릿 링크</span>
+                <span>${secretLinkText}</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </button>
             </div>
@@ -939,6 +2117,7 @@
       });
       if (!found) return;
 
+      const t = I18N[currentLang] || I18N.ko;
       activeModalDeal = found;
       document.getElementById("modal-img").src = found.productImg;
       document.getElementById("modal-influencer-img").src = found.profileImg;
@@ -946,11 +2125,11 @@
       document.getElementById("modal-brand").innerText = found.brand;
       document.getElementById("modal-title").innerText = found.productName;
       document.getElementById("modal-quote").innerText = `"${found.influencerQuote}"`;
-      document.getElementById("modal-original-price").innerText = found.originalPrice.toLocaleString() + "원";
-      document.getElementById("modal-olive-price").innerText = found.olivePrice.toLocaleString() + "원";
-      document.getElementById("modal-sale-price").innerText = found.salePrice.toLocaleString() + "원";
+      document.getElementById("modal-original-price").innerText = formatCurrency(found.originalPrice, currentLang);
+      document.getElementById("modal-olive-price").innerText = formatCurrency(found.olivePrice, currentLang);
+      document.getElementById("modal-sale-price").innerText = formatCurrency(found.salePrice, currentLang);
       document.getElementById("modal-discount-rate").innerText = `${found.discountRate}%`;
-      document.getElementById("modal-promo-code").innerText = found.promoCode || "자동 할인 적용";
+      document.getElementById("modal-promo-code").innerText = found.promoCode || t.auto_applied || "자동 할인 적용";
 
       document.getElementById("detail-modal").classList.remove("hidden");
     }
@@ -962,17 +2141,21 @@
     function copyCurrentPromoCode() {
       if (!activeModalDeal || !activeModalDeal.promoCode) return;
       navigator.clipboard.writeText(activeModalDeal.promoCode);
-      showToast(`단독코드 [${activeModalDeal.promoCode}] 가 복사되었습니다!`);
+      const t = I18N[currentLang] || I18N.ko;
+      const msg = (t.toast_copied || "단독코드 [{code}] 가 복사되었습니다!").replace("{code}", activeModalDeal.promoCode);
+      showToast(msg);
     }
 
     function goToDealLink() {
       if (!activeModalDeal) return;
+      const t = I18N[currentLang] || I18N.ko;
       const code = activeModalDeal.promoCode;
-      if (code && code !== '자동 할인 적용') {
+      if (code && code !== '자동 할인 적용' && code !== t.auto_applied) {
         navigator.clipboard.writeText(code);
-        showToast(`단독코드 [${code}] 자동 복사 완료! 제휴 할인 결제창으로 이동합니다 ✈️`);
+        const msg = (t.toast_redirect || "단독코드 [{code}] 자동 복사 완료! 제휴 할인 결제창으로 이동합니다 ✈️").replace("{code}", code);
+        showToast(msg);
       } else {
-        showToast("시크릿 할인 링크로 안전하게 이동합니다 ✈️");
+        showToast(t.toast_safe_redirect || "시크릿 할인 링크로 안전하게 이동합니다 ✈️");
       }
       setTimeout(() => {
         // [수익화 핵심]: 제휴 마케팅(CPS) 파라미터 자동 결합 (팀 제티 고유 트래킹)
@@ -1004,10 +2187,10 @@
       currentCategory = cat;
       const pills = document.querySelectorAll(".cat-pill");
       pills.forEach(p => {
-        if (p.innerText.includes(cat) || (cat === '전체' && p.innerText === '전체')) {
-          p.className = "cat-pill active px-3 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white";
+        if (p.getAttribute("data-cat") === cat) {
+          p.className = "cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white whitespace-nowrap";
         } else {
-          p.className = "cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900";
+          p.className = "cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap";
         }
       });
       renderAll();
@@ -1017,7 +2200,7 @@
       currentBenefit = benefit;
       const btns = document.querySelectorAll(".benefit-btn");
       btns.forEach(b => {
-        if (b.innerText.includes(benefit) || (benefit === '전체' && b.innerText === '전체 혜택')) {
+        if (b.getAttribute("data-benefit") === benefit) {
           b.className = "benefit-btn active px-3 py-1 rounded-lg font-bold bg-zinc-900 text-white whitespace-nowrap";
         } else {
           b.className = "benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap";
@@ -1098,7 +2281,8 @@
 
     function copyCurrentUrl() {
       navigator.clipboard.writeText(window.location.href);
-      showToast("주소가 복사되었습니다.");
+      const t = I18N[currentLang] || I18N.ko;
+      showToast(t.toast_url_copied || "주소가 복사되었습니다.");
     }
 
     function downloadQRCode() {
@@ -1138,15 +2322,24 @@
     function handleNotifySubmit(e) {
       e.preventDefault();
       const name = document.getElementById("user-name").value;
-      showToast(`${name}님, 공구 오픈 알림이 등록되었습니다.`);
+      const t = I18N[currentLang] || I18N.ko;
+      const msg = (t.toast_registered || "{name}님, 공구 오픈 알림이 등록되었습니다.").replace("{name}", name);
+      showToast(msg);
       const countEl = document.getElementById("reserve-count");
-      countEl.innerText = (parseInt(countEl.innerText) + 1) + '명';
+      if (countEl) countEl.innerText = (parseInt(countEl.innerText) + 1) + (currentLang === 'ko' ? '명' : '');
       closeNotifyModal();
       document.getElementById("notify-form").reset();
     }
 
     window.addEventListener("DOMContentLoaded", () => {
+      const savedLang = localStorage.getItem('zetty_lang');
+      if (savedLang && I18N[savedLang]) {
+        currentLang = savedLang;
+        const switcher = document.getElementById("lang-switcher");
+        if (switcher) switcher.value = currentLang;
+      }
       applyBrandConfig();
+      applyTranslations();
       initData();
     });
   </script>
