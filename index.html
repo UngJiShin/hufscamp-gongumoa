@@ -124,12 +124,9 @@
 
       <!-- Right Actions -->
       <div class="flex items-center space-x-2.5">
-        <button onclick="openQRModal()" class="px-3 py-2 rounded-full border border-zinc-200 hover:border-zinc-900 text-zinc-800 text-xs font-semibold transition flex items-center space-x-1.5 bg-white shadow-sm">
-          <i class="fa-solid fa-qrcode text-rose-500"></i>
-          <span class="hidden sm:inline">모바일 QR 시연</span>
-        </button>
-        <button onclick="openNotifyModal('시크릿 알림')" class="px-4 py-2 rounded-full bg-zinc-900 hover:bg-rose-600 text-white text-xs font-semibold shadow-sm transition">
-          공구 오픈 알림
+        <button onclick="openGoogleFormOrModal()" class="px-4 py-2 rounded-full bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold shadow-sm transition flex items-center space-x-1.5">
+          <i class="fa-regular fa-bell text-xs"></i>
+          <span>공구 오픈 알림</span>
         </button>
       </div>
     </div>
@@ -356,9 +353,9 @@
       </div>
 
       <div class="flex items-center space-x-6 text-zinc-600 font-medium">
-        <button onclick="openQRModal()" class="hover:text-zinc-900 flex items-center space-x-1.5">
-          <i class="fa-solid fa-qrcode text-rose-500"></i>
-          <span>모바일 시연 QR</span>
+        <button onclick="openGoogleFormOrModal()" class="hover:text-zinc-900 flex items-center space-x-1.5">
+          <i class="fa-regular fa-bell text-rose-500"></i>
+          <span>공구 오픈 알림 (구글 폼)</span>
         </button>
         <span>•</span>
         <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-zinc-900">
@@ -368,8 +365,8 @@
     </div>
   </footer>
 
-  <!-- 8. Mobile Fixed Bottom Nav -->
-  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 px-6 py-2.5 flex justify-between items-center text-center">
+  <!-- 8. Mobile Fixed Bottom Nav (QR tab removed, Google Form notification integrated) -->
+  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 px-8 py-2.5 flex justify-between items-center text-center">
     <button onclick="resetAll()" class="flex flex-col items-center text-zinc-900">
       <i class="fa-solid fa-house text-sm"></i>
       <span class="text-[10px] font-bold mt-1">홈</span>
@@ -378,13 +375,9 @@
       <i class="fa-solid fa-magnifying-glass text-sm"></i>
       <span class="text-[10px] font-medium mt-1">검색</span>
     </button>
-    <button onclick="openQRModal()" class="flex flex-col items-center text-zinc-600">
-      <i class="fa-solid fa-qrcode text-sm text-rose-500"></i>
-      <span class="text-[10px] font-medium mt-1">QR 시연</span>
-    </button>
-    <button onclick="openNotifyModal('모바일')" class="flex flex-col items-center text-zinc-600">
+    <button onclick="openGoogleFormOrModal()" class="flex flex-col items-center text-rose-600 font-bold">
       <i class="fa-regular fa-bell text-sm"></i>
-      <span class="text-[10px] font-medium mt-1">알림</span>
+      <span class="text-[10px] font-bold mt-1">공구 오픈 알림</span>
     </button>
   </nav>
 
@@ -496,7 +489,26 @@
         <p class="text-xs text-zinc-600">관심 있는 크리에이터의 공구가 오픈되면 가장 먼저 카톡으로 알려드립니다.</p>
       </div>
 
-      <form id="notify-form" onsubmit="handleNotifySubmit(event)" class="mt-5 space-y-3">
+      <!-- Google Form Direct CTA Banner -->
+      <div class="mt-4 p-4 bg-rose-50 border border-rose-100 rounded-2xl text-center space-y-2">
+        <div class="flex items-center justify-center space-x-1">
+          <span class="inline-block px-2 py-0.5 bg-rose-600 text-white text-[10px] font-extrabold rounded-full">공식 설문 채널</span>
+          <span class="text-xs font-bold text-zinc-900">구글 폼으로 1초 만에 알림 예약</span>
+        </div>
+        <p class="text-[11px] text-zinc-600 leading-tight">선호 크리에이터·피부 고민 설문이 포함된 공식 구글 설문지로 바로 연결됩니다.</p>
+        <a id="google-form-link-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSe-sample-zetty-beauty/viewform" target="_blank" class="block w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs transition shadow-sm flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-square-poll-horizontal"></i>
+          <span>구글 폼(Google Forms)으로 바로 신청하기 →</span>
+        </a>
+      </div>
+
+      <div class="relative flex py-2 items-center">
+        <div class="flex-grow border-t border-zinc-200"></div>
+        <span class="flex-shrink mx-3 text-zinc-400 text-[11px]">또는 웹에서 간편 접수</span>
+        <div class="flex-grow border-t border-zinc-200"></div>
+      </div>
+
+      <form id="notify-form" onsubmit="handleNotifySubmit(event)" class="mt-1 space-y-3">
         <div>
           <label class="block text-xs font-bold text-zinc-700 mb-1">성함</label>
           <input type="text" id="user-name" required placeholder="예: 지웅" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
@@ -509,7 +521,7 @@
           <label class="block text-xs font-bold text-zinc-700 mb-1">관심 브랜드 또는 크리에이터</label>
           <input type="text" id="user-wish" placeholder="예: 유트루, 달바, 롬앤 등" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3.5 bg-zinc-900 hover:bg-rose-600 text-white font-bold rounded-xl text-xs sm:text-sm transition">
+        <button type="submit" class="w-full py-3 bg-zinc-900 hover:bg-rose-600 text-white font-bold rounded-xl text-xs transition">
           알림 신청 완료하기
         </button>
       </form>
@@ -529,7 +541,8 @@
       serviceName: "공구모아",                          // 창업 아이템 한글명 (예: 제티뷰티, 링크글로우, 뷰티딜러, 글로우픽 등 자유롭게 변경)
       serviceNameEn: "gongumoa",                       // 창업 아이템 영문명 / 로고 텍스트 (소문자 권장, 예: zetty, linkglow, glowmoa 등)
       serviceSubTitle: "인플루언서 뷰티 마켓 큐레이션",    // 탭 타이틀 서브 카피
-      tagline: "인플루언서 뷰티 마켓 셀렉트숍"                  // 상단 헤더 태그라인
+      tagline: "인플루언서 뷰티 마켓 셀렉트숍",                 // 상단 헤더 태그라인
+      googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe-sample-zetty-beauty/viewform" // 구글 폼 신청 링크
     };
 
     function applyBrandConfig() {
@@ -547,6 +560,12 @@
       // 4. 푸터 로고 영문명 동적 변경
       const footerLogo = document.getElementById("footer-logo-text");
       if (footerLogo) footerLogo.innerText = BRAND_CONFIG.serviceNameEn;
+
+      // 5. 구글 폼 링크 동적 바인딩
+      const googleFormBtn = document.getElementById("google-form-link-btn");
+      if (googleFormBtn && BRAND_CONFIG.googleFormUrl) {
+        googleFormBtn.href = BRAND_CONFIG.googleFormUrl;
+      }
     }
 
     let allData = [];
@@ -712,10 +731,12 @@
         { name: "유트루", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "유트루" },
         { name: "디렉터파이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
         { name: "레오제이", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
+        { name: "포니 (PONY)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "포니" },
         { name: "미즈키 (日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
         { name: "사키 (日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
         { name: "리자치 (中)", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
-        { name: "장다이 (中)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "장다이" }
+        { name: "장다이 (中)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "장다이" },
+        { name: "신바 (中)", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80", filter: "신바" }
       ];
 
       creators.forEach(c => {
@@ -744,15 +765,20 @@
       const emptyState = document.getElementById("empty-state");
       grid.innerHTML = "";
 
-      let group = allData.find(g => g.country === currentCountry);
-      let deals = group ? [...group.deals] : [];
+      let deals = [];
 
       if (searchQuery.trim() !== "") {
         const q = searchQuery.toLowerCase().trim();
-        deals = [];
         allData.forEach(g => {
           g.deals.forEach(d => {
-            if (d.productName.toLowerCase().includes(q) || d.brand.toLowerCase().includes(q) || d.influencerName.toLowerCase().includes(q)) {
+            const matchName = d.productName && d.productName.toLowerCase().includes(q);
+            const matchBrand = d.brand && d.brand.toLowerCase().includes(q);
+            const matchInfluencer = d.influencerName && d.influencerName.toLowerCase().includes(q);
+            const matchConcern = d.skinConcern && d.skinConcern.toLowerCase().includes(q);
+            const matchCat = d.category && d.category.toLowerCase().includes(q);
+            const matchBenefit = d.benefitTag && d.benefitTag.toLowerCase().includes(q);
+            const matchFeat = d.features && d.features.some(f => f.toLowerCase().includes(q));
+            if (matchName || matchBrand || matchInfluencer || matchConcern || matchCat || matchBenefit || matchFeat) {
               deals.push(d);
             }
           });
@@ -762,12 +788,42 @@
         document.getElementById("search-count").innerText = deals.length;
       } else {
         document.getElementById("search-feedback").classList.add("hidden");
+        if (currentCountry === "ALL") {
+          allData.forEach(g => deals.push(...g.deals));
+        } else {
+          let group = allData.find(g => g.country === currentCountry);
+          deals = group ? [...group.deals] : [];
+        }
       }
 
+      // 2축: 피부 고민 및 효능 다차원 필터링 (지웅 님 분류 체계)
       if (currentCategory !== "전체") {
-        deals = deals.filter(d => d.category === currentCategory || d.skinConcern === currentCategory);
+        deals = deals.filter(d => {
+          if (d.category === currentCategory || d.skinConcern === currentCategory) return true;
+          if (currentCategory === "속건조/진정") {
+            return (d.category && (d.category.includes("진정") || d.category.includes("스킨케어"))) || 
+                   (d.skinConcern && (d.skinConcern.includes("진정") || d.skinConcern.includes("속건조") || d.skinConcern.includes("수분") || d.skinConcern.includes("패드")));
+          }
+          if (currentCategory === "선케어") {
+            return (d.category && d.category.includes("선케어")) || (d.skinConcern && (d.skinConcern.includes("자외선") || d.skinConcern.includes("수분자차")));
+          }
+          if (currentCategory === "모공/트러블") {
+            return (d.category && (d.category.includes("모공") || d.category.includes("트러블"))) || 
+                   (d.skinConcern && (d.skinConcern.includes("모공") || d.skinConcern.includes("트러블") || d.skinConcern.includes("니들") || d.skinConcern.includes("티트리")));
+          }
+          if (currentCategory === "안티에이징/광채") {
+            return (d.category && (d.category.includes("안티에이징") || d.category.includes("광채") || d.category.includes("탄력"))) || 
+                   (d.skinConcern && (d.skinConcern.includes("광채") || d.skinConcern.includes("탄력") || d.skinConcern.includes("속광") || d.skinConcern.includes("세럼")));
+          }
+          if (currentCategory === "베이스/색조") {
+            return (d.category && (d.category.includes("베이스") || d.category.includes("색조") || d.category.includes("립"))) || 
+                   (d.skinConcern && (d.skinConcern.includes("커버") || d.skinConcern.includes("립") || d.skinConcern.includes("밀착") || d.skinConcern.includes("듀얼")));
+          }
+          return false;
+        });
       }
 
+      // 3축: 혜택 유형별 필터링
       if (currentBenefit === "50%이상") {
         deals = deals.filter(d => d.discountRate >= 50);
       } else if (currentBenefit === "1+1") {
@@ -776,6 +832,7 @@
         deals = deals.filter(d => d.endTimeHours <= 14);
       }
 
+      // 정렬
       if (currentSort === "discount") {
         deals.sort((a, b) => b.discountRate - a.discountRate);
       } else if (currentSort === "saved") {
@@ -796,54 +853,62 @@
 
       deals.forEach(deal => {
         const card = document.createElement("div");
-        card.className = "flex flex-col justify-between group cursor-pointer";
+        card.className = "flex flex-col justify-between group cursor-pointer bg-white/40 p-3 sm:p-4 rounded-3xl border border-zinc-200/70 hover:border-zinc-900 transition duration-300 hover:shadow-lg";
         card.onclick = () => openDetailModal(deal.id);
         card.innerHTML = `
           <div>
             <!-- Image Area -->
-            <div class="relative h-72 rounded-3xl overflow-hidden bg-sand-100 mb-4">
+            <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-sand-100 mb-3.5">
               <img src="${deal.productImg}" alt="${deal.productName}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               
               <!-- Clean Discount Tag -->
-              <div class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-sm">
+              <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-sm">
                 ${deal.discountRate}% OFF
               </div>
 
               <!-- Time Left -->
-              <div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-zinc-900/80 backdrop-blur text-white text-[11px] font-medium">
+              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-zinc-900/80 backdrop-blur text-white text-[11px] font-medium">
                 마감 ${deal.endTimeHours}시간 전
               </div>
 
               <!-- Creator Overlaid Pill -->
-              <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-sm flex items-center justify-between border border-zinc-100">
-                <div class="flex items-center space-x-2.5 truncate">
-                  <img src="${deal.profileImg}" class="w-7 h-7 rounded-full object-cover border border-rose-300" />
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-sm flex items-center justify-between border border-zinc-100">
+                <div class="flex items-center space-x-2 truncate">
+                  <img src="${deal.profileImg}" class="w-6 h-6 rounded-full object-cover border border-rose-300" />
                   <div class="truncate">
                     <span class="text-xs font-bold text-zinc-900 block truncate">${deal.influencerName}</span>
                     <span class="text-[10px] text-zinc-600 block">${deal.influencerChannel}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-md border border-rose-200/50">${deal.benefitTag || '단독 특가'}</span>
+                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/50">${deal.benefitTag || '단독 특가'}</span>
               </div>
             </div>
 
             <!-- Meta & Title -->
-            <div class="space-y-1.5 px-1">
+            <div class="space-y-1.5 px-0.5">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-bold text-zinc-700 uppercase tracking-wide">${deal.brand} <span class="text-zinc-400 font-normal">• ${deal.category}</span></span>
-                <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-sand-100 text-zinc-600 border border-zinc-200/60">
-                  <i class="fa-solid fa-link text-[9px] mr-1 text-rose-500"></i>${deal.linkType || '인플루언서 단독 링크'}
+                <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>구매 가능
                 </span>
               </div>
-              <h4 class="font-bold text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
+              <h4 class="font-bold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
                 ${deal.productName}
               </h4>
               <p class="text-xs text-zinc-600 line-clamp-1 italic font-normal pt-0.5">"${deal.influencerQuote}"</p>
+              
+              <!-- Promo Code Badge if available -->
+              ${deal.promoCode && deal.promoCode !== '자동 할인 적용' ? `
+                <div class="pt-1 flex items-center space-x-1.5 text-[11px] text-zinc-600">
+                  <span class="font-mono font-bold bg-sand-100 px-2 py-0.5 rounded border border-zinc-200 text-zinc-800">코드: ${deal.promoCode}</span>
+                  <span class="text-[10px] text-rose-500">클릭 시 자동복사</span>
+                </div>
+              ` : ''}
             </div>
           </div>
 
           <!-- Pricing & CTA -->
-          <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-baseline justify-between px-1">
+          <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-baseline justify-between px-0.5">
             <div>
               <span class="text-xs text-zinc-600 line-through">${deal.originalPrice.toLocaleString()}원</span>
               <div class="text-xl font-black text-rose-600">
@@ -851,9 +916,9 @@
               </div>
             </div>
             <div class="text-right">
-              <span class="text-[10px] text-zinc-600 block">${((deal.originalPrice - deal.salePrice)).toLocaleString()}원 절약</span>
+              <span class="text-[10px] text-emerald-600 font-bold block">${((deal.originalPrice - deal.salePrice)).toLocaleString()}원 절약</span>
               <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1 ml-auto">
-                <span>할인 링크 확인</span>
+                <span>시크릿 링크</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </button>
             </div>
@@ -903,24 +968,30 @@
       const code = activeModalDeal.promoCode;
       if (code && code !== '자동 할인 적용') {
         navigator.clipboard.writeText(code);
-        showToast(`단독코드 [${code}] 자동 복사 완료! 공식몰로 이동합니다 ✈️`);
+        showToast(`단독코드 [${code}] 자동 복사 완료! 제휴 할인 결제창으로 이동합니다 ✈️`);
       } else {
         showToast("시크릿 할인 링크로 안전하게 이동합니다 ✈️");
       }
       setTimeout(() => {
-        window.open(activeModalDeal.link, "_blank");
+        // [수익화 핵심]: 제휴 마케팅(CPS) 파라미터 자동 결합 (팀 제티 고유 트래킹)
+        let finalUrl = activeModalDeal.link;
+        if (finalUrl && !finalUrl.includes("ref=")) {
+          const sep = finalUrl.includes("?") ? "&" : "?";
+          finalUrl = `${finalUrl}${sep}ref=zetty&affiliate_id=hufscamp_zetty`;
+        }
+        window.open(finalUrl, "_blank");
       }, 500);
     }
 
     function setCountry(code) {
       currentCountry = code;
-      ["US", "KR", "JP", "CN"].forEach(c => {
+      ["ALL", "US", "KR", "JP", "CN"].forEach(c => {
         const btn = document.getElementById(`tab-${c}`);
         if (btn) {
           if (c === code) {
-            btn.className = "text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5";
+            btn.className = "text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap";
           } else {
-            btn.className = "text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5";
+            btn.className = "text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap";
           }
         }
       });
@@ -1038,10 +1109,22 @@
       }
     }
 
-    // Notification Modal
+    // Notification & Google Form Modal
+    function openGoogleFormOrModal() {
+      openNotifyModal('시크릿 알림');
+    }
+
+    function openGoogleFormDirect() {
+      if (BRAND_CONFIG.googleFormUrl) {
+        window.open(BRAND_CONFIG.googleFormUrl, "_blank");
+      } else {
+        openNotifyModal('시크릿 알림');
+      }
+    }
+
     function openNotifyModal(target) {
       document.getElementById("notify-modal").classList.remove("hidden");
-      if (target && target !== '시크릿 알림') {
+      if (target && target !== '시크릿 알림' && target !== '구글폼연동') {
         document.getElementById("user-wish").value = target;
       }
     }
