@@ -261,21 +261,35 @@
       </div>
 
       <!-- Category Filter Pills & Sort -->
-      <div class="flex items-center justify-between sm:justify-end gap-3">
-        <div class="flex items-center space-x-1" id="category-pills">
-          <button onclick="setCategory('전체')" class="cat-pill active px-3 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white">전체</button>
-          <button onclick="setCategory('스킨케어')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">스킨케어</button>
-          <button onclick="setCategory('베이스/쿠션')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">쿠션/베이스</button>
-          <button onclick="setCategory('색조/립')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">립/색조</button>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 w-full sm:w-auto">
+        <!-- Skin Concern Category Pills -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1" id="category-pills">
+          <button onclick="setCategory('전체')" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white whitespace-nowrap">전체</button>
+          <button onclick="setCategory('속건조/진정')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💧 속건조/진정</button>
+          <button onclick="setCategory('선케어')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">☀️ 선케어</button>
+          <button onclick="setCategory('모공/트러블')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">🪡 모공/트러블</button>
+          <button onclick="setCategory('안티에이징/광채')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">✨ 광채/탄력</button>
+          <button onclick="setCategory('베이스/색조')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900 bg-sand-100 whitespace-nowrap">💄 베이스/색조</button>
         </div>
 
-        <select id="sort-select" onchange="handleSort(this.value)" class="text-xs font-medium bg-transparent border-0 text-zinc-700 py-1 pl-2 pr-6 focus:outline-none cursor-pointer">
-          <option value="rank">추천순</option>
-          <option value="discount">할인율 높은순</option>
-          <option value="time">마감 임박순</option>
+        <!-- Sort Select -->
+        <select id="sort-select" onchange="handleSort(this.value)" class="text-xs font-semibold bg-white border border-zinc-200 text-zinc-800 py-1.5 pl-3 pr-8 rounded-full focus:outline-none cursor-pointer shadow-sm">
+          <option value="rank">추천 랭킹순</option>
+          <option value="discount">🔥 할인율 높은순</option>
+          <option value="saved">💰 절약금액 큰순</option>
+          <option value="time">⏳ 마감 임박순</option>
           <option value="price">낮은 가격순</option>
         </select>
       </div>
+    </div>
+
+    <!-- Secondary Quick Benefit Filter Bar -->
+    <div class="flex items-center space-x-2 text-xs overflow-x-auto no-scrollbar pt-1" id="benefit-pills">
+      <span class="text-zinc-400 font-bold text-[11px] uppercase mr-1 whitespace-nowrap">Quick Filter:</span>
+      <button onclick="setBenefit('전체')" class="benefit-btn active px-3 py-1 rounded-lg font-bold bg-zinc-900 text-white whitespace-nowrap">전체 혜택</button>
+      <button onclick="setBenefit('50%이상')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🔥 50% 이상 반값</button>
+      <button onclick="setBenefit('1+1')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">🎁 1+1 기획전</button>
+      <button onclick="setBenefit('마감임박')" class="benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap">⏳ 14시간 내 마감</button>
     </div>
 
     <!-- Active Search Filter Breadcrumb -->
@@ -530,6 +544,7 @@
     let allData = [];
     let currentCountry = "US";
     let currentCategory = "전체";
+    let currentBenefit = "전체";
     let searchQuery = "";
     let currentSort = "rank";
     let activeModalDeal = null;
@@ -740,11 +755,21 @@
       }
 
       if (currentCategory !== "전체") {
-        deals = deals.filter(d => d.category === currentCategory);
+        deals = deals.filter(d => d.category === currentCategory || d.skinConcern === currentCategory);
+      }
+
+      if (currentBenefit === "50%이상") {
+        deals = deals.filter(d => d.discountRate >= 50);
+      } else if (currentBenefit === "1+1") {
+        deals = deals.filter(d => (d.benefitTag && d.benefitTag.includes("1+1")) || (d.productName.includes("1+1")));
+      } else if (currentBenefit === "마감임박") {
+        deals = deals.filter(d => d.endTimeHours <= 14);
       }
 
       if (currentSort === "discount") {
         deals.sort((a, b) => b.discountRate - a.discountRate);
+      } else if (currentSort === "saved") {
+        deals.sort((a, b) => (b.savedAmount || 0) - (a.savedAmount || 0));
       } else if (currentSort === "price") {
         deals.sort((a, b) => a.salePrice - b.salePrice);
       } else if (currentSort === "time") {
@@ -788,14 +813,14 @@
                     <span class="text-[10px] text-zinc-600 block">${deal.influencerChannel}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">단독 특가</span>
+                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-md border border-rose-200/50">${deal.benefitTag || '단독 특가'}</span>
               </div>
             </div>
 
             <!-- Meta & Title -->
             <div class="space-y-1.5 px-1">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-zinc-600 uppercase tracking-wide">${deal.brand}</span>
+                <span class="text-xs font-bold text-zinc-700 uppercase tracking-wide">${deal.brand} <span class="text-zinc-400 font-normal">• ${deal.category}</span></span>
                 <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-sand-100 text-zinc-600 border border-zinc-200/60">
                   <i class="fa-solid fa-link text-[9px] mr-1 text-rose-500"></i>${deal.linkType || '인플루언서 단독 링크'}
                 </span>
@@ -900,6 +925,19 @@
           p.className = "cat-pill active px-3 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white";
         } else {
           p.className = "cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900";
+        }
+      });
+      renderAll();
+    }
+
+    function setBenefit(benefit) {
+      currentBenefit = benefit;
+      const btns = document.querySelectorAll(".benefit-btn");
+      btns.forEach(b => {
+        if (b.innerText.includes(benefit) || (benefit === '전체' && b.innerText === '전체 혜택')) {
+          b.className = "benefit-btn active px-3 py-1 rounded-lg font-bold bg-zinc-900 text-white whitespace-nowrap";
+        } else {
+          b.className = "benefit-btn px-3 py-1 rounded-lg font-medium text-zinc-600 hover:text-zinc-900 bg-white border border-zinc-200 whitespace-nowrap";
         }
       });
       renderAll();
