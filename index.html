@@ -245,16 +245,16 @@
       
       <!-- Country Region Selector -->
       <div class="flex space-x-6 text-sm font-bold">
-        <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>국내 크리에이터 마켓</span>
+        <button id="tab-US" onclick="setCountry('US')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5">
+          <span>🇺🇸 미국/글로벌 올리브영 1위</span>
+          <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-full font-extrabold">BEST</span>
+        </button>
+        <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
+          <span>🇰🇷 국내 & 방한 외국인 쇼핑</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
         <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>일본 직구 핫딜</span>
-          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
-        </button>
-        <button id="tab-CN" onclick="setCountry('CN')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>글로벌 화제템</span>
+          <span>🇯🇵 일본 큐텐/직구 1위</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
       </div>
@@ -485,7 +485,7 @@
   <!-- Main JavaScript App -->
   <script>
     let allData = [];
-    let currentCountry = "KR";
+    let currentCountry = "US";
     let currentCategory = "전체";
     let searchQuery = "";
     let currentSort = "rank";
@@ -640,14 +640,14 @@
 
       const creators = [
         { name: "전체 마켓", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
-        { name: "유트루", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "유트루" },
-        { name: "디렉터파이", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
-        { name: "레오제이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
-        { name: "씬님", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "씬님" },
-        { name: "미즈키", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
-        { name: "사키", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
-        { name: "리자치", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
-        { name: "장다이", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "장다이" }
+        { name: "Haley Kim (美)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "Haley" },
+        { name: "Tina (글로벌)", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "Tina" },
+        { name: "Soo Beauty", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "Soo" },
+        { name: "유트루", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "유트루" },
+        { name: "디렉터파이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
+        { name: "레오제이", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
+        { name: "미즈키 (日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
+        { name: "사키 (日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" }
       ];
 
       creators.forEach(c => {
@@ -823,12 +823,14 @@
 
     function setCountry(code) {
       currentCountry = code;
-      ["KR", "JP", "CN"].forEach(c => {
+      ["US", "KR", "JP"].forEach(c => {
         const btn = document.getElementById(`tab-${c}`);
-        if (c === code) {
-          btn.className = "text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5";
-        } else {
-          btn.className = "text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5";
+        if (btn) {
+          if (c === code) {
+            btn.className = "text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5";
+          } else {
+            btn.className = "text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5";
+          }
         }
       });
       renderAll();
