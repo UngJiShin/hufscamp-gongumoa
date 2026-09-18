@@ -1,0 +1,164 @@
+[
+  {
+    "country": "KR",
+    "countryName": "🇰🇷 한국 K-Beauty",
+    "deals": [
+      {
+        "id": "kr-1",
+        "rank": 1,
+        "productName": "달바 화이트 트러플 퍼스트 스프레이 세럼 100ml 3개 세트",
+        "brand": "d'Alba",
+        "influencerName": "유튜버 유트루 (구독자 58만)",
+        "platform": "YouTube / 스마트스토어",
+        "profileImg": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 87000,
+        "salePrice": 41700,
+        "discountRate": 52,
+        "endTime": "2026-09-19T23:59:59",
+        "link": "https://smartstore.naver.com",
+        "features": ["승무원 미스트 1위", "전용 파우치 & 미니어처 증정", "무료배송"]
+      },
+      {
+        "id": "kr-2",
+        "rank": 2,
+        "productName": "토리든 다이브인 저분자 히알루론산 수분 진정 크림 100ml 더블",
+        "brand": "Torriden",
+        "influencerName": "인스타 뷰티 크리에이터 민정 (팔로워 32만)",
+        "platform": "Instagram / 올리브영",
+        "profileImg": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 42000,
+        "salePrice": 23100,
+        "discountRate": 45,
+        "endTime": "2026-09-20T18:00:00",
+        "link": "https://oliveyoung.co.kr",
+        "features": ["속건조 완벽 케어", "단독 1+1 리필 증정", "선착순 500명 팩 5매 증정"]
+      },
+      {
+        "id": "kr-3",
+        "rank": 3,
+        "productName": "롬앤 쥬시 래스팅 틴트 가을 신상 3종 패키지",
+        "brand": "rom&nd",
+        "influencerName": "뷰티 크리에이터 씬님 (구독자 142만)",
+        "platform": "YouTube / 링크트리",
+        "profileImg": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 39000,
+        "salePrice": 21800,
+        "discountRate": 44,
+        "endTime": "2026-09-19T12:00:00",
+        "link": "https://linktr.ee",
+        "features": ["웜톤/쿨톤 맞춤 세트", "미니 손거울 사은품", "런칭 1시간 만에 3,000개 완판"]
+      }
+    ]
+  },
+  {
+    "country": "JP",
+    "countryName": "🇯🇵 일본 J-Beauty",
+    "deals": [
+      {
+        "id": "jp-1",
+        "rank": 1,
+        "productName": "티르티르 마스크핏 레드 쿠션 21N + 미니 쿠션 증정",
+        "brand": "TIRTIR Japan",
+        "influencerName": "미용 인플루언서 미즈키 (구독자 85만)",
+        "platform": "X (구 트위터) / Qoo10 Japan",
+        "profileImg": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 48000,
+        "salePrice": 28800,
+        "discountRate": 40,
+        "endTime": "2026-09-19T21:00:00",
+        "link": "https://qoo10.jp",
+        "features": ["큐텐 메가와리 1위", "일본 뷰티 어워드 3관왕", "72시간 지속력"]
+      },
+      {
+        "id": "jp-2",
+        "rank": 2,
+        "productName": "아누아 어성초 77 수딩 토너 500ml 대용량",
+        "brand": "Anua Japan",
+        "influencerName": "LIPS 뷰티 에디터 사키 (팔로워 42만)",
+        "platform": "LIPS / 라쿠텐",
+        "profileImg": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 45000,
+        "salePrice": 27900,
+        "discountRate": 38,
+        "endTime": "2026-09-20T23:59:59",
+        "link": "https://rakuten.co.jp",
+        "features": ["피부 진정 1위", "전용 화장솜 100매 증정", "일본 돈키호테 품절 대란"]
+      },
+      {
+        "id": "jp-3",
+        "rank": 3,
+        "productName": "코스알엑스 어드밴스드 스네일 96 뮤신 파워 에센스",
+        "brand": "COSRX",
+        "influencerName": "틱톡커 켄타 (팔로워 60만)",
+        "platform": "TikTok / 아마존 재팬",
+        "profileImg": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 32000,
+        "salePrice": 20800,
+        "discountRate": 35,
+        "endTime": "2026-09-19T15:00:00",
+        "link": "https://amazon.co.jp",
+        "features": ["글로벌 틱톡 바이럴템", "쫀쫀한 보습막", "아마존 재팬 뷰티 베스트셀러"]
+      }
+    ]
+  },
+  {
+    "country": "CN",
+    "countryName": "🇨🇳 중국 C-Beauty",
+    "deals": [
+      {
+        "id": "cn-1",
+        "rank": 1,
+        "productName": "설화수 자음생 세트 리미티드 패키지",
+        "brand": "Sulwhasoo China",
+        "influencerName": "라이브 립스틱킹 리자치 (팔로워 3,000만)",
+        "platform": "타오바오 라이브 (Taobao Live)",
+        "profileImg": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1617897903246-719242758050?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 240000,
+        "salePrice": 124800,
+        "discountRate": 48,
+        "endTime": "2026-09-19T22:00:00",
+        "link": "https://taobao.com",
+        "features": ["라이브 단독 본품급 사은품 7종", "광군제 사전 특가", "선착순 전용 쿠폰"]
+      },
+      {
+        "id": "cn-2",
+        "rank": 2,
+        "productName": "라네즈 립 슬리핑 마스크 EX 4종 컬렉션",
+        "brand": "LANEIGE China",
+        "influencerName": "샤오홍슈 뷰티 퀸 장다이 (팔로워 1,200만)",
+        "platform": "샤오홍슈 (RED)",
+        "profileImg": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 56000,
+        "salePrice": 31300,
+        "discountRate": 44,
+        "endTime": "2026-09-20T12:00:00",
+        "link": "https://xiaohongshu.com",
+        "features": ["베리/자몽/애플라임/민트초코 4종", "입술 각질 완벽 잠재우기", "샤오홍슈 한정 박스"]
+      },
+      {
+        "id": "cn-3",
+        "rank": 3,
+        "productName": "조선미녀 맑은쌀 선크림 50ml 2개 + 클렌징밤 증정",
+        "brand": "Beauty of Joseon",
+        "influencerName": "더우인 탑 뷰티 크리에이터 신바 (팔로워 800만)",
+        "platform": "더우인 (Douyin)",
+        "profileImg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+        "productImg": "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&auto=format&fit=crop&q=80",
+        "originalPrice": 48000,
+        "salePrice": 28800,
+        "discountRate": 40,
+        "endTime": "2026-09-19T18:00:00",
+        "link": "https://douyin.com",
+        "features": ["백탁 없는 촉촉한 유기자차", "더우인 뷰티 랭킹 1위", "무료배송"]
+      }
+    ]
+  }
+]
