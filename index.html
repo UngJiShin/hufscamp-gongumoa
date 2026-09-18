@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>공구모아 (GonguMoa) | 한·중·일 인플루언서 화장품 공구 핫딜 TOP 3</title>
-  <meta name="description" content="인플루언서 팔로워만 알던 화장품 시크릿 할인 링크! 한·중·일 실시간 크롤링으로 TOP 3 핫딜만 모아보는 스마트 뷰티 큐레이션" />
-  
+  <title>공구모아 (gongumoa) | 인플루언서 뷰티 마켓 큐레이션</title>
+  <meta name="description" content="유튜브, 인스타그램 인플루언서들이 진행하는 단독 화장품 공구 링크를 한눈에 모아보는 스마트 뷰티 플랫폼" />
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -13,485 +13,477 @@
       theme: {
         extend: {
           colors: {
-            brand: {
-              50: '#fff1f2',
-              100: '#ffe4e6',
-              200: '#fecdd3',
-              500: '#f43f5e',
-              600: '#e11d48',
-              700: '#be123c',
-              dark: '#0f172a',
+            sand: {
+              50: '#FAF9F6',
+              100: '#F5F5F0',
+              200: '#EBEAE5',
+            },
+            point: {
+              DEFAULT: '#E11D48',
+              hover: '#BE123C',
+              soft: '#FFF1F2'
+            },
+            charcoal: {
+              DEFAULT: '#18181B',
+              muted: '#71717A',
+              light: '#A1A1AA'
             }
+          },
+          fontFamily: {
+            sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif']
           }
         }
       }
     }
   </script>
 
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- QRCode.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
     body {
-      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      font-family: 'Pretendard', sans-serif;
+      background-color: #FAF9F6;
+      color: #18181B;
+      letter-spacing: -0.02em;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .editorial-border {
+      border-bottom: 1px solid rgba(24, 24, 27, 0.08);
     }
     .story-ring {
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .gold-shimmer {
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-      background-size: 200% 100%;
-      animation: shimmer 2.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
+      background: linear-gradient(135deg, #F43F5E 0%, #FB923C 100%);
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col pb-20 sm:pb-0">
+<body class="min-h-screen flex flex-col selection:bg-rose-100 selection:text-rose-900 pb-20 sm:pb-0">
 
   <!-- Toast Notification -->
-  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform -translate-y-12 opacity-0 pointer-events-none transition-all duration-300 px-4 py-2.5 rounded-full bg-slate-900/90 text-white text-xs font-semibold shadow-2xl flex items-center space-x-2 border border-slate-700">
-    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 transform -translate-y-12 opacity-0 pointer-events-none transition-all duration-300 px-5 py-3 rounded-full bg-zinc-900 text-white text-xs font-semibold shadow-xl flex items-center space-x-2">
+    <i class="fa-solid fa-check text-rose-400"></i>
     <span id="toast-msg">알림 메시지</span>
   </div>
 
-  <!-- 1. Real-time Live Crawling Banner -->
-  <aside aria-label="실시간 크롤링 현황" class="bg-slate-950 text-white text-xs py-2 px-4 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <div class="flex items-center space-x-2.5">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span class="font-bold text-emerald-400 tracking-wide text-[11px] sm:text-xs">실시간 인플루언서 크롤러 가동 중</span>
-        <span class="text-slate-600 hidden md:inline">|</span>
-        <span class="text-slate-400 text-[11px] hidden md:inline">한·중·일 35개 채널 (유튜브/인스타/샤오홍슈/LIPS) 실시간 연동</span>
+  <!-- 1. Top Notice Bar -->
+  <aside aria-label="오늘의 공구 공지" class="bg-zinc-900 text-zinc-300 text-xs py-2 px-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center text-[11px] sm:text-xs">
+      <div class="flex items-center space-x-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+        <span class="font-medium text-white">오늘 오픈된 인플루언서 단독 마켓 <strong>8건</strong></span>
+        <span class="text-zinc-600 hidden sm:inline">•</span>
+        <span class="text-zinc-400 hidden sm:inline">스토리 마감 전 단독 할인가로 쟁여두세요</span>
       </div>
-      <div class="flex items-center space-x-3 text-[11px] text-slate-300">
-        <span>다음 데이터 동기화: <strong id="refresh-timer" class="text-amber-400 font-mono">04:48</strong></span>
-        <button onclick="toggleCrawlerTerminal()" class="text-slate-400 hover:text-white underline decoration-slate-600 ml-2 hidden sm:inline">
-          터미널 로그 보기
-        </button>
+      <div class="flex items-center space-x-3 text-zinc-400">
+        <span class="text-amber-300 font-medium">오늘 24:00 마감 임박 공구 3건</span>
       </div>
     </div>
   </aside>
 
-  <!-- 2. Sticky Navbar -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all duration-200">
+  <!-- 2. Minimal Editorial Header -->
+  <header class="sticky top-0 z-40 bg-sand-50/90 backdrop-blur-md editorial-border">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-400 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-rose-500/20 transform hover:scale-105 transition">
-          공
-        </div>
-        <div>
-          <div class="flex items-center space-x-1.5">
-            <span class="text-xl font-black tracking-tight text-slate-900">공구모아</span>
-            <span class="text-[10px] font-black uppercase px-1.5 py-0.5 rounded-md bg-rose-500 text-white tracking-wider">LIVE</span>
-          </div>
-          <p class="text-[10px] text-slate-600 font-semibold tracking-tight">GonguMoa • 한·중·일 뷰티 핫딜 TOP 3</p>
-        </div>
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="resetAll()">
+        <span class="text-2xl font-black tracking-tighter text-zinc-900">
+          gongumoa<span class="text-rose-500 font-serif text-3xl leading-none">.</span>
+        </span>
+        <span class="hidden sm:inline text-[11px] text-zinc-600 font-medium pl-2 border-l border-zinc-200">
+          인플루언서 뷰티 마켓 셀렉트숍
+        </span>
       </div>
 
-      <!-- Search Bar (Desktop) -->
-      <div class="hidden md:flex items-center flex-1 max-w-md mx-6">
-        <div class="relative w-full">
+      <!-- Live Search Bar -->
+      <div class="flex-1 max-w-sm mx-4 hidden md:block">
+        <div class="relative">
           <input 
             type="text" 
             id="desktop-search" 
             oninput="handleSearch(this.value)" 
-            placeholder="인플루언서 이름, 화장품 브랜드, 제품명 검색... (예: 유트루, 달바, 쿠션)"
-            class="w-full pl-10 pr-9 py-2 text-xs bg-slate-100/80 hover:bg-slate-100 focus:bg-white rounded-full border border-slate-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 focus:outline-none transition shadow-inner"
+            placeholder="인플루언서, 브랜드, 제품명을 검색해보세요" 
+            class="w-full pl-9 pr-8 py-2 text-xs bg-white/80 hover:bg-white focus:bg-white rounded-full border border-zinc-200 focus:border-zinc-900 focus:outline-none transition shadow-sm"
           />
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-600 text-xs"></i>
-          <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-3 top-2 text-slate-600 hover:text-slate-600">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-zinc-400 text-xs"></i>
+          <button id="search-clear-btn" onclick="clearSearch()" class="hidden absolute right-3 top-2 text-zinc-300 hover:text-zinc-600">
             <i class="fa-solid fa-circle-xmark text-xs"></i>
           </button>
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="flex items-center space-x-2">
-        <button onclick="openQRModal()" class="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition">
-          <i class="fa-solid fa-qrcode text-rose-500 text-sm"></i>
+      <!-- Right Actions -->
+      <div class="flex items-center space-x-2.5">
+        <button onclick="openQRModal()" class="px-3 py-2 rounded-full border border-zinc-200 hover:border-zinc-900 text-zinc-800 text-xs font-semibold transition flex items-center space-x-1.5 bg-white shadow-sm">
+          <i class="fa-solid fa-qrcode text-rose-500"></i>
           <span class="hidden sm:inline">모바일 QR 시연</span>
         </button>
-        <button onclick="openNotifyModal('전체')" class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white text-xs font-bold shadow-md shadow-rose-500/20 transition transform hover:-translate-y-0.5">
-          <i class="fa-solid fa-bell"></i>
-          <span>시크릿 알림 받기</span>
+        <button onclick="openNotifyModal('시크릿 알림')" class="px-4 py-2 rounded-full bg-zinc-900 hover:bg-rose-600 text-white text-xs font-semibold shadow-sm transition">
+          공구 오픈 알림
         </button>
       </div>
     </div>
 
-    <!-- Mobile Search Bar -->
+    <!-- Mobile Search Row -->
     <div class="md:hidden px-4 pb-3">
       <div class="relative w-full">
         <input 
           type="text" 
           id="mobile-search" 
           oninput="handleSearch(this.value)" 
-          placeholder="인플루언서, 브랜드, 제품명 검색..." 
-          class="w-full pl-9 pr-8 py-2 text-xs bg-slate-100 rounded-full border border-slate-200 focus:outline-none focus:ring-2 focus:ring-rose-400"
+          placeholder="인플루언서, 화장품 검색..." 
+          class="w-full pl-8 pr-7 py-2 text-xs bg-white rounded-full border border-zinc-200 focus:outline-none focus:border-zinc-900"
         />
-        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-600 text-xs"></i>
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-zinc-400 text-xs"></i>
       </div>
     </div>
   </header>
 
-  <!-- 3. Influencer Story Avatars Bar (Instagram Story Style) -->
-  <section class="bg-white border-b border-slate-100 py-3.5 px-4 overflow-hidden">
+  <!-- 3. Influencer Story Circles (Human Creator Curation) -->
+  <section class="bg-sand-50 py-4 px-4 editorial-border">
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar py-1 text-center" id="influencer-story-bar">
-        <!-- Story items rendered dynamically via JS -->
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">Creators on Market</h2>
+        <span class="text-[11px] text-zinc-600">프로필을 누르면 크리에이터별 마켓으로 이동합니다</span>
+      </div>
+      <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar py-1" id="influencer-story-bar">
+        <!-- Story circles rendered via JS -->
       </div>
     </div>
   </section>
 
-  <!-- 4. Hero Banner -->
-  <section class="relative bg-gradient-to-b from-rose-100/60 via-white to-slate-50 pt-8 pb-10 px-4 overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center relative z-10 space-y-4">
-      <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/90 border border-rose-200 shadow-sm text-xs font-bold text-rose-600">
-        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-        <span>1박 2일 창업 캠프 출품작 • Render 실시간 배포</span>
-      </div>
-
-      <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-        인플루언서 역대급 할인 링크,<br class="hidden sm:block" />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500">
-          이제 팔로워만 보지 말고 한곳에서 챙기세요!
-        </span>
-      </h1>
-
-      <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-        유튜브 더보기란, 인스타 스토리, 샤오홍슈에 흩어진 뷰티 공구를 실시간 크롤링하여<br class="hidden sm:inline" />
-        <strong>검증된 뷰티 크리에이터의 일간 TOP 3 할인율 핫딜</strong>만 큐레이션합니다.
-      </p>
-
-      <!-- 3 Key Metric Stats -->
-      <div class="pt-3 grid grid-cols-3 gap-2.5 sm:gap-4 max-w-lg mx-auto">
-        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm">
-          <div class="text-[11px] text-slate-600 font-semibold">실시간 수집 공구</div>
-          <div class="text-xl sm:text-2xl font-black text-rose-600 mt-0.5">48<span class="text-xs text-slate-600 font-normal">개</span></div>
-        </div>
-        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm">
-          <div class="text-[11px] text-slate-600 font-semibold">최대 할인율</div>
-          <div class="text-xl sm:text-2xl font-black text-amber-500 mt-0.5">52<span class="text-xs text-slate-600 font-normal">%</span></div>
-        </div>
-        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm">
-          <div class="text-[11px] text-slate-600 font-semibold">사전 예약자</div>
-          <div class="text-xl sm:text-2xl font-black text-indigo-600 mt-0.5" id="reserve-count">142<span class="text-xs text-slate-600 font-normal">명</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Main Filter & Country Tabs Section -->
-  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-6">
-    
-    <!-- Top Filter Controls -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+  <!-- 4. Editorial Magazine Hero Section (탈 박스 오픈 레이아웃) -->
+  <section class="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
       
-      <!-- Country Tabs (한·중·일) -->
-      <div class="flex space-x-1.5 overflow-x-auto no-scrollbar">
-        <button id="tab-KR" onclick="setCountry('KR')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition flex items-center space-x-2 bg-rose-500 text-white shadow-md shadow-rose-500/20">
-          <span>🇰🇷 한국 K-Beauty</span>
-          <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full">TOP 3</span>
+      <!-- Left Editorial Copy -->
+      <div class="lg:col-span-7 space-y-4">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold">
+          <span>✨ 이번 주 가장 화제인 인플루언서 단독 구성</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-zinc-900 tracking-tight leading-[1.15]">
+          인스타 스토리 속 그 링크,<br />
+          <span class="text-rose-600 font-serif italic">단독 최저가</span>로 한눈에.
+        </h1>
+        <p class="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-xl font-normal">
+          좋아하는 크리에이터가 공들여 기획한 특별 공구 마켓.<br class="hidden sm:inline" />
+          흩어진 링크를 찾아 헤매지 않도록, 오늘 마감되는 시크릿 최저가만 모아둡니다.
+        </p>
+
+        <!-- Social Proof Stats (Human Editorial Numbers) -->
+        <div class="pt-4 flex items-center space-x-8 text-xs text-zinc-600">
+          <div>
+            <span class="block text-2xl font-black text-zinc-900">48개</span>
+            <span class="text-zinc-600">진행 중인 단독 마켓</span>
+          </div>
+          <div class="w-px h-8 bg-zinc-200"></div>
+          <div>
+            <span class="block text-2xl font-black text-rose-600">최대 52%</span>
+            <span class="text-zinc-600">인플루언서 전용 할인</span>
+          </div>
+          <div class="w-px h-8 bg-zinc-200"></div>
+          <div>
+            <span class="block text-2xl font-black text-zinc-900" id="reserve-count">142명</span>
+            <span class="text-zinc-600">오픈 알림 구독 중</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Hero Featured Showcase Card (Clean Editorial Card) -->
+      <div class="lg:col-span-5">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-zinc-200/80 hover:shadow-xl transition duration-300 relative group">
+          <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-sand-100">
+            <img src="https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=800&auto=format&fit=crop&q=80" alt="달바 세럼" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-zinc-900 text-white text-xs font-bold">
+              WEEKLY BEST #1
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-zinc-100 shadow-sm flex items-center justify-between">
+              <div class="flex items-center space-x-2.5 truncate">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-8 h-8 rounded-full object-cover border border-rose-300" />
+                <div>
+                  <span class="text-xs font-bold text-zinc-900 block truncate">유트루 X 달바 마켓</span>
+                  <span class="text-[10px] text-zinc-600 block">YouTube 58만 • 단독 3종 기획</span>
+                </div>
+              </div>
+              <span class="text-xs font-black text-rose-600 bg-rose-50 px-2 py-1 rounded-lg">52% OFF</span>
+            </div>
+          </div>
+
+          <div class="mt-4 space-y-2">
+            <h3 class="font-extrabold text-base text-zinc-900">달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 3종 세트</h3>
+            <p class="text-xs text-zinc-600 italic">"3통째 비우고 6개월 동안 직접 본사에 요청해 준비한 역대급 구성입니다."</p>
+            <div class="pt-2 flex items-baseline justify-between border-t border-zinc-100">
+              <div>
+                <span class="text-xs text-zinc-600 line-through">87,000원</span>
+                <span class="text-xl font-black text-rose-600 ml-1.5">41,700원</span>
+              </div>
+              <button onclick="openDetailModal('kr-1')" class="px-4 py-2 bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition">
+                마켓 바로가기 →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Main Filter & Country Collection -->
+  <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full space-y-8">
+    
+    <!-- Filter Navigation Tabs -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-4">
+      
+      <!-- Country Region Selector -->
+      <div class="flex space-x-6 text-sm font-bold">
+        <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5">
+          <span>국내 크리에이터 마켓</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
-        <button id="tab-JP" onclick="setCountry('JP')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-          <span>🇯🇵 일본 J-Beauty</span>
-          <span class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
+        <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
+          <span>일본 직구 핫딜</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
-        <button id="tab-CN" onclick="setCountry('CN')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-          <span>🇨🇳 중국 C-Beauty</span>
-          <span class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
+        <button id="tab-CN" onclick="setCountry('CN')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
+          <span>글로벌 화제템</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
       </div>
 
       <!-- Category Filter Pills & Sort -->
-      <div class="flex items-center justify-between md:justify-end gap-2 overflow-x-auto">
+      <div class="flex items-center justify-between sm:justify-end gap-3">
         <div class="flex items-center space-x-1" id="category-pills">
-          <button onclick="setCategory('전체')" class="cat-pill active px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white">전체</button>
-          <button onclick="setCategory('스킨케어')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">스킨케어</button>
-          <button onclick="setCategory('베이스/쿠션')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">쿠션/베이스</button>
-          <button onclick="setCategory('색조/립')" class="cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">립/색조</button>
+          <button onclick="setCategory('전체')" class="cat-pill active px-3 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white">전체</button>
+          <button onclick="setCategory('스킨케어')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">스킨케어</button>
+          <button onclick="setCategory('베이스/쿠션')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">쿠션/베이스</button>
+          <button onclick="setCategory('색조/립')" class="cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900">립/색조</button>
         </div>
 
-        <select id="sort-select" onchange="handleSort(this.value)" class="text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 py-1.5 px-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-rose-500">
-          <option value="rank">🔥 랭킹순</option>
-          <option value="discount">📉 할인율 높은순</option>
-          <option value="time">⏳ 마감 임박순</option>
-          <option value="price">💰 가격 낮은순</option>
+        <select id="sort-select" onchange="handleSort(this.value)" class="text-xs font-medium bg-transparent border-0 text-zinc-700 py-1 pl-2 pr-6 focus:outline-none cursor-pointer">
+          <option value="rank">추천순</option>
+          <option value="discount">할인율 높은순</option>
+          <option value="time">마감 임박순</option>
+          <option value="price">낮은 가격순</option>
         </select>
       </div>
     </div>
 
-    <!-- Active Search Filter Badge (Visible when searching) -->
-    <div id="search-feedback" class="hidden flex items-center justify-between bg-rose-50 border border-rose-200 px-4 py-2 rounded-xl text-xs text-rose-700 font-semibold">
-      <span>검색어: "<strong id="search-keyword"></strong>" 결과 <strong id="search-count">0</strong>건</span>
-      <button onclick="clearSearch()" class="text-rose-600 hover:underline">필터 초기화</button>
+    <!-- Active Search Filter Breadcrumb -->
+    <div id="search-feedback" class="hidden flex items-center justify-between bg-white px-4 py-2.5 rounded-xl border border-zinc-200 text-xs text-zinc-700">
+      <span>검색어 <strong id="search-keyword" class="text-rose-600"></strong> 검색 결과 <strong id="search-count">0</strong>건</span>
+      <button onclick="clearSearch()" class="text-zinc-600 hover:text-zinc-900 font-medium">전체 보기로 돌아가기</button>
     </div>
 
-    <!-- 6. Deal Cards Grid -->
-    <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cards dynamically inserted here -->
+    <!-- Product Grid (Open Airy Layout) -->
+    <div id="deals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Dynamic clean editorial cards injected here -->
     </div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300 space-y-3">
-      <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-600 mx-auto flex items-center justify-center text-xl">
+    <div id="empty-state" class="hidden text-center py-20 bg-white rounded-3xl border border-zinc-200 space-y-3">
+      <div class="w-12 h-12 rounded-full bg-sand-100 text-zinc-600 mx-auto flex items-center justify-center text-lg">
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
-      <p class="text-sm font-bold text-slate-700">일치하는 인플루언서 공구 핫딜이 없습니다.</p>
-      <p class="text-xs text-slate-600">검색어를 바꾸거나 다른 국가/카테고리를 선택해 보세요.</p>
-      <button onclick="resetFilters()" class="px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-black transition">
-        전체 보기로 돌아가기
+      <p class="text-sm font-bold text-zinc-900">찾으시는 마켓이나 제품이 없습니다.</p>
+      <p class="text-xs text-zinc-600">다른 크리에이터나 제품 키워드로 검색해보세요.</p>
+      <button onclick="resetAll()" class="mt-2 px-4 py-2 bg-zinc-900 text-white rounded-xl text-xs font-semibold">
+        전체 마켓 보기
       </button>
     </div>
 
-    <!-- 7. Live Crawler Console Terminal (Collapsible / Tech Credibility) -->
-    <section id="crawler-terminal" class="bg-slate-950 rounded-2xl p-5 text-white shadow-xl border border-slate-800 space-y-3">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center space-x-2.5">
-          <div class="flex space-x-1.5">
-            <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-            <div class="w-3 h-3 rounded-full bg-amber-500"></div>
-            <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-          </div>
-          <span class="text-xs font-mono text-slate-400">gongumoa_crawler_core.py [LIVE BACKGROUND PIPELINE]</span>
-        </div>
-        <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">
-          200 OK • WORKER RUNNING
-        </span>
-      </div>
+    <!-- 6. Bottom Clean Newsletter / Pre-order Banner (No Tech Jargon) -->
+    <section class="bg-zinc-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+      <div class="max-w-2xl space-y-3">
+        <span class="text-rose-400 font-bold text-xs uppercase tracking-wider">Secret Market Alert</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          좋아하는 크리에이터의 다음 공구,<br />
+          놓치지 않도록 시작 1시간 전에 알려드립니다.
+        </h2>
+        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+          한정 수량이나 선착순 사은품이 포함된 공구는 오픈 10분 만에 품절되는 경우가 많습니다. 
+          카카오톡 알림을 신청하고 시크릿 마켓 링크를 가장 먼저 받아보세요.
+        </p>
 
-      <div class="font-mono text-xs text-slate-300 space-y-1 bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 max-h-44 overflow-y-auto leading-relaxed">
-        <p class="text-slate-600">[13:48:12] Initializing GonguMoa Multi-Region Parser Engine (v1.0-hufscamp)...</p>
-        <p class="text-sky-400">[KR] Crawling Instagram Story links & YouTube linktrees (유트루, 디렉터파이, 레오제이, 씬님)...</p>
-        <p class="text-emerald-400">  ↳ [PASS] d'Alba First Spray Serum (52% OFF) coupon TRUELOVE52 verified.</p>
-        <p class="text-emerald-400">  ↳ [PASS] Torriden Dive-in Cream (45% OFF) double special pack parsed.</p>
-        <p class="text-sky-400">[JP] Scraping Qoo10 Japan Mega-Wari & LIPS feed (미즈키, 사키, 켄타)...</p>
-        <p class="text-emerald-400">  ↳ [PASS] TIRTIR Mask Fit Cushion (40% OFF) mini gift matched.</p>
-        <p class="text-sky-400">[CN] Fetching Xiaohongshu (RED) & Douyin live streams (리자치, 장다이, 신바)...</p>
-        <p class="text-emerald-400">  ↳ [PASS] Sulwhasoo special luxury gift pack (48% OFF) live code active.</p>
-        <p class="text-amber-300 font-semibold">[AUTO] Top 3 rankings recalculated and deals.json hot-reloaded.</p>
+        <div class="pt-4">
+          <button onclick="openNotifyModal('시크릿 알림')" class="px-6 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg transition">
+            무료 오픈 알림 신청하기 →
+          </button>
+        </div>
       </div>
     </section>
 
-    <!-- 8. Pre-Registration Call to Action -->
-    <section class="relative bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 rounded-3xl p-8 text-white shadow-xl overflow-hidden">
-      <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
-      <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2 text-center md:text-left">
-          <div class="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold tracking-wide">
-            🔔 놓치면 정가 구매
-          </div>
-          <h2 class="text-xl sm:text-2xl font-black">원하는 화장품 인플루언서 공구 알림을 1초 만에 등록하세요!</h2>
-          <p class="text-xs sm:text-sm text-rose-100">
-            공구가 열리는 날 정오 12시, 시크릿 할인 링크와 전용 할인 코드를 카톡/문자로 즉시 쏴드립니다.
-          </p>
-        </div>
-        <button onclick="openNotifyModal('시크릿 알림')" class="px-6 py-3.5 bg-slate-900 hover:bg-black text-white text-xs sm:text-sm font-black rounded-2xl shadow-xl transition transform hover:scale-105 whitespace-nowrap">
-          🚀 무료 알림 신청하고 5,000원 쿠폰 받기
-        </button>
-      </div>
-    </section>
   </main>
 
-  <!-- 9. Footer -->
-  <footer class="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-600">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div class="text-center sm:text-left">
-        <div class="flex items-center justify-center sm:justify-start space-x-2">
-          <span class="font-extrabold text-slate-900 text-sm">공구모아 (GonguMoa)</span>
-          <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">v1.0 MVP</span>
-        </div>
-        <p class="mt-1 text-slate-600">1박 2일 창업 캠프 출품작 • 팀 공구모아 (지웅, 성준, 민석, 신혜, 재현)</p>
-        <p class="text-[11px] text-slate-600">본 서비스는 각 인플루언서 및 공식 브랜드와의 사전 제휴 및 실시간 크롤링 데이터를 기반으로 최저가 정보를 안내합니다.</p>
+  <!-- 7. Minimal Human Footer -->
+  <footer class="bg-white border-t border-zinc-200 mt-16 py-10 text-xs text-zinc-600">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+      <div class="space-y-1">
+        <span class="text-base font-black text-zinc-900">gongumoa.</span>
+        <p class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • 팀 공구모아 (지웅, 성준, 민석, 신혜, 재현)</p>
+        <p class="text-[11px] text-zinc-600">본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.</p>
       </div>
-      <div class="flex items-center space-x-4 text-xs font-semibold">
-        <button onclick="openQRModal()" class="hover:text-rose-600 flex items-center space-x-1">
+
+      <div class="flex items-center space-x-6 text-zinc-600 font-medium">
+        <button onclick="openQRModal()" class="hover:text-zinc-900 flex items-center space-x-1.5">
           <i class="fa-solid fa-qrcode text-rose-500"></i>
-          <span>현장 QR 코드</span>
+          <span>모바일 시연 QR</span>
         </button>
         <span>•</span>
-        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-slate-900">
-          맨 위로 ↑
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-zinc-900">
+          맨 위로
         </button>
       </div>
     </div>
   </footer>
 
-  <!-- 10. Mobile Bottom Sticky Nav Bar -->
-  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 px-6 py-2 flex justify-between items-center text-center">
-    <button onclick="resetFilters()" class="flex flex-col items-center text-rose-500">
-      <i class="fa-solid fa-house text-base"></i>
-      <span class="text-[10px] font-bold mt-0.5">홈</span>
+  <!-- 8. Mobile Fixed Bottom Nav -->
+  <nav class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-zinc-200 px-6 py-2.5 flex justify-between items-center text-center">
+    <button onclick="resetAll()" class="flex flex-col items-center text-zinc-900">
+      <i class="fa-solid fa-house text-sm"></i>
+      <span class="text-[10px] font-bold mt-1">홈</span>
     </button>
-    <button onclick="document.getElementById('mobile-search').focus()" class="flex flex-col items-center text-slate-600 hover:text-rose-500">
-      <i class="fa-solid fa-magnifying-glass text-base"></i>
-      <span class="text-[10px] font-bold mt-0.5">검색</span>
+    <button onclick="document.getElementById('mobile-search').focus()" class="flex flex-col items-center text-zinc-600">
+      <i class="fa-solid fa-magnifying-glass text-sm"></i>
+      <span class="text-[10px] font-medium mt-1">검색</span>
     </button>
-    <button onclick="openQRModal()" class="flex flex-col items-center text-slate-600 hover:text-rose-500">
-      <i class="fa-solid fa-qrcode text-base"></i>
-      <span class="text-[10px] font-bold mt-0.5">QR 시연</span>
+    <button onclick="openQRModal()" class="flex flex-col items-center text-zinc-600">
+      <i class="fa-solid fa-qrcode text-sm text-rose-500"></i>
+      <span class="text-[10px] font-medium mt-1">QR 시연</span>
     </button>
-    <button onclick="openNotifyModal('모바일')" class="flex flex-col items-center text-slate-600 hover:text-rose-500">
-      <i class="fa-regular fa-bell text-base"></i>
-      <span class="text-[10px] font-bold mt-0.5">알림</span>
+    <button onclick="openNotifyModal('모바일')" class="flex flex-col items-center text-zinc-600">
+      <i class="fa-regular fa-bell text-sm"></i>
+      <span class="text-[10px] font-medium mt-1">알림</span>
     </button>
   </nav>
 
-  <!-- MODAL 1: Product Detail & Secret Code Modal -->
-  <div id="detail-modal" class="fixed inset-0 bg-slate-950/70 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-200 max-h-[90vh] flex flex-col">
-      <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition">
-        <i class="fa-solid fa-xmark"></i>
+  <!-- MODAL 1: Clean Editorial Detail Modal -->
+  <div id="detail-modal" class="fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in duration-150 max-h-[90vh] flex flex-col">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-zinc-800 flex items-center justify-center shadow transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
-      <div class="relative h-56 bg-slate-100 flex-shrink-0">
-        <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
-        <div class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur text-white text-xs font-bold flex items-center space-x-1.5">
-          <img id="modal-influencer-img" src="" class="w-5 h-5 rounded-full object-cover" />
+      <div class="relative h-60 bg-sand-100 flex-shrink-0">
+        <img id="modal-img" src="" class="w-full h-full object-cover" />
+        <div class="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-zinc-900 text-xs font-bold flex items-center space-x-2 shadow-sm">
+          <img id="modal-influencer-img" src="" class="w-5 h-5 rounded-full object-cover border border-rose-400" />
           <span id="modal-influencer-name"></span>
         </div>
       </div>
 
       <div class="p-6 overflow-y-auto space-y-4">
         <div>
-          <span id="modal-brand" class="text-xs font-bold text-rose-600 uppercase tracking-wide"></span>
-          <h3 id="modal-title" class="text-lg font-black text-slate-900 mt-1"></h3>
+          <span id="modal-brand" class="text-xs font-bold text-rose-600 tracking-wider uppercase"></span>
+          <h3 id="modal-title" class="text-lg font-black text-zinc-900 mt-1 leading-snug"></h3>
         </div>
 
-        <!-- Quote Bubble -->
-        <div class="p-3.5 bg-rose-50 rounded-2xl border border-rose-100 flex items-start space-x-3">
-          <i class="fa-solid fa-quote-left text-rose-400 text-base mt-1"></i>
-          <p id="modal-quote" class="text-xs text-rose-950 font-medium leading-relaxed"></p>
+        <!-- Creator Note -->
+        <div class="p-3.5 bg-sand-50 rounded-2xl border border-zinc-200/80 text-xs text-zinc-700 leading-relaxed font-normal">
+          <span class="font-bold text-zinc-900 block mb-1">Creator's Note</span>
+          <p id="modal-quote" class="italic"></p>
         </div>
 
-        <!-- Price Breakdown Box -->
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
-          <div class="flex justify-between text-slate-600">
-            <span>브랜드 공식 정가</span>
+        <!-- Clean Pricing Box -->
+        <div class="py-3 border-y border-zinc-100 space-y-1.5 text-xs">
+          <div class="flex justify-between text-zinc-600">
+            <span>공식 정가</span>
             <span id="modal-original-price" class="line-through"></span>
           </div>
-          <div class="flex justify-between text-slate-600">
-            <span>올리브영 / 일반 세일가</span>
-            <span id="modal-olive-price" class="font-medium"></span>
+          <div class="flex justify-between text-zinc-600">
+            <span>일반 시중 할인가</span>
+            <span id="modal-olive-price"></span>
           </div>
-          <div class="pt-2 border-t border-slate-200 flex justify-between items-baseline">
-            <span class="font-bold text-slate-900">인플루언서 단독 시크릿가</span>
+          <div class="pt-2 flex justify-between items-baseline">
+            <span class="font-bold text-zinc-900">인플루언서 단독 할인가</span>
             <div class="text-right">
-              <span id="modal-discount-rate" class="px-2 py-0.5 rounded bg-rose-100 text-rose-600 font-black text-xs mr-1.5"></span>
-              <strong id="modal-sale-price" class="text-xl font-black text-rose-600"></strong>
+              <span id="modal-discount-rate" class="text-rose-600 font-extrabold text-sm mr-1"></span>
+              <strong id="modal-sale-price" class="text-2xl font-black text-rose-600"></strong>
             </div>
           </div>
         </div>
 
-        <!-- Secret Promo Code Copy Box -->
-        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-center justify-between">
-          <div>
-            <span class="text-[10px] text-amber-700 font-bold block">결제 시 입력할 인플루언서 단독 코드</span>
-            <code id="modal-promo-code" class="text-xs font-mono font-black text-amber-900"></code>
-          </div>
-          <button onclick="copyPromoCode()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-xs font-bold transition">
-            코드 복사
-          </button>
-        </div>
-
-        <!-- Action Button -->
-        <div class="pt-2 flex space-x-2">
-          <button onclick="goToDealLink()" class="flex-1 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-lg shadow-rose-600/20 flex items-center justify-center space-x-1.5">
-            <span>인플루언서 할인 링크로 이동</span>
+        <!-- Direct Purchase Button -->
+        <div class="pt-2">
+          <button onclick="goToDealLink()" class="w-full py-4 bg-zinc-900 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-sm flex items-center justify-center space-x-2">
+            <span>공구 마켓 페이지 바로가기</span>
             <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </button>
+          <p class="text-[11px] text-zinc-600 text-center mt-2">클릭 시 인플루언서 단독 시크릿 링크로 이동합니다.</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- MODAL 2: QR Code Presentation Modal -->
-  <div id="qr-modal" class="fixed inset-0 bg-slate-950/80 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center relative animate-in fade-in zoom-in duration-150">
-      <button onclick="closeQRModal()" class="absolute top-4 right-4 text-slate-600 hover:text-slate-600">
-        <i class="fa-solid fa-xmark text-lg"></i>
+  <div id="qr-modal" class="fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center relative">
+      <button onclick="closeQRModal()" class="absolute top-4 right-4 text-zinc-600 hover:text-zinc-600">
+        <i class="fa-solid fa-xmark text-base"></i>
       </button>
-
-      <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 mx-auto flex items-center justify-center text-xl mb-3 shadow-inner">
-        <i class="fa-solid fa-qrcode"></i>
-      </div>
-      <h3 class="text-lg font-black text-slate-900">현장 시연용 실시간 QR 코드</h3>
-      <p class="text-xs text-slate-600 mt-1">심사위원 및 팀원 스마트폰으로 스캔 시 즉시 모바일 최적화 웹으로 연결됩니다.</p>
+      <h3 class="text-base font-black text-zinc-900 mt-2">현장 모바일 시연용 QR 코드</h3>
+      <p class="text-xs text-zinc-600 mt-1">스마트폰 카메라로 비추면 모바일 최적화 웹으로 연결됩니다.</p>
 
       <div class="my-5 flex justify-center">
-        <div id="qrcode" class="p-4 bg-white border border-slate-200 rounded-2xl shadow-md"></div>
+        <div id="qrcode" class="p-3 bg-white border border-zinc-200 rounded-2xl shadow-sm"></div>
       </div>
 
-      <div class="p-2.5 bg-slate-100 rounded-xl text-[11px] text-slate-600 font-mono break-all" id="current-url-display">
+      <div class="p-2.5 bg-sand-100 rounded-xl text-[11px] text-zinc-600 font-mono break-all" id="current-url-display">
         https://ungjishin.github.io/hufscamp-gongumoa/
       </div>
 
       <div class="mt-4 grid grid-cols-2 gap-2">
-        <button onclick="copyCurrentUrl()" class="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl transition">
+        <button onclick="copyCurrentUrl()" class="py-2.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold rounded-xl transition">
           주소 복사
         </button>
-        <button onclick="downloadQRCode()" class="py-2.5 bg-slate-900 hover:bg-black text-white text-xs font-bold rounded-xl transition">
-          QR 이미지 저장
+        <button onclick="downloadQRCode()" class="py-2.5 bg-zinc-900 hover:bg-black text-white text-xs font-bold rounded-xl transition">
+          QR 저장
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: Notification Modal -->
-  <div id="notify-modal" class="fixed inset-0 bg-slate-950/70 z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in duration-150">
-      <button onclick="closeNotifyModal()" class="absolute top-4 right-4 text-slate-600 hover:text-slate-600">
-        <i class="fa-solid fa-xmark text-lg"></i>
+  <!-- MODAL 3: Simple Notification Modal -->
+  <div id="notify-modal" class="fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeNotifyModal()" class="absolute top-4 right-4 text-zinc-600 hover:text-zinc-600">
+        <i class="fa-solid fa-xmark text-base"></i>
       </button>
-      <div class="text-center space-y-2">
-        <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 mx-auto flex items-center justify-center text-xl shadow-inner">
-          <i class="fa-regular fa-bell"></i>
-        </div>
-        <h3 class="text-lg font-black text-slate-900">시크릿 공구 오픈 알림 신청</h3>
-        <p class="text-xs text-slate-600">
-          원하는 뷰티 제품이나 인플루언서 공구가 열리는 즉시 카카오톡 / 문자로 1등 링크를 보내드립니다.
-        </p>
+      <div class="text-center space-y-1">
+        <h3 class="text-lg font-black text-zinc-900">시크릿 공구 오픈 알림</h3>
+        <p class="text-xs text-zinc-600">관심 있는 크리에이터의 공구가 오픈되면 가장 먼저 카톡으로 알려드립니다.</p>
       </div>
 
       <form id="notify-form" onsubmit="handleNotifySubmit(event)" class="mt-5 space-y-3">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">성함 / 닉네임</label>
-          <input type="text" id="user-name" required placeholder="예: 지웅" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none" />
+          <label class="block text-xs font-bold text-zinc-700 mb-1">성함</label>
+          <input type="text" id="user-name" required placeholder="예: 지웅" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">연락처 (휴대폰 또는 이메일)</label>
-          <input type="text" id="user-contact" required placeholder="010-1234-5678 또는 email@example.com" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none" />
+          <label class="block text-xs font-bold text-zinc-700 mb-1">연락처</label>
+          <input type="text" id="user-contact" required placeholder="010-1234-5678 또는 이메일" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">알림받고 싶은 제품 또는 인플루언서</label>
-          <input type="text" id="user-wish" placeholder="예: 유트루 달바 미스트, 롬앤 틴트 등" class="w-full px-3.5 py-2.5 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none" />
+          <label class="block text-xs font-bold text-zinc-700 mb-1">관심 브랜드 또는 크리에이터</label>
+          <input type="text" id="user-wish" placeholder="예: 유트루, 달바, 롬앤 등" class="w-full px-3.5 py-2.5 text-xs border border-zinc-300 rounded-xl focus:ring-1 focus:ring-zinc-900 focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold rounded-xl text-xs sm:text-sm transition shadow-md shadow-rose-500/20">
-          무료로 알림 예약 완료 (5,000원 쿠폰 증정)
+        <button type="submit" class="w-full py-3.5 bg-zinc-900 hover:bg-rose-600 text-white font-bold rounded-xl text-xs sm:text-sm transition">
+          알림 신청 완료하기
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Master JavaScript Application Logic -->
+  <!-- Main JavaScript App -->
   <script>
-    // In-memory Data Fallback (Guarantees zero-network fail during live judging)
     let allData = [];
     let currentCountry = "KR";
     let currentCategory = "전체";
@@ -499,160 +491,139 @@
     let currentSort = "rank";
     let activeModalDeal = null;
 
-    // Fetch deals.json with fallback
     async function initData() {
       try {
         const res = await fetch("deals.json");
-        if (!res.ok) throw new Error("fetch failed");
+        if (!res.ok) throw new Error();
         allData = await res.json();
-      } catch (err) {
-        console.warn("Using fallback embedded data", err);
+      } catch (e) {
+        // Fallback embedded
         allData = [
           {
             country: "KR",
-            countryName: "🇰🇷 한국 K-Beauty",
+            countryName: "국내 크리에이터",
             deals: [
               {
                 id: "kr-1", rank: 1, category: "스킨케어",
                 productName: "달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 100ml 3개 세트",
-                brand: "d'Alba", influencerName: "유트루 (구독자 58만)", influencerChannel: "@yoothrue",
-                platform: "YouTube / 스마트스토어",
-                profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80",
+                brand: "d'Alba", influencerName: "유트루", influencerChannel: "YouTube 58만",
+                profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "제가 3통째 공병 비우고 본사에 6개월 동안 직접 졸라서 따온 52% 역대급 시크릿 할인입니다!",
-                originalPrice: 87000, olivePrice: 62000, salePrice: 41700, discountRate: 52, promoCode: "TRUELOVE52",
-                stockLeft: 43, endTimeHours: 14, link: "https://smartstore.naver.com",
-                features: ["승무원 보습 미스트 1위", "전용 골드 파우치 & 50ml 미니어처 증정", "전국 무료배송 & 1+1 리필권"],
-                tags: ["#승무원미스트", "#유트루공구", "#노란오일미스트"]
+                influencerQuote: "공병 3통 비우고 직접 본사에 6개월간 요청해 따온 52% 단독 구성입니다.",
+                originalPrice: 87000, olivePrice: 62000, salePrice: 41700, discountRate: 52,
+                endTimeHours: 14, link: "https://smartstore.naver.com",
+                features: ["승무원 보습 미스트 1위", "전용 파우치 & 50ml 증정", "무료배송"]
               },
               {
                 id: "kr-2", rank: 2, category: "스킨케어",
                 productName: "토리든 다이브인 저분자 히알루론산 수분 진정 크림 100ml 더블 기획",
-                brand: "Torriden", influencerName: "디렉터파이 (구독자 102만)", influencerChannel: "@directorpi",
-                platform: "YouTube / 올리브영",
-                profileImg: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80",
+                brand: "Torriden", influencerName: "디렉터파이", influencerChannel: "YouTube 102만",
+                profileImg: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "성분 분석 합격! 속건조 심하고 장벽 무너진 민감 피부라면 이번 45% 기획 때 무조건 쟁이세요.",
-                originalPrice: 42000, olivePrice: 31500, salePrice: 23100, discountRate: 45, promoCode: "PIPASSDIVE",
-                stockLeft: 18, endTimeHours: 26, link: "https://oliveyoung.co.kr",
-                features: ["화해 뷰티어워드 수분크림 1위", "단독 본품 1+1 리필 증정", "선착순 300명 시트마스크 5매"],
-                tags: ["#성분합격", "#디렉터파이추천", "#속보습끝판왕"]
+                influencerQuote: "성분 합격! 속건조 심하고 장벽 무너진 민감 피부라면 이번 45% 기획 때 쟁이세요.",
+                originalPrice: 42000, olivePrice: 31500, salePrice: 23100, discountRate: 45,
+                endTimeHours: 26, link: "https://oliveyoung.co.kr",
+                features: ["화해 수분크림 1위", "본품 1+1 리필 증정", "시트마스크 5매 추가"]
               },
               {
                 id: "kr-3", rank: 3, category: "베이스/쿠션",
                 productName: "투쿨포스쿨 픽싱 듀얼 쿠션 본품 + 리필 + 전용 퍼프 4매",
-                brand: "too cool for school", influencerName: "레오제이 (구독자 130만)", influencerChannel: "@leojmakeup",
-                platform: "YouTube / 네이버쇼핑",
-                profileImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80",
+                brand: "too cool for school", influencerName: "레오제이", influencerChannel: "YouTube 130만",
+                profileImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "오레오들 소리 질러! 모공 요철 싹 지워주는 블러 쿠션, 제 자존심 걸고 만든 구성입니다.",
-                originalPrice: 54000, olivePrice: 39000, salePrice: 28000, discountRate: 48, promoCode: "LEOFIX48",
-                stockLeft: 27, endTimeHours: 18, link: "https://shopping.naver.com",
-                features: ["72시간 지속 밀착 매트", "모공 요철 블러 효과 99%", "레오제이 전용 미니 파우치 증정"],
-                tags: ["#레오제이쿠션", "#모공블러", "#지속력끝판왕"]
+                influencerQuote: "모공 요철 싹 지워주는 블러 쿠션, 제 자존심 걸고 준비했습니다.",
+                originalPrice: 54000, olivePrice: 39000, salePrice: 28000, discountRate: 48,
+                endTimeHours: 18, link: "https://shopping.naver.com",
+                features: ["72시간 지속 밀착", "모공 블러 효과 99%", "미니 파우치 사은품"]
               },
               {
                 id: "kr-4", rank: 4, category: "색조/립",
                 productName: "롬앤 쥬시 래스팅 틴트 가을 신상 3종 스페셜 패키지",
-                brand: "rom&nd", influencerName: "씬님 (구독자 142만)", influencerChannel: "@ssinnim",
-                platform: "YouTube / 링크트리",
-                profileImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80",
+                brand: "rom&nd", influencerName: "씬님", influencerChannel: "YouTube 142만",
+                profileImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "가을 웜톤/쿨톤 인생 립 종결. 정가로 사면 손해인 거 아시죠? 사은품 손거울까지 싹 챙겨왔습니다.",
-                originalPrice: 39000, olivePrice: 29000, salePrice: 21800, discountRate: 44, promoCode: "SSINJUICY",
-                stockLeft: 62, endTimeHours: 8, link: "https://linktr.ee",
-                features: ["탕후루 광택 신상 3종", "미니 손거울 & 스티커팩 증정", "런칭 1시간 만에 3,000개 완판"],
-                tags: ["#탕후루립", "#씬님픽", "#가을신상"]
+                influencerQuote: "가을 웜톤/쿨톤 인생 립 종결! 손거울 사은품까지 챙겨왔습니다.",
+                originalPrice: 39000, olivePrice: 29000, salePrice: 21800, discountRate: 44,
+                endTimeHours: 8, link: "https://linktr.ee",
+                features: ["탕후루 광택 신상 3종", "미니 손거울 증정", "런칭 1시간 만에 완판"]
               }
             ]
           },
           {
             country: "JP",
-            countryName: "🇯🇵 일본 J-Beauty",
+            countryName: "일본 핫딜",
             deals: [
               {
                 id: "jp-1", rank: 1, category: "베이스/쿠션",
-                productName: "티르티르 마스크핏 레드 쿠션 21N + 미니 레드 쿠션 증정 세트",
-                brand: "TIRTIR Japan", influencerName: "미즈키 (구독자 85만)", influencerChannel: "@mizuki_cosme",
-                platform: "X (구 트위터) / Qoo10 Japan",
-                profileImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&auto=format&fit=crop&q=80",
+                productName: "티르티르 마스크핏 레드 쿠션 21N + 미니 레드 쿠션 증정",
+                brand: "TIRTIR Japan", influencerName: "미즈키 (日)", influencerChannel: "YouTube 85만",
+                profileImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "日本のメガ割より絶対にお得！72時間崩れない圧倒的カバー力、今回は限定ミニサイズ付きです！",
-                originalPrice: 48000, olivePrice: 36000, salePrice: 28800, discountRate: 40, promoCode: "MIZUKITIRTIR",
-                stockLeft: 31, endTimeHours: 19, link: "https://qoo10.jp",
-                features: ["큐텐 메가와리 뷰티 1위", "일본 뷰티 어워드 3관왕", "마스크 묻어남 없는 72시간 픽싱"],
-                tags: ["#赤クッション", "#メガ割超え", "#神カバー"]
+                influencerQuote: "일본 메가와리보다 저렴한 단독 구성! 72시간 지속력의 1위 쿠션.",
+                originalPrice: 48000, olivePrice: 36000, salePrice: 28800, discountRate: 40,
+                endTimeHours: 19, link: "https://qoo10.jp",
+                features: ["큐텐 메가와리 1위", "일본 뷰티 어워드 3관왕", "미니 쿠션 증정"]
               },
               {
                 id: "jp-2", rank: 2, category: "스킨케어",
-                productName: "아누아 어성초 77 수딩 토너 500ml 대용량 점보 사이즈",
-                brand: "Anua Japan", influencerName: "사키 (팔로워 42만)", influencerChannel: "@saki_beauty",
-                platform: "LIPS / 라쿠텐",
-                profileImg: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=200&auto=format&fit=crop&q=80",
+                productName: "아누아 어성초 77 수딩 토너 500ml 대용량 점보",
+                brand: "Anua Japan", influencerName: "사키 (日)", influencerChannel: "LIPS 42만",
+                profileImg: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "ドンキで売り切れ続出のアヌア！肌荒れレスキューにこれ以上のトナーはありません。",
-                originalPrice: 45000, olivePrice: 34000, salePrice: 27900, discountRate: 38, promoCode: "SAKIANUA38",
-                stockLeft: 15, endTimeHours: 32, link: "https://rakuten.co.jp",
-                features: ["일본 돈키호테 품절 대란템", "엠보싱 화장솜 100매 증정", "트러블 피부 급속 진정 99%"],
-                tags: ["#ドクダミトナー", "#肌荒れケア", "#ドンキ爆売れ"]
+                influencerQuote: "돈키호테 품절 대란템! 트러블 진정에 가장 확실한 토너.",
+                originalPrice: 45000, olivePrice: 34000, salePrice: 27900, discountRate: 38,
+                endTimeHours: 32, link: "https://rakuten.co.jp",
+                features: ["돈키호테 품절템", "화장솜 100매 증정", "트러블 급속 진정"]
               },
               {
                 id: "jp-3", rank: 3, category: "스킨케어",
-                productName: "코스알엑스 어드밴스드 스네일 96 뮤신 파워 에센스 100ml 2병",
-                brand: "COSRX", influencerName: "켄타 (팔로워 60만)", influencerChannel: "@kenta_kbeauty",
-                platform: "TikTok / 아마존 재팬",
-                profileImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80",
+                productName: "코스알엑스 어드밴스드 스네일 96 뮤신 파워 에센스 2병",
+                brand: "COSRX", influencerName: "켄타 (日)", influencerChannel: "TikTok 60만",
+                profileImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "海外TikTokでバズりまくってる伝説のエッセンス！毛穴がキュッと引き締まる神アイテム。",
-                originalPrice: 32000, olivePrice: 25000, salePrice: 20800, discountRate: 35, promoCode: "KENTASNAIL",
-                stockLeft: 54, endTimeHours: 11, link: "https://amazon.co.jp",
-                features: ["글로벌 틱톡 10억 뷰 바이럴템", "쫀쫀한 달팽이점액 수분막", "아마존 재팬 뷰티 베스트셀러"],
-                tags: ["#スネイルエッセンス", "#毛穴引き締め", "#TikTokバズり"]
+                influencerQuote: "해외 틱톡에서 바이럴된 전설템! 모공 쫀쫀 에센스.",
+                originalPrice: 32000, olivePrice: 25000, salePrice: 20800, discountRate: 35,
+                endTimeHours: 11, link: "https://amazon.co.jp",
+                features: ["글로벌 틱톡 바이럴", "보습막 형성", "아마존 베스트셀러"]
               }
             ]
           },
           {
             country: "CN",
-            countryName: "🇨🇳 중국 C-Beauty",
+            countryName: "글로벌 핫딜",
             deals: [
               {
                 id: "cn-1", rank: 1, category: "스킨케어",
-                productName: "설화수 자음생 세트 리미티드 럭셔리 패키지 (본품 2종 + 기프트 7종)",
-                brand: "Sulwhasoo China", influencerName: "리자치 (팔로워 3,000만)", influencerChannel: "@austin_li",
-                platform: "타오바오 라이브 (Taobao Live)",
-                profileImg: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80",
+                productName: "설화수 자음생 세트 럭셔리 패키지 (본품 2종 + 기프트 7종)",
+                brand: "Sulwhasoo", influencerName: "리자치 (中)", influencerChannel: "라이브 3,000만",
+                profileImg: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1617897903246-719242758050?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "所有女生！雪花秀专场历史最低价，买一送七，倒计时三秒上链接，冲！",
-                originalPrice: 240000, olivePrice: 180000, salePrice: 124800, discountRate: 48, promoCode: "AUSTIN777",
-                stockLeft: 12, endTimeHours: 16, link: "https://taobao.com",
-                features: ["타오바오 라이브 단독 본품급 사은품 7종", "광군제 사전 특별 파괴가", "선착순 전용 골드 쿠폰"],
-                tags: ["#李佳琦直播间", "#雪花秀破盘价", "#买一送七"]
+                influencerQuote: "설화수 역대 최저가! 본품급 7종 사은품 증정 특별 라이브가.",
+                originalPrice: 240000, olivePrice: 180000, salePrice: 124800, discountRate: 48,
+                endTimeHours: 16, link: "https://taobao.com",
+                features: ["본품급 기프트 7종", "광군제 사전 특가", "선착순 쿠폰"]
               },
               {
                 id: "cn-2", rank: 2, category: "색조/립",
-                productName: "라네즈 립 슬리핑 마스크 EX 4종 풀컬렉션 (베리/자몽/애플/민트)",
-                brand: "LANEIGE China", influencerName: "장다이 (팔로워 1,200만)", influencerChannel: "@zhangdayi",
-                platform: "샤오홍슈 (RED)",
-                profileImg: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&auto=format&fit=crop&q=80",
+                productName: "라네즈 립 슬리핑 마스크 EX 4종 풀컬렉션",
+                brand: "LANEIGE", influencerName: "장다이 (中)", influencerChannel: "샤오홍슈 1,200만",
+                profileImg: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "小红书独家首发！一晚上淡化唇纹，秋冬换季干唇救星，限量礼盒手慢无！",
-                originalPrice: 56000, olivePrice: 42000, salePrice: 31300, discountRate: 44, promoCode: "DAYILIP44",
-                stockLeft: 39, endTimeHours: 29, link: "https://xiaohongshu.com",
-                features: ["베리·자몽·애플·민트초코 4종 풀세트", "자는 동안 입술 각질 완벽 멜팅", "샤오홍슈 단독 한정 파우치"],
-                tags: ["#小红书爆款", "#唇部SPA", "#淡化唇纹"]
+                influencerQuote: "샤오홍슈 단독 오픈! 자는 동안 입술 각질을 완벽하게 녹여줍니다.",
+                originalPrice: 56000, olivePrice: 42000, salePrice: 31300, discountRate: 44,
+                endTimeHours: 29, link: "https://xiaohongshu.com",
+                features: ["4종 풀컬렉션", "입술 각질 케어", "단독 파우치 증정"]
               },
               {
                 id: "cn-3", rank: 3, category: "선케어",
-                productName: "조선미녀 맑은쌀 선크림 50ml 2개 + 래디언스 클렌징밤 50g",
-                brand: "Beauty of Joseon", influencerName: "신바 (팔로워 800만)", influencerChannel: "@xinba_live",
-                platform: "더우인 (Douyin)",
-                profileImg: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80",
+                productName: "조선미녀 맑은쌀 선크림 50ml 2개 + 클렌징밤 50g",
+                brand: "Beauty of Joseon", influencerName: "신바 (中)", influencerChannel: "더우인 800만",
+                profileImg: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "全网霸榜的大米防晒！不搓泥不假白，今日直播专享包邮破价，抢完即止！",
-                originalPrice: 48000, olivePrice: 35000, salePrice: 28800, discountRate: 40, promoCode: "XINBASUN40",
-                stockLeft: 22, endTimeHours: 13, link: "https://douyin.com",
-                features: ["백탁 없는 로션 질감 유기자차", "더우인 뷰티 랭킹 1위", "클렌징밤 본품 증정 & 무료배송"],
-                tags: ["#大米防晒", "#抖音爆款", "#辛巴直播专享"]
+                influencerQuote: "백탁 없이 촉촉한 쌀선크림! 오늘 라이브 한정 파괴가.",
+                originalPrice: 48000, olivePrice: 35000, salePrice: 28800, discountRate: 40,
+                endTimeHours: 13, link: "https://douyin.com",
+                features: ["백탁 없는 촉촉함", "더우인 랭킹 1위", "클렌징밤 증정"]
               }
             ]
           }
@@ -662,81 +633,73 @@
       renderAll();
     }
 
-    // Render Influencer Story Avatars
+    // Story Bar
     function renderStoryBar() {
       const bar = document.getElementById("influencer-story-bar");
       bar.innerHTML = "";
 
-      const influencers = [
-        { name: "전체 핫딜", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
+      const creators = [
+        { name: "전체 마켓", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
         { name: "유트루", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "유트루" },
         { name: "디렉터파이", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
         { name: "레오제이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
         { name: "씬님", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "씬님" },
-        { name: "미즈키(日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
-        { name: "사키(日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
-        { name: "리자치(中)", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
-        { name: "장다이(中)", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "장다이" }
+        { name: "미즈키", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
+        { name: "사키", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
+        { name: "리자치", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
+        { name: "장다이", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "장다이" }
       ];
 
-      influencers.forEach(inf => {
+      creators.forEach(c => {
         const item = document.createElement("div");
         item.className = "flex flex-col items-center flex-shrink-0 cursor-pointer group";
         item.onclick = () => {
-          document.getElementById("desktop-search").value = inf.filter;
-          document.getElementById("mobile-search").value = inf.filter;
-          handleSearch(inf.filter);
+          document.getElementById("desktop-search").value = c.filter;
+          document.getElementById("mobile-search").value = c.filter;
+          handleSearch(c.filter);
         };
         item.innerHTML = `
           <div class="p-0.5 rounded-full story-ring group-hover:scale-105 transition transform">
-            <div class="p-0.5 bg-white rounded-full">
-              <img src="${inf.img}" alt="${inf.name}" class="w-12 h-12 rounded-full object-cover" />
+            <div class="p-0.5 bg-sand-50 rounded-full">
+              <img src="${c.img}" class="w-12 h-12 rounded-full object-cover" />
             </div>
           </div>
-          <span class="text-[11px] font-bold text-slate-700 mt-1 truncate max-w-[65px] group-hover:text-rose-600">${inf.name}</span>
+          <span class="text-[11px] font-semibold text-zinc-700 mt-1 truncate max-w-[65px] group-hover:text-rose-600">${c.name}</span>
         `;
         bar.appendChild(item);
       });
     }
 
-    // Filter and Render Deals
+    // Render Deals Feed (Editorial Open Card Style)
     function renderAll() {
       const grid = document.getElementById("deals-grid");
       const emptyState = document.getElementById("empty-state");
       grid.innerHTML = "";
 
-      let countryGroup = allData.find(g => g.country === currentCountry);
-      let deals = countryGroup ? [...countryGroup.deals] : [];
+      let group = allData.find(g => g.country === currentCountry);
+      let deals = group ? [...group.deals] : [];
 
-      // If user is searching, optionally search across ALL countries!
       if (searchQuery.trim() !== "") {
-        const query = searchQuery.toLowerCase().trim();
+        const q = searchQuery.toLowerCase().trim();
         deals = [];
         allData.forEach(g => {
           g.deals.forEach(d => {
-            const matchName = d.productName.toLowerCase().includes(query);
-            const matchBrand = d.brand.toLowerCase().includes(query);
-            const matchInf = d.influencerName.toLowerCase().includes(query);
-            const matchTag = (d.tags || []).some(t => t.toLowerCase().includes(query));
-            if (matchName || matchBrand || matchInf || matchTag) {
+            if (d.productName.toLowerCase().includes(q) || d.brand.toLowerCase().includes(q) || d.influencerName.toLowerCase().includes(q)) {
               deals.push(d);
             }
           });
         });
-
         document.getElementById("search-feedback").classList.remove("hidden");
-        document.getElementById("search-keyword").innerText = searchQuery;
+        document.getElementById("search-keyword").innerText = `"${searchQuery}"`;
         document.getElementById("search-count").innerText = deals.length;
       } else {
         document.getElementById("search-feedback").classList.add("hidden");
       }
 
-      // Category filter
       if (currentCategory !== "전체") {
         deals = deals.filter(d => d.category === currentCategory);
       }
 
-      // Sorting
       if (currentSort === "discount") {
         deals.sort((a, b) => b.discountRate - a.discountRate);
       } else if (currentSort === "price") {
@@ -750,107 +713,62 @@
       if (deals.length === 0) {
         emptyState.classList.remove("hidden");
         return;
-      } else {
-        emptyState.classList.add("hidden");
       }
+      emptyState.classList.add("hidden");
 
-      // Render cards
       deals.forEach(deal => {
-        const rankBadge = deal.rank === 1 ? "bg-amber-400 text-slate-950 font-black shadow-amber-400/30" : (deal.rank === 2 ? "bg-slate-300 text-slate-900 font-bold" : "bg-amber-700 text-white font-bold");
-        
         const card = document.createElement("div");
-        card.className = "bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-2xl transition duration-300 flex flex-col justify-between group";
+        card.className = "flex flex-col justify-between group cursor-pointer";
+        card.onclick = () => openDetailModal(deal.id);
         card.innerHTML = `
           <div>
-            <!-- Image Frame -->
-            <div class="relative h-60 bg-slate-100 overflow-hidden cursor-pointer" onclick="openDetailModal('${deal.id}')">
+            <!-- Image Area -->
+            <div class="relative h-72 rounded-3xl overflow-hidden bg-sand-100 mb-4">
               <img src="${deal.productImg}" alt="${deal.productName}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
               
-              <!-- Floating Rank & Discount -->
-              <div class="absolute top-3.5 left-3.5 flex items-center space-x-2">
-                <span class="px-3 py-1 rounded-xl text-xs font-black shadow-md ${rankBadge}">
-                  TOP ${deal.rank}
-                </span>
-                <span class="px-2.5 py-1 rounded-xl bg-rose-600 text-white text-xs font-black shadow-md">
-                  ${deal.discountRate}% OFF
-                </span>
+              <!-- Clean Discount Tag -->
+              <div class="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-sm">
+                ${deal.discountRate}% OFF
               </div>
 
-              <!-- Live Timer Badge -->
-              <div class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-xl bg-slate-950/75 backdrop-blur text-white text-[11px] font-mono flex items-center space-x-1 shadow">
-                <i class="fa-regular fa-clock text-amber-300"></i>
-                <span>마감 ${deal.endTimeHours}시간 전</span>
+              <!-- Time Left -->
+              <div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-zinc-900/80 backdrop-blur text-white text-[11px] font-medium">
+                마감 ${deal.endTimeHours}시간 전
               </div>
 
-              <!-- Floating Stock Left Pill -->
-              <div class="absolute bottom-14 right-3.5 px-2.5 py-1 rounded-lg bg-red-500/90 text-white text-[10px] font-bold shadow animate-pulse">
-                잔여 ${deal.stockLeft}개 한정
-              </div>
-
-              <!-- Influencer Bar Overlaid -->
-              <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between bg-white/95 backdrop-blur-md px-3 py-2 rounded-2xl border border-white/60 shadow-lg">
+              <!-- Creator Overlaid Pill -->
+              <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-sm flex items-center justify-between border border-zinc-100">
                 <div class="flex items-center space-x-2.5 truncate">
-                  <div class="p-0.5 rounded-full story-ring">
-                    <img src="${deal.profileImg}" alt="${deal.influencerName}" class="w-7 h-7 rounded-full object-cover" />
-                  </div>
-                  <div class="truncate text-left">
-                    <span class="font-extrabold text-slate-900 text-xs block truncate">${deal.influencerName}</span>
-                    <span class="text-[10px] text-slate-600 block">${deal.platform}</span>
+                  <img src="${deal.profileImg}" class="w-7 h-7 rounded-full object-cover border border-rose-300" />
+                  <div class="truncate">
+                    <span class="text-xs font-bold text-zinc-900 block truncate">${deal.influencerName}</span>
+                    <span class="text-[10px] text-zinc-600 block">${deal.influencerChannel}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-extrabold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                  단독 공구
-                </span>
+                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">단독 특가</span>
               </div>
             </div>
 
-            <!-- Card Content -->
-            <div class="p-5 space-y-3.5">
-              <div class="flex items-center justify-between text-[11px]">
-                <span class="font-black text-rose-600 tracking-wider uppercase">${deal.brand}</span>
-                <span class="text-slate-600 font-medium">${deal.category}</span>
-              </div>
-
-              <h3 onclick="openDetailModal('${deal.id}')" class="text-sm sm:text-base font-black text-slate-900 line-clamp-2 leading-snug cursor-pointer group-hover:text-rose-600 transition">
+            <!-- Meta & Title -->
+            <div class="space-y-1.5 px-1">
+              <span class="text-xs font-bold text-zinc-600 uppercase tracking-wide">${deal.brand}</span>
+              <h4 class="font-bold text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
                 ${deal.productName}
-              </h3>
-
-              <!-- Influencer Direct Quote -->
-              <div class="p-3 bg-rose-50/70 rounded-2xl border border-rose-100/80 text-xs text-rose-950 flex items-start space-x-2">
-                <i class="fa-solid fa-quote-left text-rose-400 text-xs mt-0.5 flex-shrink-0"></i>
-                <p class="line-clamp-2 italic font-medium">${deal.influencerQuote}</p>
-              </div>
-
-              <!-- Key Features -->
-              <ul class="space-y-1 text-xs text-slate-600">
-                ${deal.features.slice(0, 2).map(f => `<li class="flex items-center"><i class="fa-solid fa-check text-rose-500 text-[10px] mr-1.5 flex-shrink-0"></i><span class="truncate">${f}</span></li>`).join("")}
-              </ul>
-
-              <!-- Pricing Comparison Section -->
-              <div class="pt-3 border-t border-slate-100 flex items-baseline justify-between">
-                <div>
-                  <span class="text-xs text-slate-600 line-through">${deal.originalPrice.toLocaleString()}원</span>
-                  <div class="text-2xl font-black text-rose-600 tracking-tight">
-                    ${deal.salePrice.toLocaleString()}<span class="text-xs text-slate-900 font-bold ml-0.5">원</span>
-                  </div>
-                </div>
-                <div class="text-right">
-                  <span class="text-[10px] text-slate-600 block">올리브영 ${deal.olivePrice.toLocaleString()}원</span>
-                  <span class="text-[11px] font-black text-emerald-600">
-                    약 ${(deal.olivePrice - deal.salePrice).toLocaleString()}원 추가 절약!
-                  </span>
-                </div>
-              </div>
+              </h4>
+              <p class="text-xs text-zinc-600 line-clamp-1 italic font-normal pt-1">"${deal.influencerQuote}"</p>
             </div>
           </div>
 
-          <!-- Bottom Action CTAs -->
-          <div class="p-5 pt-0 grid grid-cols-5 gap-2">
-            <button onclick="toggleFavorite(this, '${deal.id}')" class="col-span-1 py-3 rounded-2xl border border-slate-200 text-slate-600 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition">
-              <i class="fa-regular fa-heart text-base"></i>
-            </button>
-            <button onclick="openDetailModal('${deal.id}')" class="col-span-4 py-3 bg-slate-900 hover:bg-rose-600 text-white rounded-2xl text-xs font-black transition flex items-center justify-center space-x-1.5 shadow-md group-hover:bg-rose-600">
-              <span>시크릿 최저가 확인하기</span>
+          <!-- Pricing & CTA -->
+          <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-baseline justify-between px-1">
+            <div>
+              <span class="text-xs text-zinc-600 line-through">${deal.originalPrice.toLocaleString()}원</span>
+              <div class="text-xl font-black text-rose-600">
+                ${deal.salePrice.toLocaleString()}<span class="text-xs text-zinc-900 font-semibold ml-0.5">원</span>
+              </div>
+            </div>
+            <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1">
+              <span>상세보기</span>
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </button>
           </div>
@@ -859,15 +777,50 @@
       });
     }
 
-    // Handlers
+    // Modal Control
+    function openDetailModal(id) {
+      let found = null;
+      allData.forEach(g => {
+        const d = g.deals.find(x => x.id === id);
+        if (d) found = d;
+      });
+      if (!found) return;
+
+      activeModalDeal = found;
+      document.getElementById("modal-img").src = found.productImg;
+      document.getElementById("modal-influencer-img").src = found.profileImg;
+      document.getElementById("modal-influencer-name").innerText = `${found.influencerName} (${found.influencerChannel})`;
+      document.getElementById("modal-brand").innerText = found.brand;
+      document.getElementById("modal-title").innerText = found.productName;
+      document.getElementById("modal-quote").innerText = `"${found.influencerQuote}"`;
+      document.getElementById("modal-original-price").innerText = found.originalPrice.toLocaleString() + "원";
+      document.getElementById("modal-olive-price").innerText = found.olivePrice.toLocaleString() + "원";
+      document.getElementById("modal-sale-price").innerText = found.salePrice.toLocaleString() + "원";
+      document.getElementById("modal-discount-rate").innerText = `${found.discountRate}%`;
+
+      document.getElementById("detail-modal").classList.remove("hidden");
+    }
+
+    function closeDetailModal() {
+      document.getElementById("detail-modal").classList.add("hidden");
+    }
+
+    function goToDealLink() {
+      if (!activeModalDeal) return;
+      showToast("공구 링크로 이동합니다.");
+      setTimeout(() => {
+        window.open(activeModalDeal.link, "_blank");
+      }, 400);
+    }
+
     function setCountry(code) {
       currentCountry = code;
       ["KR", "JP", "CN"].forEach(c => {
         const btn = document.getElementById(`tab-${c}`);
         if (c === code) {
-          btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-black transition flex items-center space-x-2 bg-rose-500 text-white shadow-md shadow-rose-500/20";
+          btn.className = "text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5";
         } else {
-          btn.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center space-x-2 bg-slate-100 text-slate-600 hover:bg-slate-200";
+          btn.className = "text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5";
         }
       });
       renderAll();
@@ -878,9 +831,9 @@
       const pills = document.querySelectorAll(".cat-pill");
       pills.forEach(p => {
         if (p.innerText.includes(cat) || (cat === '전체' && p.innerText === '전체')) {
-          p.className = "cat-pill active px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white";
+          p.className = "cat-pill active px-3 py-1.5 rounded-full text-xs font-bold bg-zinc-900 text-white";
         } else {
-          p.className = "cat-pill px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200";
+          p.className = "cat-pill px-3 py-1.5 rounded-full text-xs font-medium text-zinc-600 hover:text-zinc-900";
         }
       });
       renderAll();
@@ -888,11 +841,11 @@
 
     function handleSearch(val) {
       searchQuery = val;
-      const clearBtn = document.getElementById("search-clear-btn");
+      const btn = document.getElementById("search-clear-btn");
       if (val.trim()) {
-        clearBtn.classList.remove("hidden");
+        btn.classList.remove("hidden");
       } else {
-        clearBtn.classList.add("hidden");
+        btn.classList.add("hidden");
       }
       renderAll();
     }
@@ -905,7 +858,7 @@
       renderAll();
     }
 
-    function resetFilters() {
+    function resetAll() {
       currentCountry = "KR";
       currentCategory = "전체";
       searchQuery = "";
@@ -920,50 +873,6 @@
       renderAll();
     }
 
-    // Modal Details Logic
-    function openDetailModal(id) {
-      let found = null;
-      allData.forEach(g => {
-        const d = g.deals.find(x => x.id === id);
-        if (d) found = d;
-      });
-      if (!found) return;
-
-      activeModalDeal = found;
-      document.getElementById("modal-img").src = found.productImg;
-      document.getElementById("modal-influencer-img").src = found.profileImg;
-      document.getElementById("modal-influencer-name").innerText = found.influencerName;
-      document.getElementById("modal-brand").innerText = found.brand;
-      document.getElementById("modal-title").innerText = found.productName;
-      document.getElementById("modal-quote").innerText = `"${found.influencerQuote}"`;
-      document.getElementById("modal-original-price").innerText = found.originalPrice.toLocaleString() + "원";
-      document.getElementById("modal-olive-price").innerText = found.olivePrice.toLocaleString() + "원 (일반가)";
-      document.getElementById("modal-sale-price").innerText = found.salePrice.toLocaleString() + "원";
-      document.getElementById("modal-discount-rate").innerText = `${found.discountRate}% OFF`;
-      document.getElementById("modal-promo-code").innerText = found.promoCode;
-
-      document.getElementById("detail-modal").classList.remove("hidden");
-    }
-
-    function closeDetailModal() {
-      document.getElementById("detail-modal").classList.add("hidden");
-    }
-
-    function copyPromoCode() {
-      if (!activeModalDeal) return;
-      navigator.clipboard.writeText(activeModalDeal.promoCode);
-      showToast(`할인코드 [${activeModalDeal.promoCode}] 가 복사되었습니다!`);
-    }
-
-    function goToDealLink() {
-      if (!activeModalDeal) return;
-      copyPromoCode();
-      setTimeout(() => {
-        window.open(activeModalDeal.link, "_blank");
-      }, 500);
-    }
-
-    // Toast
     function showToast(msg) {
       const toast = document.getElementById("toast");
       document.getElementById("toast-msg").innerText = msg;
@@ -973,18 +882,6 @@
         toast.classList.add("-translate-y-12", "opacity-0", "pointer-events-none");
         toast.classList.remove("translate-y-0", "opacity-100");
       }, 2500);
-    }
-
-    function toggleFavorite(btn, id) {
-      const icon = btn.querySelector("i");
-      if (icon.classList.contains("fa-regular")) {
-        icon.className = "fa-solid fa-heart text-rose-500 animate-bounce";
-        btn.classList.add("border-rose-300", "bg-rose-50");
-        showToast("관심 공구로 등록되었습니다! 마감 전 알림을 보냅니다.");
-      } else {
-        icon.className = "fa-regular fa-heart text-slate-600";
-        btn.classList.remove("border-rose-300", "bg-rose-50");
-      }
     }
 
     // QR Modal
@@ -1001,7 +898,7 @@
           text: currentUrl,
           width: 170,
           height: 170,
-          colorDark: "#0f172a",
+          colorDark: "#18181B",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
         });
@@ -1014,7 +911,7 @@
 
     function copyCurrentUrl() {
       navigator.clipboard.writeText(window.location.href);
-      showToast("웹 주소가 복사되었습니다!");
+      showToast("주소가 복사되었습니다.");
     }
 
     function downloadQRCode() {
@@ -1024,16 +921,13 @@
         a.href = img.src;
         a.download = "gongumoa_qr.png";
         a.click();
-        showToast("QR 코드가 이미지로 다운로드되었습니다!");
-      } else {
-        showToast("QR 생성 중입니다. 잠시 후 다시 눌러주세요.");
       }
     }
 
     // Notification Modal
     function openNotifyModal(target) {
       document.getElementById("notify-modal").classList.remove("hidden");
-      if (target && target !== '전체') {
+      if (target && target !== '시크릿 알림') {
         document.getElementById("user-wish").value = target;
       }
     }
@@ -1045,33 +939,15 @@
     function handleNotifySubmit(e) {
       e.preventDefault();
       const name = document.getElementById("user-name").value;
-      const contact = document.getElementById("user-contact").value;
-      showToast(`🎉 ${name}님, 사전 알림 예약이 완료되었습니다!`);
+      showToast(`${name}님, 공구 오픈 알림이 등록되었습니다.`);
       const countEl = document.getElementById("reserve-count");
-      countEl.innerHTML = (parseInt(countEl.innerText) + 1) + '<span class="text-xs text-slate-600 font-normal">명</span>';
+      countEl.innerText = (parseInt(countEl.innerText) + 1) + '명';
       closeNotifyModal();
       document.getElementById("notify-form").reset();
     }
 
-    function toggleCrawlerTerminal() {
-      const term = document.getElementById("crawler-terminal");
-      term.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Run On Load
     window.addEventListener("DOMContentLoaded", () => {
       initData();
-
-      // Countdown loop
-      let timerSeconds = 288;
-      setInterval(() => {
-        timerSeconds--;
-        if (timerSeconds <= 0) timerSeconds = 300;
-        const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
-        const s = String(timerSeconds % 60).padStart(2, '0');
-        const el = document.getElementById("refresh-timer");
-        if (el) el.innerText = `${m}:${s}`;
-      }, 1000);
     });
   </script>
 </body>
