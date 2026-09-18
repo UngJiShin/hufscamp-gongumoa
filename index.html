@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>뷰티스타09 (beautystar09) | 뷰티 인플루언서 시크릿 공구 & 내 화장대 알림</title>
-  <meta name="description" content="유튜브, 인스타그램에 흩어진 인플루언서 단독 화장품 공동구매(공구) 링크와 내 화장대 맞춤 알림 스마트 플랫폼, 뷰티스타09" />
+  <title>09함 (09ham) | 흩어진 인플루언서 공구 보관함 & 내 화장대 알림</title>
+  <meta name="description" content="유튜브, 인스타그램에 흩어진 국내외 탑 뷰티 인플루언서 단독 시크릿 공동구매(공구) 링크와 내 화장대 맞춤 알림 스마트 보관함, 09함 (09ham)" />
+  <link rel="icon" href="img/09ham.webp" type="image/webp" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -95,14 +96,17 @@
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <!-- ✏️ [창업 아이템명 변경 포인트]: 상단 스크립트 BRAND_CONFIG 또는 아래 태그에서 수정 가능 -->
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="resetAll()">
-        <span class="text-2xl font-black tracking-tighter text-zinc-900">
-          <span id="brand-logo-text">beautystar09</span><span class="text-rose-500 font-serif text-3xl leading-none">.</span>
-        </span>
-        <span id="brand-tagline" class="hidden sm:inline text-[11px] text-zinc-600 font-medium pl-2 border-l border-zinc-200">
-          뷰티 인플루언서 시크릿 공구 & 내 화장대 알림
-        </span>
+      <div class="flex items-center space-x-2.5 cursor-pointer group" onclick="resetAll()">
+        <img src="img/09ham.webp" alt="09함 로고" class="h-9 sm:h-10 w-auto object-contain rounded-xl shadow-xs group-hover:scale-105 transition transform" />
+        <div class="flex flex-col">
+          <div class="flex items-baseline space-x-1">
+            <span id="brand-logo-text" class="text-xl sm:text-2xl font-black tracking-tight text-zinc-900">09ham</span>
+            <span class="text-rose-500 font-serif text-2xl leading-none">.</span>
+          </div>
+          <span id="brand-tagline" class="hidden sm:inline text-[10px] text-zinc-500 font-medium -mt-0.5">
+            흩어진 인플루언서 공구 보관함
+          </span>
+        </div>
       </div>
 
       <!-- Live Search Bar -->
@@ -277,7 +281,7 @@
             <span>💄 내 화장대 등록 & 실시간 공구 오픈 대기실</span>
           </h2>
           <p class="text-xs text-zinc-600 mt-1 leading-relaxed">
-            내가 매일 쓰는 인생 화장품을 등록해 두세요. 구매 대기 인원이 모이면, 뷰티스타09가 인플루언서 및 본사와 직접 협상해 시크릿 공구를 오픈합니다!
+            내가 매일 쓰는 인생 화장품을 등록해 두세요. 구매 대기 인원이 모이면, 09함이 인플루언서 및 본사와 직접 협상해 시크릿 공구를 오픈합니다!
           </p>
         </div>
         <button onclick="openNotifyModal('내 화장대 인생템')" class="self-start md:self-auto px-4 py-2.5 bg-zinc-900 hover:bg-rose-600 text-white text-xs font-bold rounded-2xl shadow-md hover:shadow-lg transition duration-200 flex items-center space-x-2 shrink-0 cursor-pointer">
@@ -377,16 +381,16 @@
       <!-- Country Region Selector -->
       <div class="flex space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar pb-1">
         <button id="tab-ALL" onclick="setCountry('ALL')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span id="tab-ALL-text">✨ 전체 20인 마켓</span>
-          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full font-bold">20</span>
+          <span id="tab-ALL-text">✨ 전체 26인 마켓</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full font-bold">26</span>
         </button>
         <button id="tab-US" onclick="setCountry('US')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
           <span id="tab-US-text">🇺🇸 미국/글로벌 1위</span>
           <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-full font-extrabold">BEST</span>
         </button>
         <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
-          <span id="tab-KR-text">🇰🇷 국내 올리브영 랭킹</span>
-          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 9</span>
+          <span id="tab-KR-text">🇰🇷 국내 올리브영 랭킹 (15인)</span>
+          <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-full font-bold">TOP 15</span>
         </button>
         <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
           <span id="tab-JP-text">🇯🇵 일본 큐텐/직구 1위</span>
@@ -480,7 +484,10 @@
   <footer class="bg-white border-t border-zinc-200 mt-16 py-10 text-xs text-zinc-600">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
       <div class="space-y-1">
-        <span class="text-base font-black text-zinc-900"><span id="footer-logo-text">09ham</span>.</span>
+        <div class="flex items-center space-x-2">
+          <img src="img/09ham.webp" alt="09함 로고" class="h-6 w-auto object-contain rounded-md" />
+          <span class="text-base font-black text-zinc-900"><span id="footer-logo-text">09ham</span><span class="text-rose-500">.</span></span>
+        </div>
         <p id="footer-team-sub" class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • <strong class="text-zinc-900" id="footer-team-name">팀 제티 (Zetty)</strong> (지웅, 성준, 민석, 신혜, 재현)</p>
         <p id="footer-disclaimer" class="text-[11px] text-zinc-600">본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.</p>
       </div>
@@ -539,6 +546,13 @@
         <div class="p-3.5 bg-sand-50 rounded-2xl border border-zinc-200/80 text-xs text-zinc-700 leading-relaxed font-normal">
           <span id="modal-note-title" class="font-bold text-zinc-900 block mb-1">Creator's Note</span>
           <p id="modal-quote" class="italic"></p>
+        </div>
+
+        <!-- Creator Intelligence Tags in Modal -->
+        <div id="modal-tags-box" class="flex flex-wrap gap-1.5">
+          <span id="modal-tag-empty" class="hidden inline-flex items-center text-[11px] font-bold px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 border border-rose-200"></span>
+          <span id="modal-tag-donot" class="hidden inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-zinc-100 text-zinc-700 border border-zinc-200"></span>
+          <span id="modal-tag-routine" class="hidden inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200"></span>
         </div>
 
         <!-- Clean Pricing Box -->
@@ -673,10 +687,10 @@
     // =========================================================================
     const BRAND_CONFIG = {
       teamName: "팀 제티 (Zetty)",                      // 팀명 (고정)
-      serviceName: "뷰티스타09",                          // 창업 아이템 한글명 (뷰티스타09)
-      serviceNameEn: "beautystar09",                   // 창업 아이템 영문명 / 로고 텍스트 (beautystar09)
-      serviceSubTitle: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림", // 탭 타이틀 서브 카피
-      tagline: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림",          // 상단 헤더 태그라인
+      serviceName: "09함",                             // 창업 아이템 한글명 (09함)
+      serviceNameEn: "09ham",                          // 창업 아이템 영문명 / 로고 텍스트 (09ham)
+      serviceSubTitle: "흩어진 인플루언서 공구 보관함 & 내 화장대 알림", // 탭 타이틀 서브 카피
+      tagline: "인플루언서 시크릿 공구 & 내 화장대 알림",              // 상단 헤더 태그라인
       googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe-sample-zetty-beauty/viewform" // 구글 폼 신청 링크
     };
 
@@ -742,9 +756,9 @@
     const I18N = {
       ko: {
         notice_crawler: "한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)",
-        notice_verify: "20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증",
+        notice_verify: "26인+ 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증",
         notice_deal: "최대 52% 단독 협상 파괴가",
-        tagline: "뷰티 인플루언서 시크릿 공구 & 내 화장대 알림",
+        tagline: "흩어진 인플루언서 공구 보관함 & 내 화장대 알림",
         search_placeholder: "인플루언서, 브랜드, 제품명을 검색해보세요",
         btn_notify: "공구 오픈 알림",
         story_title: "Creators on Market",
@@ -753,8 +767,8 @@
         hero_badge: "✨ 이번 주 가장 화제인 인플루언서 단독 구성",
         hero_title: '인스타 스토리 속 그 링크,<br />단독 최저가로 한눈에.',
         hero_desc: "좋아하는 크리에이터가 공들여 기획한 특별 공구 마켓. 흩어진 링크를 찾아 헤매지 않도록, 오늘 마감되는 시크릿 최저가만 모아둡니다.",
-        stat_1_num: "20인",
-        stat_1_label: "글로벌 탑 크리에이터",
+        stat_1_num: "26인+",
+        stat_1_label: "국내외 탑 크리에이터",
         stat_2_num: "최대 52%",
         stat_2_label: "단독 협상 파괴가",
         stat_3_num: "100%",
@@ -765,9 +779,9 @@
         hero_card_title: "달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 3종 세트",
         hero_card_quote: '"3통째 비우고 6개월 동안 직접 본사에 요청해 준비한 역대급 구성입니다."',
         hero_card_btn: "마켓 바로가기 →",
-        tab_all: "✨ 전체 20인 마켓",
+        tab_all: "✨ 전체 26인 마켓",
         tab_us: "🇺🇸 미국/글로벌 1위",
-        tab_kr: "🇰🇷 국내 올리브영 랭킹",
+        tab_kr: "🇰🇷 국내 올리브영 랭킹 (15인)",
         tab_jp: "🇯🇵 일본 큐텐/직구 1위",
         tab_cn: "🇨🇳 중화권 라이브 1위",
         cat_all: "전체",
@@ -1859,51 +1873,232 @@
         allData = [
           {
             country: "KR",
-            countryName: "국내 크리에이터",
+            countryName: "국내 & 방한 외국인 쇼핑 1위",
             deals: [
               {
-                id: "kr-1", rank: 1, category: "스킨케어",
+                id: "kr-1", rank: 1, category: "안티에이징/광채", skinConcern: "프리미엄속광", benefitTag: "🔥 52% 파괴가",
                 productName: "달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 100ml 3개 세트",
                 brand: "d'Alba", influencerName: "유트루", influencerChannel: "YouTube 58만",
                 profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=600&auto=format&fit=crop&q=80",
                 influencerQuote: "공병 3통 비우고 직접 본사에 6개월간 요청해 따온 52% 단독 구성입니다.",
-                originalPrice: 87000, olivePrice: 62000, salePrice: 41700, discountRate: 52,
-                endTimeHours: 14, link: "https://smartstore.naver.com",
-                features: ["승무원 보습 미스트 1위", "전용 파우치 & 50ml 증정", "무료배송"]
+                originalPrice: 87000, olivePrice: 62000, salePrice: 41700, discountRate: 52, savedAmount: 45300,
+                endTimeHours: 14, link: "https://brand.naver.com/dalba", promoCode: "TRUELOVE52",
+                features: ["올리브영 미스트 1위", "전용 파우치 & 미니어처 증정", "무료배송"],
+                emptyBottles: "3통 공병 인증 (6개월 실사용)",
+                doNotBuy: "극지성은 가볍게 흔들어 미스트로만 활용 권장",
+                routineTip: "토너 직후 2번 레이어링 분사",
+                negotiation: "본사 미팅 3차 끝에 30ml 미니어처 쟁취"
               },
               {
-                id: "kr-2", rank: 2, category: "스킨케어",
+                id: "kr-2", rank: 2, category: "속건조/진정", skinConcern: "속보습장벽", benefitTag: "🎁 1+1 기획전",
                 productName: "토리든 다이브인 저분자 히알루론산 수분 진정 크림 100ml 더블 기획",
                 brand: "Torriden", influencerName: "디렉터파이", influencerChannel: "YouTube 102만",
                 profileImg: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80",
                 influencerQuote: "성분 합격! 속건조 심하고 장벽 무너진 민감 피부라면 이번 45% 기획 때 쟁이세요.",
-                originalPrice: 42000, olivePrice: 31500, salePrice: 23100, discountRate: 45,
-                endTimeHours: 26, link: "https://oliveyoung.co.kr",
-                features: ["화해 수분크림 1위", "본품 1+1 리필 증정", "시트마스크 5매 추가"]
+                originalPrice: 42000, olivePrice: 31500, salePrice: 23100, discountRate: 45, savedAmount: 18900,
+                endTimeHours: 26, link: "https://www.oliveyoung.co.kr", promoCode: "PIPASSDIVE",
+                features: ["화해 수분크림 1위", "본품 1+1 리필 증정", "시트마스크 5매 추가"],
+                emptyBottles: "성분 분석가 공인 5통 비움",
+                doNotBuy: "유분기 많은 악지성은 젤 타입 추천",
+                routineTip: "세안 후 물기 살짝 있을 때 도포",
+                negotiation: "시트마스크 5매 정품 본사 동봉 확약"
               },
               {
-                id: "kr-3", rank: 3, category: "베이스/쿠션",
+                id: "kr-3", rank: 3, category: "베이스/색조", skinConcern: "모공블러", benefitTag: "단독퍼프증정",
                 productName: "투쿨포스쿨 픽싱 듀얼 쿠션 본품 + 리필 + 전용 퍼프 4매",
                 brand: "too cool for school", influencerName: "레오제이", influencerChannel: "YouTube 130만",
                 profileImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
                 influencerQuote: "모공 요철 싹 지워주는 블러 쿠션, 제 자존심 걸고 준비했습니다.",
-                originalPrice: 54000, olivePrice: 39000, salePrice: 28000, discountRate: 48,
-                endTimeHours: 18, link: "https://shopping.naver.com",
-                features: ["72시간 지속 밀착", "모공 블러 효과 99%", "미니 파우치 사은품"]
+                originalPrice: 54000, olivePrice: 39000, salePrice: 28000, discountRate: 48, savedAmount: 26000,
+                endTimeHours: 18, link: "https://shopping.naver.com", promoCode: "LEOFIX48",
+                features: ["72시간 지속 밀착", "모공 블러 효과 99%", "미니 파우치 사은품"],
+                emptyBottles: "촬영장마다 비운 리필만 12통 돌파",
+                doNotBuy: "물광 꿀피부 표현 원하시면 비추천 (세미매트)",
+                routineTip: "퍼프 중앙으로 콕 찍고 뚜껑에서 덜어내기",
+                negotiation: "레오제이 단독 미니 파우치 증정"
               },
               {
-                id: "kr-4", rank: 4, category: "색조/립",
+                id: "kr-4", rank: 4, category: "속건조/진정", skinConcern: "피부장벽강화", benefitTag: "대용량 기획",
+                productName: "에스트라 아토베리어 365 세라마이드 하이드로 에센스 200ml",
+                brand: "AESTURA", influencerName: "포니 (PONY)", influencerChannel: "YouTube 590만",
+                profileImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1617897903246-719242758050?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "해외 메이크업 스케줄 때마다 챙기는 인생 속보습 에센스! 44% 단독 구성입니다.",
+                originalPrice: 48000, olivePrice: 36000, salePrice: 26800, discountRate: 44, savedAmount: 21200,
+                endTimeHours: 20, link: "https://www.oliveyoung.co.kr", promoCode: "PONYAESTRA",
+                features: ["세라마이드 장벽 케어", "물광 부스팅", "올리브영 단독 대용량"],
+                emptyBottles: "메이크업 샵 필수템 6통 공병",
+                doNotBuy: "가벼운 워터토너 선호자는 끈적일 수 있음",
+                routineTip: "화장솜에 적셔 3분 스킨팩",
+                negotiation: "미니 하이드로 에센스 50ml 추가"
+              },
+              {
+                id: "kr-5", rank: 5, category: "안티에이징/광채", skinConcern: "콜라겐탄력", benefitTag: "인스타 대란템",
+                productName: "바이오던스 바이오 콜라겐 리얼 딥 마스크 8매 스페셜 패키지",
+                brand: "BIODANCE", influencerName: "재유 (JEYU)", influencerChannel: "YouTube 52만",
+                profileImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "밤새 붙이고 자면 다음 날 아침 투명해지는 그 팩! 브랜드 단독 46% 시크릿 링크입니다.",
+                originalPrice: 50000, olivePrice: 38000, salePrice: 27000, discountRate: 46, savedAmount: 23000,
+                endTimeHours: 10, link: "https://brand.naver.com", promoCode: "JAEYUCOLLAGEN",
+                features: ["아마존 전체 뷰티 1위", "하이드로겔 콜라겐 흡수", "선착순 앰플 3종"],
+                emptyBottles: "중요 촬영 전날 무조건 붙인 20장 완판",
+                doNotBuy: "15분 만에 떼는 일반 팩 생각하시면 비추천 (3시간 부착)",
+                routineTip: "기초 스킨케어 다 바른 후 수면팩으로 부착",
+                negotiation: "콜라겐 토너 미니어처 추가 확보"
+              },
+              {
+                id: "kr-6", rank: 6, category: "모공/트러블", skinConcern: "붉은기진정", benefitTag: "🎁 1+1 기획전",
+                productName: "닥터지 레드 블레미쉬 클리어 수딩 크림 70ml 듀오 세트",
+                brand: "Dr.G", influencerName: "회사원A", influencerChannel: "YouTube 120만",
+                profileImg: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "군부대 PX 신화의 그 진정크림! 올리브영 단독 1+1에 추가 할인 적용됩니다.",
+                originalPrice: 45000, olivePrice: 32000, salePrice: 24700, discountRate: 45, savedAmount: 20300,
+                endTimeHours: 16, link: "https://www.oliveyoung.co.kr", promoCode: "DRGCOMPANY",
+                features: ["트러블 진정 1위", "10-시카 콤플렉스", "1+1 더블 구성"],
+                emptyBottles: "10년째 화장대에 상비해둔 15통 찐템",
+                doNotBuy: "극건성은 겨울철 보습막 부족할 수 있음",
+                routineTip: "두껍게 올려 수면 진정팩 활용",
+                negotiation: "닥터지 선크림 20ml 본사 사은품"
+              },
+              {
+                id: "kr-7", rank: 7, category: "베이스/색조", skinConcern: "글로우커버", benefitTag: "원장님 픽",
+                productName: "클리오 킬커버 하이글로우 쿠션 본품 + 리필 기획",
+                brand: "CLIO", influencerName: "함경식 원장", influencerChannel: "YouTube 28만",
+                profileImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "청담동 샵에서 실제로 여배우 메이크업에 쓰는 킬커버 하이글로우 43% 특가입니다.",
+                originalPrice: 38000, olivePrice: 28500, salePrice: 21600, discountRate: 43, savedAmount: 16400,
+                endTimeHours: 22, link: "https://www.oliveyoung.co.kr", promoCode: "HAMCLIO",
+                features: ["맑은 유리알 결광", "72시간 광채 지속", "전용 퍼프 2매 증정"],
+                emptyBottles: "여배우 샵 베이스로 매일 쓰는 제품",
+                doNotBuy: "지성 피부는 T존 유분 파우더 필수",
+                routineTip: "스파츌라로 펴바른 뒤 퍼프로 밀착",
+                negotiation: "전용 루비셀 퍼프 2매 추가 동봉"
+              },
+              {
+                id: "kr-8", rank: 8, category: "안티에이징/광채", skinConcern: "피부결정돈", benefitTag: "발효에센스",
+                productName: "넘버즈인 3번 결광가득 에센스 토너 200ml + 50ml 추가",
+                brand: "numbuzin", influencerName: "쏭냥 (Ssong Yang)", influencerChannel: "YouTube 35만",
+                profileImg: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1608248597359-52e6b7d2dbd9?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "올리브영 결광 토너 1위! 본사에 직접 요청해 40% 파괴가로 맞췄습니다.",
+                originalPrice: 32000, olivePrice: 24000, salePrice: 19200, discountRate: 40, savedAmount: 12800,
+                endTimeHours: 17, link: "https://brand.naver.com", promoCode: "SSONGNUM3",
+                features: ["50가지 발효 성분", "피부결 개선율 100%", "미니어처 토너 추가"],
+                emptyBottles: "거친 피부결 잡느라 4통 비움",
+                doNotBuy: "발효 성분 민감 피부는 사전 패치 테스트 요망",
+                routineTip: "손바닥에 덜어 지그시 감싸듯 흡수",
+                negotiation: "휴대용 미스트 공병 세트 추가"
+              },
+              {
+                id: "kr-9", rank: 9, category: "베이스/색조", skinConcern: "탕후루립", benefitTag: "선착순거울",
                 productName: "롬앤 쥬시 래스팅 틴트 가을 신상 3종 스페셜 패키지",
                 brand: "rom&nd", influencerName: "씬님", influencerChannel: "YouTube 142만",
                 profileImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
                 productImg: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80",
-                influencerQuote: "가을 웜톤/쿨톤 인생 립 종결! 손거울 사은품까지 챙겨왔습니다.",
-                originalPrice: 39000, olivePrice: 29000, salePrice: 21800, discountRate: 44,
-                endTimeHours: 8, link: "https://linktr.ee",
-                features: ["탕후루 광택 신상 3종", "미니 손거울 증정", "런칭 1시간 만에 완판"]
+                influencerQuote: "스토리에만 띄워둔 가을 인생 립 시크릿 링크! 손거울 사은품까지 증정됩니다.",
+                originalPrice: 39000, olivePrice: 29000, salePrice: 21800, discountRate: 44, savedAmount: 17200,
+                endTimeHours: 8, link: "https://linktr.ee", promoCode: "SSINJUICY",
+                features: ["탕후루 광택 신상 3종", "미니 손거울 증정", "런칭 1시간 만에 완판"],
+                emptyBottles: "가을마다 3통 비운 인생 틴트",
+                doNotBuy: "매트 립 선호자 비추천! 촉촉 물광립 전용",
+                routineTip: "입술 안쪽에 바르고 면봉 스머징",
+                negotiation: "씬님 단독 손거울 전원 증정"
+              },
+              {
+                id: "kr-10", rank: 10, category: "베이스/색조", skinConcern: "콧대성형쉐딩", benefitTag: "🔥 46% 단독",
+                productName: "에뛰드 그림자 쉐딩 3단 기획 + 전용 턱/코 브러쉬 2종 세트",
+                brand: "ETUDE", influencerName: "조효진 (Hyojin Cho)", influencerChannel: "YouTube 200만",
+                profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "2년 내내 콧대 성형 영상마다 쓴 4통 공병템! 브러쉬 2종까지 본사에서 쟁취했습니다.",
+                originalPrice: 38000, olivePrice: 28000, salePrice: 20500, discountRate: 46, savedAmount: 17500,
+                endTimeHours: 19, link: "https://www.oliveyoung.co.kr", promoCode: "HYOJINSHADE",
+                features: ["자연스러운 붉은기 제로 음영", "미니 디테일 앵글 브러쉬 증정", "200만 조효진 공동개발"],
+                emptyBottles: "2년간 4통 비운 콧대 쉐딩 찐템",
+                doNotBuy: "어두운 피부는 03호 필수! 01호는 밝은 21호용",
+                routineTip: "콧대 삼각존 터치 후 턱선 가볍게 쓸어내림",
+                negotiation: "전용 정품 브러쉬 2종 무료 동봉 본사 확약"
+              },
+              {
+                id: "kr-11", rank: 11, category: "선케어", skinConcern: "눈시림제로수분자차", benefitTag: "🎁 1+1 더블",
+                productName: "라운드랩 자작나무 수분 선크림 50ml 1+1 기획세트",
+                brand: "ROUND LAB", influencerName: "아랑 (Arang)", influencerChannel: "YouTube 38만",
+                profileImg: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "사계절 내내 비운 공병만 7통! 눈시림 0% 수분크림 바른 듯한 선케어 역대급 1+1입니다.",
+                originalPrice: 42000, olivePrice: 32000, salePrice: 23100, discountRate: 45, savedAmount: 18900,
+                endTimeHours: 21, link: "https://brand.naver.com", promoCode: "ARANGROUND",
+                features: ["화해 뷰티어워드 선크림 1위", "본품 1+1 더블 구성", "아랑 단독 클렌징폼 증정"],
+                emptyBottles: "7통 비운 눈시림 0% 데일리 선크림",
+                doNotBuy: "극지성은 가벼운 파우더 마무리 권장",
+                routineTip: "수분크림 대신 이 선크림 2번 얇게 레이어링",
+                negotiation: "본사 클렌징폼 30ml 추가 사은품 단독 획득"
+              },
+              {
+                id: "kr-12", rank: 12, category: "베이스/색조", skinConcern: "물먹글로우립", benefitTag: "단독 플럼퍼",
+                productName: "페리페라 잉크 무드 글로이 틴트 신상 3종 스페셜 기획",
+                brand: "peripera", influencerName: "민카롱 (Minkarong)", influencerChannel: "YouTube 45만",
+                profileImg: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "출시 전부터 샘플 5통 테스트 완료! 맑은 물먹 립 플럼퍼 사은품까지 다 털어왔어요.",
+                originalPrice: 36000, olivePrice: 27000, salePrice: 19800, discountRate: 45, savedAmount: 16200,
+                endTimeHours: 11, link: "https://www.oliveyoung.co.kr", promoCode: "MINGLOW45",
+                features: ["올리브영 틴트 랭킹 1위", "플럼퍼 미니어처 전원 증정", "웜/쿨 베스트 3종 구성"],
+                emptyBottles: "테스트 단계부터 비운 샘플만 5통",
+                doNotBuy: "보송한 벨벳 립 좋아하는 분은 비추천",
+                routineTip: "입술선 넘지 않게 톡톡 찍고 손가락 탭",
+                negotiation: "민카롱 단독 볼륨 립 플럼퍼 전원 사은품"
+              },
+              {
+                id: "kr-13", rank: 13, category: "속건조/진정", skinConcern: "모공쿨링진정", benefitTag: "대용량 리필",
+                productName: "슈레피(Surepi) 겟리프 트윈 패드 70매 대용량 + 리필 30매",
+                brand: "Surepi", influencerName: "소윤 (Soyoon)", influencerChannel: "YouTube 64만",
+                profileImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "제가 직접 개발 참여해서 8통 넘게 쓴 인생 쿨링 진정 패드! 단독 헤어밴드까지 챙겨왔습니다.",
+                originalPrice: 46000, olivePrice: 35000, salePrice: 24800, discountRate: 46, savedAmount: 21200,
+                endTimeHours: 15, link: "https://smartstore.naver.com", promoCode: "SOYOONLEAF",
+                features: ["들깻잎 추출 쿨링 진정", "밀착 극세사 원사 패드", "소윤 제작 세안 헤어밴드 증정"],
+                emptyBottles: "공동개발 후 8통째 비운 찐 인생템",
+                doNotBuy: "두꺼운 솜 패드 선호자 비추천 (초밀착 시트)",
+                routineTip: "세안 후 양볼에 5분간 올려 붓기 팩토 진행",
+                negotiation: "리필 30매 + 소윤 제작 헤어밴드 증정 확정"
+              },
+              {
+                id: "kr-14", rank: 14, category: "베이스/색조", skinConcern: "초밀착벨벳커버", benefitTag: "단독 파우치",
+                productName: "에스쁘아 프로테일러 비벨벳 커버 쿠션 뉴클래스 본품 + 리필",
+                brand: "espoir", influencerName: "헤이젤 (Heizle)", influencerChannel: "YouTube 88만",
+                profileImg: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "화보 촬영 때마다 들고 가는 인생 벨벳 쿠션! 리필 6개 비우고 헤이젤 단독 파우치까지 챙겨왔어요.",
+                originalPrice: 42000, olivePrice: 31000, salePrice: 22600, discountRate: 46, savedAmount: 19400,
+                endTimeHours: 25, link: "https://www.oliveyoung.co.kr", promoCode: "HEIZLEVELVET",
+                features: ["올리브영 쿠션 베스트셀러", "무결점 파워 벨벳 커버", "전용 시크릿 파우치 증정"],
+                emptyBottles: "촬영장마다 비운 리필만 6통 완료",
+                doNotBuy: "극건성 피부는 기초 보습 탄탄히 필수!",
+                routineTip: "쿠션 덮개에 양조절 후 볼 중앙부터 터치",
+                negotiation: "헤이젤 디자인 전용 실버 파우치 단독 증정"
+              },
+              {
+                id: "kr-15", rank: 15, category: "모공/트러블", skinConcern: "마이크로니들흡수", benefitTag: "시카마스크 5매",
+                productName: "VT 코스메틱스 리들샷 100 & 300 듀오 부스팅 앰플 기획",
+                brand: "VT Cosmetics", influencerName: "리안 (Rian)", influencerChannel: "YouTube 50만",
+                profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                productImg: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&auto=format&fit=crop&q=80",
+                influencerQuote: "피부과 모공 레이저 대신 집에서 3병 비운 리들샷! 마스크팩 5매 본품 사은품까지 가져왔습니다.",
+                originalPrice: 64000, olivePrice: 48000, salePrice: 35200, discountRate: 45, savedAmount: 28800,
+                endTimeHours: 13, link: "https://www.oliveyoung.co.kr", promoCode: "RIANREEDLE",
+                features: ["올리브영 전체 랭킹 1위 신화", "유효성분 흡수율 10배 부스팅", "시카 마스크팩 5매 정품 증정"],
+                emptyBottles: "모공 결 케어로 3병 완벽 비움",
+                doNotBuy: "피부염 환부나 상처 부위는 절대 사용 금지!",
+                routineTip: "맨 얼굴에 롤링 흡수 후 시카 수분크림 도포",
+                negotiation: "정품 시카 마스크팩 5매 추가 본사 확약"
               }
             ]
           },
@@ -1991,43 +2186,48 @@
       renderAll();
     }
 
-    // Story Bar
+    // Story Bar (하이엔드 크리에이터 서클)
     function renderStoryBar() {
       const bar = document.getElementById("influencer-story-bar");
       bar.innerHTML = "";
 
       const allMarketsLabel = I18N[currentLang] ? I18N[currentLang].story_all : "전체 마켓";
       const creators = [
-        { name: allMarketsLabel, img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "" },
-        { name: "Haley Kim (美)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "Haley" },
-        { name: "Tina (글로벌)", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "Tina" },
-        { name: "Soo Beauty", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "Soo" },
-        { name: "유트루", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "유트루" },
-        { name: "디렉터파이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
-        { name: "레오제이", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
-        { name: "포니 (PONY)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "포니" },
-        { name: "미즈키 (日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
-        { name: "사키 (日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
-        { name: "리자치 (中)", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
-        { name: "장다이 (中)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "장다이" },
-        { name: "신바 (中)", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80", filter: "신바" }
+        { name: allMarketsLabel, img: "img/09ham.webp", filter: "", badge: "ALL", isLogo: true },
+        { name: "레오제이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "레오제이", badge: "130만" },
+        { name: "포니 (PONY)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "포니", badge: "590만" },
+        { name: "조효진", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "조효진", badge: "200만" },
+        { name: "유트루", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "유트루", badge: "58만" },
+        { name: "디렉터파이", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이", badge: "102만" },
+        { name: "회사원A", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "회사원A", badge: "120만" },
+        { name: "아랑", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "아랑", badge: "38만" },
+        { name: "민카롱", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "민카롱", badge: "45만" },
+        { name: "소윤", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "소윤", badge: "64만" },
+        { name: "헤이젤", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=150&auto=format&fit=crop&q=80", filter: "헤이젤", badge: "88만" },
+        { name: "리안", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80", filter: "리안", badge: "50만" },
+        { name: "씬님", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80", filter: "씬님", badge: "142만" },
+        { name: "Haley (美)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "Haley", badge: "85만" },
+        { name: "Tina (美)", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80", filter: "Tina", badge: "62만" },
+        { name: "미즈키 (日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키", badge: "85만" },
+        { name: "리자치 (中)", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "리자치", badge: "3000만" }
       ];
 
       creators.forEach(c => {
         const item = document.createElement("div");
-        item.className = "flex flex-col items-center flex-shrink-0 cursor-pointer group";
+        item.className = "flex flex-col items-center flex-shrink-0 cursor-pointer group relative";
         item.onclick = () => {
           document.getElementById("desktop-search").value = c.filter;
           document.getElementById("mobile-search").value = c.filter;
           handleSearch(c.filter);
         };
         item.innerHTML = `
-          <div class="p-0.5 rounded-full story-ring group-hover:scale-105 transition transform">
+          <div class="relative p-0.5 rounded-full story-ring group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
             <div class="p-0.5 bg-sand-50 rounded-full">
-              <img src="${c.img}" class="w-12 h-12 rounded-full object-cover" />
+              <img src="${c.img}" class="w-12 h-12 rounded-full object-cover ${c.isLogo ? 'object-contain p-1 bg-white' : ''}" />
             </div>
+            ${c.badge ? `<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-black bg-zinc-900 text-white px-1.5 py-0.2 rounded-full border border-white shadow-xs whitespace-nowrap">${c.badge}</span>` : ''}
           </div>
-          <span class="text-[11px] font-semibold text-zinc-700 mt-1 truncate max-w-[65px] group-hover:text-rose-600">${c.name}</span>
+          <span class="text-[11px] font-semibold text-zinc-700 mt-2 truncate max-w-[68px] group-hover:text-rose-600 transition">${c.name}</span>
         `;
         bar.appendChild(item);
       });
@@ -2140,73 +2340,118 @@
         const benefitTagText = deal.benefitTag || t.card_exclusive || "단독 특가";
 
         const card = document.createElement("div");
-        card.className = "flex flex-col justify-between group cursor-pointer bg-white/40 p-3 sm:p-4 rounded-3xl border border-zinc-200/70 hover:border-zinc-900 transition duration-300 hover:shadow-lg";
+        card.className = "flex flex-col justify-between group cursor-pointer bg-white/90 backdrop-blur-md p-4 rounded-3xl border border-zinc-200/80 hover:border-zinc-900 shadow-xs hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden";
         card.onclick = () => openDetailModal(deal.id);
+        
+        const oliveFormatted = deal.olivePrice ? formatCurrency(deal.olivePrice, currentLang) : null;
+        
         card.innerHTML = `
           <div>
-            <!-- Image Area -->
-            <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-sand-100 mb-3.5">
-              <img src="${deal.productImg}" alt="${deal.productName}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            <!-- Image Area with Glassmorphism Overlays -->
+            <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden bg-sand-100 mb-3.5 shadow-inner">
+              <img src="${deal.productImg}" alt="${deal.productName}" class="w-full h-full object-cover group-hover:scale-108 transition-all duration-700 ease-out" />
               
-              <!-- Clean Discount Tag -->
-              <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-sm">
-                ${deal.discountRate}% OFF
+              <!-- Gradient Overlay on Hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              <!-- Top Left: Discount & Benefit Tag -->
+              <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+                <span class="px-2.5 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-md tracking-tight flex items-center gap-1">
+                  <i class="fa-solid fa-fire text-[10px]"></i> ${deal.discountRate}% OFF
+                </span>
+                ${deal.emptyBottles ? `
+                  <span class="px-2 py-0.5 rounded-full bg-zinc-900/80 backdrop-blur-md text-white text-[10px] font-bold shadow-xs">
+                    🧪 ${deal.emptyBottles.split(' ')[0]} ${deal.emptyBottles.split(' ')[1] || '공병'}
+                  </span>
+                ` : ''}
               </div>
 
-              <!-- Time Left -->
-              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-zinc-900/80 backdrop-blur text-white text-[11px] font-medium">
-                ${endsInText}
+              <!-- Top Right: Time Left Tag -->
+              <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-zinc-900/80 backdrop-blur-md text-white text-[11px] font-medium shadow-xs flex items-center space-x-1">
+                <i class="fa-regular fa-clock text-[10px] text-rose-400"></i>
+                <span>${endsInText}</span>
               </div>
 
-              <!-- Creator Overlaid Pill -->
-              <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-sm flex items-center justify-between border border-zinc-100">
+              <!-- Bottom: Creator Profile Card -->
+              <div class="absolute bottom-2.5 left-2.5 right-2.5 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-md flex items-center justify-between border border-zinc-100/80">
                 <div class="flex items-center space-x-2 truncate">
-                  <img src="${deal.profileImg}" class="w-6 h-6 rounded-full object-cover border border-rose-300" />
-                  <div class="truncate">
-                    <span class="text-xs font-bold text-zinc-900 block truncate">${deal.influencerName}</span>
-                    <span class="text-[10px] text-zinc-600 block">${deal.influencerChannel}</span>
+                  <img src="${deal.profileImg}" class="w-6 h-6 rounded-full object-cover border-2 border-rose-400 shadow-2xs" />
+                  <div class="truncate text-left">
+                    <span class="text-xs font-black text-zinc-900 block truncate leading-tight">${deal.influencerName}</span>
+                    <span class="text-[10px] text-zinc-600 block leading-none font-medium">${deal.influencerChannel}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/50">${benefitTagText}</span>
+                <span class="text-[10px] font-extrabold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200/60 shrink-0">${benefitTagText}</span>
               </div>
             </div>
 
             <!-- Meta & Title -->
-            <div class="space-y-1.5 px-0.5">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-zinc-700 uppercase tracking-wide">${deal.brand} <span class="text-zinc-400 font-normal">• ${deal.category}</span></span>
-                <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>${inStockText}
+            <div class="space-y-1.5 px-1">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="font-black text-zinc-700 uppercase tracking-wide">${deal.brand} <span class="text-zinc-500 font-normal">• ${deal.category}</span></span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center space-x-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>${inStockText}</span>
                 </span>
               </div>
-              <h4 class="font-bold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition">
+
+              <h4 class="font-extrabold text-sm sm:text-base text-zinc-900 leading-snug line-clamp-2 group-hover:text-rose-600 transition duration-200">
                 ${deal.productName}
               </h4>
-              <p class="text-xs text-zinc-600 line-clamp-1 italic font-normal pt-0.5">"${deal.influencerQuote}"</p>
               
-              <!-- Promo Code Badge if available -->
+              <!-- Creator Quote with Quotation Styling -->
+              <div class="bg-sand-50 rounded-xl p-2 border border-zinc-100 text-left">
+                <p class="text-[11px] text-zinc-700 line-clamp-2 italic font-normal leading-relaxed">
+                  <i class="fa-solid fa-quote-left text-[9px] text-rose-400 mr-1"></i>${deal.influencerQuote}
+                </p>
+              </div>
+
+              <!-- Creator Intelligence: 공병 인증 & 비추천 팁 -->
+              ${deal.emptyBottles || deal.doNotBuy ? `
+                <div class="pt-1 flex flex-wrap gap-1">
+                  ${deal.emptyBottles ? `
+                    <span class="inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200/60">
+                      🧪 ${deal.emptyBottles}
+                    </span>
+                  ` : ''}
+                  ${deal.doNotBuy ? `
+                    <span class="inline-flex items-center text-[10px] font-semibold px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200/70 truncate max-w-[240px]">
+                      ⚠️ ${deal.doNotBuy}
+                    </span>
+                  ` : ''}
+                </div>
+              ` : ''}
+              
+              <!-- Promo Code Badge -->
               ${deal.promoCode && deal.promoCode !== '자동 할인 적용' ? `
                 <div class="pt-1 flex items-center space-x-1.5 text-[11px] text-zinc-600">
-                  <span class="font-mono font-bold bg-sand-100 px-2 py-0.5 rounded border border-zinc-200 text-zinc-800">${codePrefix}${deal.promoCode}</span>
-                  <span class="text-[10px] text-rose-500">${autoCopyText}</span>
+                  <span class="font-mono font-bold bg-sand-100 px-2.5 py-0.5 rounded-lg border border-zinc-200 text-zinc-900 shadow-2xs">${codePrefix}${deal.promoCode}</span>
+                  <span class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                    <i class="fa-regular fa-copy text-[9px]"></i> ${autoCopyText}
+                  </span>
                 </div>
               ` : ''}
             </div>
           </div>
 
-          <!-- Pricing & CTA -->
-          <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-baseline justify-between px-0.5">
+          <!-- Pricing & 3-Step Discount Comparison (정가 ➔ 시중가 ➔ 단독가) -->
+          <div class="pt-3 mt-3 border-t border-zinc-200/80 flex items-end justify-between px-1">
             <div>
-              <span class="text-xs text-zinc-600 line-through">${origFormatted}</span>
-              <div class="text-xl font-black text-rose-600">
+              <div class="flex items-baseline space-x-1 text-[11px] text-zinc-500">
+                <span class="line-through">${origFormatted}</span>
+                ${oliveFormatted ? `<span class="text-[10px] text-zinc-500">(올영 ${oliveFormatted})</span>` : ''}
+              </div>
+              <div class="text-xl sm:text-2xl font-black text-rose-600 tracking-tight leading-tight">
                 ${saleFormatted}
               </div>
             </div>
             <div class="text-right">
-              <span class="text-[10px] text-emerald-600 font-bold block">${savedText}</span>
+              <span class="text-[10px] text-emerald-600 font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded-md border border-emerald-200 block mb-1">
+                ${savedText}
+              </span>
               <button class="text-xs font-bold text-zinc-900 group-hover:text-rose-600 transition flex items-center space-x-1 ml-auto">
                 <span>${secretLinkText}</span>
-                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
               </button>
             </div>
           </div>
@@ -2237,6 +2482,35 @@
       document.getElementById("modal-sale-price").innerText = formatCurrency(found.salePrice, currentLang);
       document.getElementById("modal-discount-rate").innerText = `${found.discountRate}%`;
       document.getElementById("modal-promo-code").innerText = found.promoCode || t.auto_applied || "자동 할인 적용";
+
+      // Intelligence Tags
+      const tagEmpty = document.getElementById("modal-tag-empty");
+      if (tagEmpty) {
+        if (found.emptyBottles) {
+          tagEmpty.innerText = `🧪 ${found.emptyBottles}`;
+          tagEmpty.classList.remove("hidden");
+        } else {
+          tagEmpty.classList.add("hidden");
+        }
+      }
+      const tagDoNot = document.getElementById("modal-tag-donot");
+      if (tagDoNot) {
+        if (found.doNotBuy) {
+          tagDoNot.innerText = `⚠️ ${found.doNotBuy}`;
+          tagDoNot.classList.remove("hidden");
+        } else {
+          tagDoNot.classList.add("hidden");
+        }
+      }
+      const tagRoutine = document.getElementById("modal-tag-routine");
+      if (tagRoutine) {
+        if (found.routineTip) {
+          tagRoutine.innerText = `🥣 꿀조합: ${found.routineTip}`;
+          tagRoutine.classList.remove("hidden");
+        } else {
+          tagRoutine.classList.add("hidden");
+        }
+      }
 
       document.getElementById("detail-modal").classList.remove("hidden");
     }
