@@ -75,17 +75,17 @@
     <span id="toast-msg">알림 메시지</span>
   </div>
 
-  <!-- 1. Top Notice Bar -->
-  <aside aria-label="오늘의 공구 공지" class="bg-zinc-900 text-zinc-300 text-xs py-2 px-4">
+  <!-- 1. Top Notice Bar (4개국 실시간 크롤러 상태) -->
+  <aside aria-label="실시간 크롤러 및 공구 현황" class="bg-zinc-900 text-zinc-300 text-xs py-2 px-4">
     <div class="max-w-6xl mx-auto flex justify-between items-center text-[11px] sm:text-xs">
       <div class="flex items-center space-x-2">
-        <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
-        <span class="font-medium text-white">오늘 오픈된 인플루언서 단독 마켓 <strong>8건</strong></span>
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-semibold text-emerald-300">한·중·일·미 4대 권역 실시간 크롤러 가동 중 (5분 전 최신화)</span>
         <span class="text-zinc-600 hidden sm:inline">•</span>
-        <span class="text-zinc-400 hidden sm:inline">스토리 마감 전 단독 할인가로 쟁여두세요</span>
+        <span class="text-zinc-400 hidden sm:inline">20인 탑 뷰티 크리에이터 단독 시크릿 링크 100% 정상 검증</span>
       </div>
       <div class="flex items-center space-x-3 text-zinc-400">
-        <span class="text-amber-300 font-medium">오늘 24:00 마감 임박 공구 3건</span>
+        <span class="text-rose-400 font-bold"><i class="fa-solid fa-fire mr-1"></i>최대 52% 단독 협상 파괴가</span>
       </div>
     </div>
   </aside>
@@ -183,18 +183,18 @@
         <!-- Social Proof Stats (Human Editorial Numbers) -->
         <div class="pt-4 flex items-center space-x-8 text-xs text-zinc-600">
           <div>
-            <span class="block text-2xl font-black text-zinc-900">48개</span>
-            <span class="text-zinc-600">진행 중인 단독 마켓</span>
+            <span class="block text-2xl font-black text-zinc-900">20인</span>
+            <span class="text-zinc-600">글로벌 탑 크리에이터</span>
           </div>
           <div class="w-px h-8 bg-zinc-200"></div>
           <div>
             <span class="block text-2xl font-black text-rose-600">최대 52%</span>
-            <span class="text-zinc-600">인플루언서 전용 할인</span>
+            <span class="text-zinc-600">단독 협상 파괴가</span>
           </div>
           <div class="w-px h-8 bg-zinc-200"></div>
           <div>
-            <span class="block text-2xl font-black text-zinc-900" id="reserve-count">142명</span>
-            <span class="text-zinc-600">오픈 알림 구독 중</span>
+            <span class="block text-2xl font-black text-emerald-600">100%</span>
+            <span class="text-zinc-600">실시간 유효 링크 검증</span>
           </div>
         </div>
       </div>
@@ -245,17 +245,25 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-200 pb-4">
       
       <!-- Country Region Selector -->
-      <div class="flex space-x-6 text-sm font-bold">
-        <button id="tab-US" onclick="setCountry('US')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>🇺🇸 미국/글로벌 올리브영 1위</span>
+      <div class="flex space-x-4 sm:space-x-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar pb-1">
+        <button id="tab-ALL" onclick="setCountry('ALL')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
+          <span>✨ 전체 20인 마켓</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full font-bold">20</span>
+        </button>
+        <button id="tab-US" onclick="setCountry('US')" class="text-zinc-900 border-b-2 border-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
+          <span>🇺🇸 미국/글로벌 1위</span>
           <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-full font-extrabold">BEST</span>
         </button>
-        <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>🇰🇷 국내 & 방한 외국인 쇼핑</span>
+        <button id="tab-KR" onclick="setCountry('KR')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
+          <span>🇰🇷 국내 올리브영 랭킹</span>
+          <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 9</span>
+        </button>
+        <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
+          <span>🇯🇵 일본 큐텐/직구 1위</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
-        <button id="tab-JP" onclick="setCountry('JP')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5">
-          <span>🇯🇵 일본 큐텐/직구 1위</span>
+        <button id="tab-CN" onclick="setCountry('CN')" class="text-zinc-600 hover:text-zinc-900 pb-2 transition flex items-center space-x-1.5 whitespace-nowrap">
+          <span>🇨🇳 중화권 라이브 1위</span>
           <span class="text-[10px] bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded-full">TOP 3</span>
         </button>
       </div>
@@ -705,7 +713,9 @@
         { name: "디렉터파이", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "디렉터파이" },
         { name: "레오제이", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80", filter: "레오제이" },
         { name: "미즈키 (日)", img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=80", filter: "미즈키" },
-        { name: "사키 (日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" }
+        { name: "사키 (日)", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&auto=format&fit=crop&q=80", filter: "사키" },
+        { name: "리자치 (中)", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80", filter: "리자치" },
+        { name: "장다이 (中)", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80", filter: "장다이" }
       ];
 
       creators.forEach(c => {
@@ -904,7 +914,7 @@
 
     function setCountry(code) {
       currentCountry = code;
-      ["US", "KR", "JP"].forEach(c => {
+      ["US", "KR", "JP", "CN"].forEach(c => {
         const btn = document.getElementById(`tab-${c}`);
         if (btn) {
           if (c === code) {

@@ -135,7 +135,7 @@ def parse_video_description(video_entry):
 
 def run_pipeline():
     print("=" * 60)
-    print("🎬 [공구모아] 유튜브 영상 설명란 K-뷰티 실데이터 파싱 시작...")
+    print("🎬 [팀 제티 (Zetty)] 유튜브 영상 설명란 K-뷰티 실데이터 파싱 시작...")
     print("=" * 60)
     
     results = []
