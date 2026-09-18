@@ -95,11 +95,12 @@
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
+      <!-- ✏️ [창업 아이템명 변경 포인트]: 상단 스크립트 BRAND_CONFIG 또는 아래 태그에서 수정 가능 -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="resetAll()">
         <span class="text-2xl font-black tracking-tighter text-zinc-900">
-          gongumoa<span class="text-rose-500 font-serif text-3xl leading-none">.</span>
+          <span id="brand-logo-text">gongumoa</span><span class="text-rose-500 font-serif text-3xl leading-none">.</span>
         </span>
-        <span class="hidden sm:inline text-[11px] text-zinc-600 font-medium pl-2 border-l border-zinc-200">
+        <span id="brand-tagline" class="hidden sm:inline text-[11px] text-zinc-600 font-medium pl-2 border-l border-zinc-200">
           인플루언서 뷰티 마켓 셀렉트숍
         </span>
       </div>
@@ -327,8 +328,8 @@
   <footer class="bg-white border-t border-zinc-200 mt-16 py-10 text-xs text-zinc-600">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
       <div class="space-y-1">
-        <span class="text-base font-black text-zinc-900">gongumoa.</span>
-        <p class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • 팀 공구모아 (지웅, 성준, 민석, 신혜, 재현)</p>
+        <span class="text-base font-black text-zinc-900"><span id="footer-logo-text">gongumoa</span>.</span>
+        <p class="text-zinc-600">1박 2일 창업 캠프 MVP 프로젝트 • <strong class="text-zinc-900" id="footer-team-name">팀 제티 (Zetty)</strong> (지웅, 성준, 민석, 신혜, 재현)</p>
         <p class="text-[11px] text-zinc-600">본 서비스는 각 크리에이터 및 공식 브랜드사에서 공개한 공구 링크를 큐레이션하여 제공합니다.</p>
       </div>
 
@@ -411,13 +412,24 @@
           </div>
         </div>
 
+        <!-- Promo Code Box -->
+        <div class="p-3 bg-sand-100 rounded-2xl flex items-center justify-between text-xs">
+          <div>
+            <span class="text-[10px] text-zinc-500 block font-medium">크리에이터 단독 프로모션 코드</span>
+            <span id="modal-promo-code" class="font-mono font-bold text-zinc-900 text-sm tracking-wide"></span>
+          </div>
+          <button type="button" onclick="copyCurrentPromoCode()" class="px-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-zinc-800 hover:bg-zinc-50 transition shadow-sm">
+            코드 복사
+          </button>
+        </div>
+
         <!-- Direct Purchase Button -->
         <div class="pt-2">
           <button onclick="goToDealLink()" class="w-full py-4 bg-zinc-900 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-sm flex items-center justify-center space-x-2">
-            <span>공구 마켓 페이지 바로가기</span>
+            <span>인플루언서 단독 링크로 구매하기</span>
             <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </button>
-          <p class="text-[11px] text-zinc-600 text-center mt-2">클릭 시 인플루언서 단독 시크릿 링크로 이동합니다.</p>
+          <p class="text-[11px] text-zinc-600 text-center mt-2">클릭 시 단독 코드가 자동 복사되며 공식 판매처로 이동합니다.</p>
         </div>
       </div>
     </div>
@@ -484,6 +496,37 @@
 
   <!-- Main JavaScript App -->
   <script>
+    // =========================================================================
+    // ⚙️ [팀 제티] 창업 아이템 & 브랜딩 설정 (BRAND_CONFIG)
+    // 💡 [아이템명 변경 요지]: 
+    //    공구모아 대신 사용할 새로운 아이템 이름이 결정되면 아래 serviceName, serviceNameEn을 
+    //    수정하기만 하면 웹사이트 전체(브라우저 탭, 로고, 푸터, QR 다운로드 등)에 1초 만에 자동 반영됩니다!
+    // =========================================================================
+    const BRAND_CONFIG = {
+      teamName: "팀 제티 (Zetty)",                      // 팀명 (고정)
+      serviceName: "공구모아",                          // 창업 아이템 한글명 (예: 제티뷰티, 링크글로우, 뷰티딜러, 글로우픽 등 자유롭게 변경)
+      serviceNameEn: "gongumoa",                       // 창업 아이템 영문명 / 로고 텍스트 (소문자 권장, 예: zetty, linkglow, glowmoa 등)
+      serviceSubTitle: "인플루언서 뷰티 마켓 큐레이션",    // 탭 타이틀 서브 카피
+      tagline: "인플루언서 뷰티 마켓 셀렉트숍"                  // 상단 헤더 태그라인
+    };
+
+    function applyBrandConfig() {
+      // 1. 브라우저 탭 타이틀 변경
+      document.title = `${BRAND_CONFIG.serviceName} (${BRAND_CONFIG.serviceNameEn}) | ${BRAND_CONFIG.serviceSubTitle}`;
+
+      // 2. 상단 헤더 로고 영문명 동적 변경
+      const brandLogo = document.getElementById("brand-logo-text");
+      if (brandLogo) brandLogo.innerText = BRAND_CONFIG.serviceNameEn;
+
+      // 3. 상단 헤더 태그라인 동적 변경
+      const brandTagline = document.getElementById("brand-tagline");
+      if (brandTagline) brandTagline.innerText = BRAND_CONFIG.tagline;
+
+      // 4. 푸터 로고 영문명 동적 변경
+      const footerLogo = document.getElementById("footer-logo-text");
+      if (footerLogo) footerLogo.innerText = BRAND_CONFIG.serviceNameEn;
+    }
+
     let allData = [];
     let currentCountry = "US";
     let currentCategory = "전체";
@@ -805,6 +848,7 @@
       document.getElementById("modal-olive-price").innerText = found.olivePrice.toLocaleString() + "원";
       document.getElementById("modal-sale-price").innerText = found.salePrice.toLocaleString() + "원";
       document.getElementById("modal-discount-rate").innerText = `${found.discountRate}%`;
+      document.getElementById("modal-promo-code").innerText = found.promoCode || "자동 할인 적용";
 
       document.getElementById("detail-modal").classList.remove("hidden");
     }
@@ -813,12 +857,24 @@
       document.getElementById("detail-modal").classList.add("hidden");
     }
 
+    function copyCurrentPromoCode() {
+      if (!activeModalDeal || !activeModalDeal.promoCode) return;
+      navigator.clipboard.writeText(activeModalDeal.promoCode);
+      showToast(`단독코드 [${activeModalDeal.promoCode}] 가 복사되었습니다!`);
+    }
+
     function goToDealLink() {
       if (!activeModalDeal) return;
-      showToast("공구 링크로 이동합니다.");
+      const code = activeModalDeal.promoCode;
+      if (code && code !== '자동 할인 적용') {
+        navigator.clipboard.writeText(code);
+        showToast(`단독코드 [${code}] 자동 복사 완료! 공식몰로 이동합니다 ✈️`);
+      } else {
+        showToast("시크릿 할인 링크로 안전하게 이동합니다 ✈️");
+      }
       setTimeout(() => {
         window.open(activeModalDeal.link, "_blank");
-      }, 400);
+      }, 500);
     }
 
     function setCountry(code) {
@@ -929,7 +985,7 @@
       if (img && img.src) {
         const a = document.createElement("a");
         a.href = img.src;
-        a.download = "gongumoa_qr.png";
+        a.download = `${BRAND_CONFIG.serviceNameEn || 'service'}_qr.png`;
         a.click();
       }
     }
@@ -957,6 +1013,7 @@
     }
 
     window.addEventListener("DOMContentLoaded", () => {
+      applyBrandConfig();
       initData();
     });
   </script>

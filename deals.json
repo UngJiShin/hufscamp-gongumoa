@@ -7,7 +7,9 @@
         "id": "us-1",
         "rank": 1,
         "category": "선케어",
-        "linkType": "Olive Young Global 단독 제휴 링크",
+        "linkType": "Olive Young Global 단독 직링크",
+        "promoCode": "HALEY40",
+        "linkStatus": "VALID",
         "productName": "조선미녀 맑은쌀 선크림 50ml 2개 + 래디언스 클렌징밤 세트",
         "brand": "Beauty of Joseon",
         "influencerName": "Haley Kim",
@@ -21,7 +23,7 @@
         "discountRate": 40,
         "savedAmount": 19200,
         "endTimeHours": 18,
-        "link": "https://global.oliveyoung.com",
+        "link": "https://global.oliveyoung.com/product/detail?prdtNo=GA211213768",
         "features": ["미국 아마존/올리브영 선케어 1위", "백탁 없는 촉촉한 유기자차", "전세계 무료배송 코드 적용"]
       },
       {
@@ -29,6 +31,8 @@
         "rank": 2,
         "category": "스킨케어",
         "linkType": "YouTube 더보기란 올리브영 시크릿 링크",
+        "promoCode": "TINACOS",
+        "linkStatus": "VALID",
         "productName": "코스알엑스 어드밴스드 스네일 96 뮤신 파워 에센스 100ml 더블팩",
         "brand": "COSRX",
         "influencerName": "Tina Tanaka Harris",
@@ -42,7 +46,7 @@
         "discountRate": 35,
         "savedAmount": 13300,
         "endTimeHours": 24,
-        "link": "https://global.oliveyoung.com",
+        "link": "https://global.oliveyoung.com/product/detail?prdtNo=GA210610940",
         "features": ["글로벌 틱톡 바이럴 에센스", "모공 쫀쫀 수분막 형성", "선착순 마스크팩 증정"]
       },
       {
@@ -50,6 +54,8 @@
         "rank": 3,
         "category": "스킨케어",
         "linkType": "YouTube 고정댓글 단독 링크",
+        "promoCode": "SOOANUA",
+        "linkStatus": "VALID",
         "productName": "아누아 어성초 77 수딩 토너 500ml 대용량 점보 기획",
         "brand": "Anua",
         "influencerName": "Soo Beauty",
@@ -63,7 +69,7 @@
         "discountRate": 38,
         "savedAmount": 17100,
         "endTimeHours": 12,
-        "link": "https://global.oliveyoung.com",
+        "link": "https://global.oliveyoung.com/product/detail?prdtNo=GA210811985",
         "features": ["해외 K-뷰티 토너 랭킹 1위", "진정 케어 특화", "전용 화장솜 100매 증정"]
       }
     ]
@@ -77,6 +83,8 @@
         "rank": 1,
         "category": "스킨케어",
         "linkType": "YouTube 더보기란 올리브영 협상 링크",
+        "promoCode": "TRUELOVE52",
+        "linkStatus": "VALID",
         "productName": "달바 화이트 트러플 수프림 퍼스트 스프레이 세럼 100ml 3개 세트",
         "brand": "d'Alba",
         "influencerName": "유트루",
@@ -90,7 +98,7 @@
         "discountRate": 52,
         "savedAmount": 45300,
         "endTimeHours": 14,
-        "link": "https://smartstore.naver.com",
+        "link": "https://brand.naver.com/dalba",
         "features": ["올리브영 미스트 1위", "전용 파우치 & 미니어처 증정", "무료배송"]
       },
       {
@@ -98,6 +106,8 @@
         "rank": 2,
         "category": "스킨케어",
         "linkType": "올리브영 단독 기획전 직링크",
+        "promoCode": "PIPASSDIVE",
+        "linkStatus": "VALID",
         "productName": "토리든 다이브인 저분자 히알루론산 수분 진정 크림 100ml 더블",
         "brand": "Torriden",
         "influencerName": "디렉터파이",
@@ -111,7 +121,7 @@
         "discountRate": 45,
         "savedAmount": 18900,
         "endTimeHours": 26,
-        "link": "https://oliveyoung.co.kr",
+        "link": "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000185966",
         "features": ["올리브영 어워즈 1위", "본품 1+1 리필 증정", "선착순 마스크팩 5매"]
       },
       {
@@ -119,6 +129,8 @@
         "rank": 3,
         "category": "베이스/쿠션",
         "linkType": "인스타 프로필 링크트리 직링크",
+        "promoCode": "LEOFIX48",
+        "linkStatus": "VALID",
         "productName": "투쿨포스쿨 픽싱 듀얼 쿠션 본품 + 리필 + 전용 퍼프 4매",
         "brand": "too cool for school",
         "influencerName": "레오제이",
@@ -146,6 +158,8 @@
         "rank": 1,
         "category": "베이스/쿠션",
         "linkType": "Qoo10 Japan 단독 시크릿 링크",
+        "promoCode": "MIZUKITIRTIR",
+        "linkStatus": "VALID",
         "productName": "티르티르 마스크핏 레드 쿠션 21N + 미니 레드 쿠션 증정",
         "brand": "TIRTIR Japan",
         "influencerName": "미즈키 (日)",
@@ -159,7 +173,7 @@
         "discountRate": 40,
         "savedAmount": 19200,
         "endTimeHours": 19,
-        "link": "https://qoo10.jp",
+        "link": "https://www.qoo10.jp/shop/tirtir",
         "features": ["큐텐 메가와리 1위", "일본 뷰티 어워드 3관왕", "미니 쿠션 증정"]
       },
       {
@@ -167,6 +181,8 @@
         "rank": 2,
         "category": "스킨케어",
         "linkType": "LIPS 뷰티 에디터 제휴 링크",
+        "promoCode": "SAKIVT38",
+        "linkStatus": "VALID",
         "productName": "브이티(VT) 리들샷 100 에센스 50ml + 시카 데일리 마스크",
         "brand": "VT Cosmetics",
         "influencerName": "사키 (日)",
